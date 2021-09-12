@@ -35,6 +35,8 @@ The two functions [`build_horus_binary_packet_v1`](https://github.com/projecthor
 int pkt_len = build_horus_binary_packet_v1(rawbuffer);
 ```
 
+These functions are the main bit of code that you would need to modify to insert telemetry data from wherever you are obtaining it (GPS libraries, sensors, etc).
+
 ### Encoding the Packet
 Next, we need to apply the Golay(23,12) forward-error-correction, interleaving and scrambling which protect the telemetry data. This is performed using the `horus_l2_encode_packet` function, which is located in `horus_l2.cpp`. This function takes a pointer to a destination and source buffer, and the packet length:
 
