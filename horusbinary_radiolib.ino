@@ -97,7 +97,7 @@ int build_horus_binary_packet_v1(char *buffer){
 
   struct HorusBinaryPacketV1 BinaryPacket;
 
-  BinaryPacket.PayloadID = 0; // 0 = 4FSKTEST
+  BinaryPacket.PayloadID = 0; // 0 = 4FSKTEST. Refer https://github.com/projecthorus/horusdemodlib/blob/master/payload_id_list.txt
   BinaryPacket.Counter = packet_count;
   BinaryPacket.Hours = 12;
   BinaryPacket.Minutes = 34;
@@ -124,7 +124,7 @@ int build_horus_binary_packet_v2(char *buffer){
 
   struct HorusBinaryPacketV2 BinaryPacketV2;
 
-  BinaryPacketV2.PayloadID = 256; // 0 = 4FSKTEST-V2
+  BinaryPacketV2.PayloadID = 256; // 0 = 4FSKTEST-V2. Refer https://github.com/projecthorus/horusdemodlib/blob/master/payload_id_list.txt
   BinaryPacketV2.Counter = packet_count;
   BinaryPacketV2.Hours = 12;
   BinaryPacketV2.Minutes = 34;
