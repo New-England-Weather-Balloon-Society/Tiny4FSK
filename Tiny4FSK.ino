@@ -22,6 +22,8 @@
 
 #define Serial SerialUSB
 
+#define EXTINT 8
+
 // SX1278 has the following connections:
 // NSS pin:   10
 // DIO0 pin:  2
@@ -100,8 +102,8 @@ int build_horus_binary_packet_v2(char *buffer, int hours, int minutes, int secon
   BinaryPacketV2.Hours = hours;
   BinaryPacketV2.Minutes = minutes;
   BinaryPacketV2.Seconds = seconds;
-  BinaryPacketV2.Latitude = (lat);  // Corrected data type
-  BinaryPacketV2.Longitude = (lon); // Corrected data type
+  BinaryPacketV2.Latitude = (lat);   // Corrected data type
+  BinaryPacketV2.Longitude = (lon);  // Corrected data type
   BinaryPacketV2.Altitude = alt;
   BinaryPacketV2.Speed = speed;
   BinaryPacketV2.BattVoltage = volts;
@@ -123,12 +125,11 @@ int build_horus_binary_packet_v2(char *buffer, int hours, int minutes, int secon
 
 
 void setup() {
+  #include "gps.h"
 
   Serial.begin(9600);
-  delay(100);
   // initialize SX1278 with default settings
   Serial.println(("[SX1278] Initializing ... "));
-  delay(100);
 
 
   // when using one of the non-LoRa modules for FSK4
@@ -176,7 +177,7 @@ void loop() {
   int prevMinute = 0;
   int prevSecond = 0;
   double prevGroundSpeed = 0.0;
-  
+
 
   // Inside your loop or wherever you are checking for GPS fix
   if (myGNSS.getPVT()) {
@@ -208,12 +209,14 @@ void loop() {
   // send out idle condition for 1000 ms
   fsk4_idle(&radio);
   delay(1000);
+  gpsSleep(950);
   fsk4_preamble(&radio, 8);
   fsk4_write(&radio, codedbuffer, coded_len);
 
   Serial.println(F("done!"));
 
   delay(1000);
+  gpsSleep(950);
 
   packet_count++;
 }
