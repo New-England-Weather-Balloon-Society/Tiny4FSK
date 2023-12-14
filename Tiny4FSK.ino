@@ -11,6 +11,7 @@
 #include <Wire.h>  //Needed for I2C to GNSS
 
 #include <SparkFun_u-blox_GNSS_v3.h>  //http://librarymanager/All#SparkFun_u-blox_GNSS_v3
+#include "gps.h"
 
 // RADIO SETUP
 
@@ -125,8 +126,6 @@ int build_horus_binary_packet_v2(char *buffer, int hours, int minutes, int secon
 
 
 void setup() {
-  #include "gps.h"
-
   Serial.begin(9600);
   // initialize SX1278 with default settings
   Serial.println(("[SX1278] Initializing ... "));
@@ -158,6 +157,8 @@ void setup() {
   }
 
   myGNSS.setI2COutput(COM_TYPE_UBX);
+
+  gpsConfig(); //Problematic - TODO
 
   radio.beginFSK();
   fsk4_setup(&radio, TX_FREQ, FSK4_SPACING, FSK4_BAUD);
