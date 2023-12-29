@@ -32,6 +32,27 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 // Enable status mode LEDs for information on GPS initialization and issues.
 #define STATUS_LED
 
-// Enable Serial Prints for debugging. Disable for flights to conserve power.
-#define DEBUG_FEEDBACK
+// Enable Serial Prints for debugging and sleep modes for MCU.
+// MCU sleep mode disabled debug messages, so disable for MCU sleep.
+// Disable for flights to conserve power.
+#define DEV_MODE
 
+// *********************
+// || Pin Definitions ||
+// *********************
+
+// You most likely do not need to touch these, if you are using the PCB.
+// Mostly for indivisual development or shields.
+
+// SX1278 Pins. These are in junction with normal SPI pins (MISO, MOSI, SCK).
+#define NSS_PIN 10
+#define DIO0_PIN 2
+#define RESET_PIN 9
+#define DIO1_PIN 3
+
+// GPS External interrupt Pin. In junction with I2C pins.
+#define EXTINT 8
+
+// Status LED Pins
+#define ERROR_LED 24
+#define SUCCESS_LED 4

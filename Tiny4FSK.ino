@@ -6,33 +6,32 @@
 // Made by Max Kendall W0MXX and the New England Weather Balloon Society (N.E.W.B.S.)                   //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <RadioLib.h>
-#include "horus_l2.h"
+// ***************
+// || Libraries ||
+// ***************
 #include <Wire.h>
 #include <SparkFun_u-blox_GNSS_v3.h>
+#include <ArduinoLowPower.h>
+#include <RadioLib.h>
+#include "horus_l2.h"
 #include "config.h"
 #include "crc_calc.h"
 
-// SERIAL SETUP
-// Needed for SAMD Native USB.
-#ifdef DEBUG_FEEDBACK
+// **********************
+// || Native USB Setup ||
+// **********************
+#ifdef DEV_MODE
 #define Serial SerialUSB
 #endif
 
-// SX1278 connections
-const int NSS_PIN = 10;
-const int DIO0_PIN = 2;
-const int RESET_PIN = 9;
-const int DIO1_PIN = 3;
-
+// *************************
+// || Object Declarations ||
+// *************************
 // SX1278 radio module instance
 SX1278 radio = new Module(NSS_PIN, DIO0_PIN, RESET_PIN, DIO1_PIN);
 
 // New UBLOX object
 SFE_UBLOX_GNSS gps;
-
-// External interrupt pin
-#define EXTINT 8
 
 // Horus Binary Structures & Variables
 
@@ -46,9 +45,9 @@ struct HorusBinaryPacketV2 {
   float Latitude;
   float Longitude;
   uint16_t Altitude;
-  uint8_t Speed;      // Speed in Knots (1-255 knots)
+  uint8_t Speed;  // Speed in Knots (1-255 knots)
   uint8_t Sats;
-  int8_t Temp;        // Twos Complement Temp value.
+  int8_t Temp;          // Twos Complement Temp value.
   uint8_t BattVoltage;  // 0 = 0.5v, 255 = 2.0V, linear steps in-between.
   // The following 9 bytes (up to the CRC) are user-customizable.
   uint8_t dummy1;     // unsigned int
@@ -62,76 +61,7 @@ struct HorusBinaryPacketV2 {
 // Buffers and counters.
 char rawbuffer[128];        // Buffer to temporarily store a raw binary packet.
 char codedbuffer[128];      // Buffer to store an encoded binary packet
-char debugbuffer[256];      // Buffer to store debug strings
 uint16_t packet_count = 1;  // Packet counter
-
-// Build the Horus v2 Packet. This is where the GPS positions are organized to the struct.
-int build_horus_binary_packet_v2(char *buffer) {
-  struct HorusBinaryPacketV2 BinaryPacketV2;
-
-  // Wake up GPS by pulsing to the EXTINT (External Interrupt) pin. 250 ms is probably more the needed,
-  // but nice to be safe.
-  digitalWrite(EXTINT, HIGH);
-  delay(250);
-  digitalWrite(EXTINT, LOW);
-
-  // Payload ID (16 bits)
-  BinaryPacketV2.PayloadID = 256;
-
-  // Counter (16 bits)
-  BinaryPacketV2.Counter = packet_count;
-
-  // Time Fields (Hours, Minutes, Seconds)
-  BinaryPacketV2.Hours = gps.getHour();
-  BinaryPacketV2.Minutes = gps.getMinute();
-  BinaryPacketV2.Seconds = gps.getSecond();
-
-  // GPS Coordinates (Latitude, Longitude)
-  BinaryPacketV2.Latitude = gps.getLatitude() / 10000000.00;
-  BinaryPacketV2.Longitude = gps.getLongitude() / 10000000.00;
-
-  // Altitude (16 bits)
-  BinaryPacketV2.Altitude = 70;
-
-  // Speed (8 bits) - Speed in Knots (1-255 knots)
-  BinaryPacketV2.Speed = gps.getGroundSpeed();
-
-  // Battery Voltage (8 bits) - 0 = 0.5v, 255 = 2.0V, linear steps in-between
-  BinaryPacketV2.BattVoltage = 5.00;  // Voltage Divider
-
-  // Satellites (8 bits)
-  BinaryPacketV2.Sats = gps.getSIV();
-
-  // Temperature (8 bits) - Twos Complement Temp value
-  BinaryPacketV2.Temp = 20;  // BME280
-
-  // User-Customizable Fields (dummy1, dummy2, dummy3, dummy4, dummy5)
-  BinaryPacketV2.dummy1 = 1;
-  BinaryPacketV2.dummy2 = 2;
-  BinaryPacketV2.dummy3 = 3;
-  BinaryPacketV2.dummy4 = 4;
-  BinaryPacketV2.dummy5 = 5;
-
-  // Print some debug information
-  Serial.print("Latitude: ");
-  Serial.print(BinaryPacketV2.Latitude, 7);
-  Serial.print(", Longitude: ");
-  Serial.print(BinaryPacketV2.Longitude, 7);
-  Serial.print(", Sats: ");
-  Serial.println(gps.getSIV());
-
-  // Calculate CRC checksum (16 bits)
-  BinaryPacketV2.Checksum = (uint16_t)crc16((unsigned char *)&BinaryPacketV2, sizeof(BinaryPacketV2) - 2);
-
-  // Copy the binary packet to the buffer
-  memcpy(buffer, &BinaryPacketV2, sizeof(BinaryPacketV2));
-
-  // Put GPS back to sleep.
-  gps.powerOffWithInterrupt(10000, VAL_RXM_PMREQ_WAKEUPSOURCE_EXTINT0, true);
-
-  return sizeof(struct HorusBinaryPacketV2);
-}
-
 
 void setup() {
   Serial.begin(9600);
@@ -139,25 +69,42 @@ void setup() {
   // Initialize SX1278 radio with default settings
   Serial.println(("Initializing Radio..."));
 
-  // Initialize FSK4 transmitter
+  // Pinmode Declarations
+  pinMode(ERROR_LED, OUTPUT);
+  pinMode(SUCCESS_LED, OUTPUT);
+
+  // Initialize I2C for GPS
   Wire.begin();
 
   // Connect to u-blox GPS module
   while (gps.begin() == false) {
+#ifdef DEV_MODE
     Serial.println(F("u-blox GNSS not detected at default I2C address. Retrying..."));
+#endif
     delay(1000);
+#ifdef STATUS_LED
+    digitalWrite(ERROR_LED, HIGH);
+    delay(500);
+    digitalWrite(ERROR_LED, LOW);
+    delay(500);
+#endif
   }
+#ifdef STATUS_LED
+  digitalWrite(ERROR_LED, LOW);
+#endif
 
   // Configure GPS settings
   gps.setI2COutput(COM_TYPE_UBX);
   gps.factoryDefault();
 
-  // Configure GPS power-saving settings
+  // ***********************
+  // || GPS Configuration ||
+  // ***********************
   gps.factoryDefault();  // Clear any saved configuration
 
   bool setValueSuccess = true;
 
-  gps.enableGNSS(true, SFE_UBLOX_GNSS_ID_GPS);       // Enable GPS, disable everything else for lower power and for PSMOO to work.
+  gps.enableGNSS(true, SFE_UBLOX_GNSS_ID_GPS);       // Enable GPS, disable everything else for lower power.
   gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_SBAS);     // Disable SBAS.
   gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_GALILEO);  // Disable Galileo.
   gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_BEIDOU);   // Disable BeiDou.
@@ -165,43 +112,166 @@ void setup() {
   gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_QZSS);     // Disable QZSS.
   gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_GLONASS);  // Disable GLONASS.
 
-  setValueSuccess &= gps.setVal8(UBLOX_CFG_PM_OPERATEMODE, 2);        // Setting to PSMCT.
+  setValueSuccess &= gps.setVal8(UBLOX_CFG_PM_OPERATEMODE, 2);   // Setting to PSMCT.
+  setValueSuccess &= gps.setDynamicModel(DYN_MODEL_AIRBORNE1g);  // Setting Airborne Mode.
 
   // Print GPS configuration status
   if (setValueSuccess == true) {
     gps.saveConfiguration();
+#ifdef DEV_MODE
     Serial.println("GPS Config Success!");
+#endif
+#ifdef STATUS_LED
+    digitalWrite(SUCCESS_LED, HIGH);
+    delay(1000);
+    digitalWrite(SUCCESS_LED, LOW);
+#endif
   } else {
-    Serial.println("GPS Config Failed!");
+    while (1) {
+#ifdef DEV_MODE
+      Serial.println("GPS Config Failed!");
+#endif
+#ifdef STATUS_LED
+      digitalWrite(ERROR_LED, HIGH);
+      delay(500);
+      digitalWrite(ERROR_LED, LOW);
+      delay(500);
+#endif
+    }
   }
 
   digitalWrite(EXTINT, LOW);
 
-  // Initialize radio for FSK
+  // **********************
+  // || Initialize Radio ||
+  // **********************
   radio.beginFSK();
   fsk4_setup(&radio, FSK_FREQ, FSK_SPACING, FSK_BAUD);
+#ifdef DEV_MODE
   Serial.println(("Radio Initialized!"));
+#endif
+#ifdef STATUS_LED
+  digitalWrite(SUCCESS_LED, HIGH);
+  delay(1000);
+  digitalWrite(SUCCESS_LED, LOW);
+#endif
 }
 
 void loop() {
+  // *********************
+  // || Local Variables ||
+  // *********************
   int coded_len;
   int pkt_len;
 
-  // Generate and transmit Horus Binary V2 packet
+  // ***************************
+  // || Generate Horus Packet ||
+  // ***************************
+#ifdef DEV_MODE
   Serial.println(F("Generating Horus Binary v2 Packet"));
+#endif
   pkt_len = build_horus_binary_packet_v2(rawbuffer);
   coded_len = horus_l2_encode_tx_packet((unsigned char *)codedbuffer, (unsigned char *)rawbuffer, pkt_len);
 
-  // Transmit!
+  // *******************
+  // || Transmit Time ||
+  // *******************
+#ifdef DEV_MODE
   Serial.println(F("Transmitting Horus Binary v2 Packet"));
+#endif
   fsk4_idle(&radio);  // send out idle condition for 1000 ms
+
+// Long, ugly way to control power mode.
+// Deep sleep disabled USB serial, so no debug.
+#ifndef DEV_MODE
+  LowPower.deepSleep(1000);
+#endif
+#ifdef DEV_MODE
   delay(1000);
+#endif
   fsk4_preamble(&radio, 8);
   fsk4_write(&radio, codedbuffer, coded_len);
 
+#ifdef DEV_MODE
   Serial.println(F("Transmission complete!"));
-
+#endif
+#ifdef STATUS_LED
+  digitalWrite(SUCCESS_LED, HIGH);
   delay(1000);
+  digitalWrite(SUCCESS_LED, LOW);
+#endif
 
+  // **********************
+  // || Sleep Mode Time! ||
+  // **********************
+#ifndef DEV_MODE
+  LowPower.deepSleep(1000);
+#endif
+#ifdef DEV_MODE
+  delay(1000);
+#endif
   packet_count++;
+}
+
+// Build the Horus v2 Packet. This is where the GPS positions are organized to the struct.
+int build_horus_binary_packet_v2(char *buffer) {
+  struct HorusBinaryPacketV2 BinaryPacketV2;
+
+  // Wake up GPS by pulsing to the EXTINT (External Interrupt) pin. 250 ms is probably more the needed,
+  // but nice to be safe.
+  /*digitalWrite(EXTINT, LOW);
+  delay(1000);
+  digitalWrite(EXTINT, HIGH);
+  delay(1000);
+  digitalWrite(EXTINT, LOW);*/
+
+  // Filled with GPS readings.
+  BinaryPacketV2.Hours = gps.getHour();
+  BinaryPacketV2.Minutes = gps.getMinute();
+  BinaryPacketV2.Seconds = gps.getSecond();
+  BinaryPacketV2.Latitude = gps.getLatitude() / 10000000.00;
+  BinaryPacketV2.Longitude = gps.getLongitude() / 10000000.00;
+  BinaryPacketV2.Altitude = 70;
+  BinaryPacketV2.Speed = gps.getGroundSpeed();
+  BinaryPacketV2.Sats = gps.getSIV();
+#ifdef STATUS_LED
+  digitalWrite(SUCCESS_LED, HIGH);
+  delay(1000);
+  digitalWrite(SUCCESS_LED, LOW);
+#endif
+
+
+  // Non-GPS values
+  BinaryPacketV2.PayloadID = 256;
+  BinaryPacketV2.Counter = packet_count;
+  BinaryPacketV2.BattVoltage = 5.00;  // Voltage Divider
+  BinaryPacketV2.Temp = 20;           // BME280
+
+  // User-Customizable Fields
+  BinaryPacketV2.dummy1 = 1;
+  BinaryPacketV2.dummy2 = 2;
+  BinaryPacketV2.dummy3 = 3;
+  BinaryPacketV2.dummy4 = 4;
+  BinaryPacketV2.dummy5 = 5;
+
+  // End the packet off with a CRC checksum.
+  BinaryPacketV2.Checksum = (uint16_t)crc16((unsigned char *)&BinaryPacketV2, sizeof(BinaryPacketV2) - 2);
+
+// Print some debug information if enabled
+#ifdef DEV_MODE
+  Serial.print("Latitude: ");
+  Serial.print(BinaryPacketV2.Latitude, 7);
+  Serial.print(", Longitude: ");
+  Serial.print(BinaryPacketV2.Longitude, 7);
+  Serial.print(", Sats: ");
+  Serial.println(gps.getSIV());
+#endif
+
+  // Copy the binary packet to the buffer
+  memcpy(buffer, &BinaryPacketV2, sizeof(BinaryPacketV2));
+
+  // Put GPS back to sleep.
+  //gps.powerOffWithInterrupt(10000, VAL_RXM_PMREQ_WAKEUPSOURCE_EXTINT0, true);
+
+  return sizeof(struct HorusBinaryPacketV2);
 }
