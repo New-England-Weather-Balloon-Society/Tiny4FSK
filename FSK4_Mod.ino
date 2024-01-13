@@ -55,11 +55,11 @@ int16_t fsk4_transmitDirect(PhysicalLayer* phy, uint32_t freq) {
 }
 
 void fsk4_tone(PhysicalLayer* phy, uint8_t i) {
-  uint32_t start = Module::micros();
+  uint32_t start = micros();
   fsk4_transmitDirect(phy, fsk4_base + fsk4_tones[i]);
   //delayMicroseconds(fsk4_bitDuration);
-  while(Module::micros() - start < fsk4_bitDuration) {
-    Module::yield();
+  while(micros() - start < fsk4_bitDuration) {
+    yield();
   }
 }
 
@@ -94,11 +94,10 @@ size_t fsk4_writebyte(PhysicalLayer* phy, uint8_t b){
   return(1);
 }
 
-void fsk4_write(PhysicalLayer* phy, uint8_t* buff, size_t len){
+void fsk4_write(PhysicalLayer* phy, char* buff, size_t len){
   size_t n = 0;
   for(size_t i = 0; i < len; i++) {
     n += fsk4_writebyte(phy, buff[i]);
   }
   fsk4_standby(phy);
-  return(n);
 }
