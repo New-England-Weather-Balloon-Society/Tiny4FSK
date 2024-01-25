@@ -54,5 +54,5 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 #define EXTINT 8
 
 // Status LED Pins
-#define ERROR_LED 24
+#define ERROR_LED 5
 #define SUCCESS_LED 4
