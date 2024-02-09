@@ -1,7 +1,7 @@
 ![Tiny4FSK_Logo](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/assets/66796793/ab7b77fc-2d4b-4a5b-8a1d-bdfebb96c139)
 # Tiny4FSK - The lightweight Horus Binary tracker built for HABs
 
-**WORK IN PROGRESS** - Please do not rely on this as your only tracking system. Tiny4FSK is still in the R&D phase of development and testing.
+**WORK IN PROGRESS** - Please do not rely on this as your only tracking system yet. Tiny4FSK is still in the R&D phase of development and testing.
 
 **NEW** - KiCAD Schematic and PCB files uploaded (2/8/24)
 
@@ -38,19 +38,31 @@ This code is modular and separated into several different files for easy expansi
 ## Configuration
 User configuration of this tracker is **required**. As this system uses amateur radio, you will need a Technician's level license (US). Configuration file is located in **config.h**. Here are instruction for configuration of these parameters.
 `HORUS_ID` - This setting is your Horus ID number. Information on how to get one in next section.
+
 `FSK_FREQ` - This is setting for your preferred TX frequency. If in US, best to keep the same as the PCB is built around 433.200 MHz. Minor modifications in the 70 cm band are fine though.
+
 `FSK_BAUD` - FSK baud rate. No need to change, as most RX station use the baud rate. 
+
 `FSK_SPACING` - FSK spacing in Hz. Once again, most station are set to this value.
+
 `STATUS_LED` - Comment out to disable verbose status LEDs on PCB.
+
 `DEV_MODE` - Comment out for flight mode. Disables Serial and enables deep sleep modes for lower power consumption.
+
 **Everything below these value in configuration file can go unchanged.** These are pin numbers, and unless you are making your own PCB, leave them be.
 
 `NSS_PIN`- Si4063 SS pin
+
 `RESET_PIN` - Si4063 RST pin
+
 `DIO0_PIN` - Si4063 GPIO0 pin
+
 `DIO1_PIN` - Si4063 GPIO1 pin
+
 `EXTINT` - GPS EXTINT pin for longer packet delays.
+
 `SUCCESS_LED` - Success LED pin.
+
 `ERROR_LED` - Error LED pin.
 
 ## How do I get a Horus v2 ID?
@@ -59,12 +71,19 @@ If you are going to fly your own payload using Horus Binary, you must get a payl
 **Do not use the testing (4FSKTEST-V2) payload ID on an actual launch! (ID 256)**
 ## Cited Works and Sources
 https://github.com/mikaelnousiainen/RS41ng - RS41ng Project
+
 https://github.com/projecthorus/horusdemodlib - Horus Binary modulator and decoder repository
+
 https://www.microchip.com/en-us/product/atsamd21g18 - SAMD21 product page
+
 https://www.silabs.com/wireless/proprietary/ezradiopro-sub-ghz-ics/device.si4063 - Si4063 product page
+
 https://www.u-blox.com/en/product/max-m10-series - MAX-M10 product page
+
 https://www.bosch-sensortec.com/products/environmental-sensors/humidity-sensors-bme280 - BME280 product page
+
 https://www.ti.com/product/TPS61200 - TPS61200 product page
+
 https://www.microchip.com/en-us/product/mcp1700 - MCP1700 product page
 
 ## Special Thanks
