@@ -75,11 +75,11 @@ This project would not be possible without the following individuals:
  - Bob Phinney K5TEC for providing funding for this project
  - Brett Miwa for schematic and PCB design help
  - Joe KM1P for help with much of the RF part of this project
- - Seth and Jennifer Kendall (Mum and Dad!) for motivating me to work
+ - Seth KC1PZY and Jennifer Kendall KC1PON (Mum and Dad!) for motivating me to work
 
 And these entities:
 
  - New England Sci-Tech for providing a makerspace to work
  - Sci-Tech Amateur Radio Society for providing expertise
- - New England Weather Balloon Society for providing insights
+ - New England Weather Balloon Society's community for providing insights
  - Digikey for being our part sourcing site
