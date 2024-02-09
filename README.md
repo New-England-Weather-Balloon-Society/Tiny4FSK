@@ -1,3 +1,85 @@
-![Tiny4FSKLogo_Big_Thick_i (1)](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/assets/66796793/ab7b77fc-2d4b-4a5b-8a1d-bdfebb96c139)
-# Tiny4FSK
-Lightweight 4FSK tracker for amateur high altitude balloons
+![Tiny4FSK_Logo](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/assets/66796793/ab7b77fc-2d4b-4a5b-8a1d-bdfebb96c139)
+# Tiny4FSK - The lightweight Horus Binary tracker built for HABs
+
+**WORK IN PROGRESS** - Please do not rely on this as your only tracking system. Tiny4FSK is still in the R&D phase of development and testing.
+
+**NEW** - KiCAD Schematic and PCB files uploaded (2/8/24)
+
+**STATE** - Breadboard and prototyping has been completed. Schematic has been created and a first draft of the PCB has been created (being peer-reviewed).
+
+## What is the Tiny4FSK project?
+Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It runs on 1 AAA battery that can last for ~12 hours. It runs on 4FSK (4-frequency shift keying), which means that is separated tones into 4 separate frequencies. (Figure 1.1). Upon this, it uses the [Horus Binary v2](https://github.com/projecthorus/horusdemodlib/wiki/2---Modem-Details#horus-binary-v1-mode-4-fsk) system, which is a relatively modern system popularly used with [RS41ng](https://github.com/mikaelnousiainen/RS41ng).
+
+## What are High-Altitude Balloons?
+
+High-Altitude Ballooning (HAB) offers a formally structured yet thrilling hobby, launching payloads to near-space (30km) for atmospheric research, breathtaking imagery, and scientific experimentation. While demanding meticulous planning, safety adherence, and technical skill in electronics and mechanics, HAB rewards hobbyists with hands-on engineering challenges and atmospheric understanding.
+
+## Parts and Materials
+This codebase is meant to work with the Tiny4FSK PCB, also on this GitHub repository. On it are these basic components:
+
+ - **Microcontroller** - [SAMD21G18A](https://www.microchip.com/en-us/product/atsamd21g18). This is a modern Cortex-M0 microcontroller by Microchip. It runs on ARM.
+ - **TX Module** - [Si4063](https://www.silabs.com/wireless/proprietary/ezradiopro-sub-ghz-ics/device.si4063?tab=specs). This is a transceiver from Silicon Labs, a derivative of the Si4032 on RS41 radiosondes.
+ - **GPS RX Module** - [MAX-M10S](https://www.u-blox.com/en/product/max-m10-series). This is a top-of-the-line GPS module from Ublox.
+ - **Environmental Sensor** - [BME280](https://www.bosch-sensortec.com/products/environmental-sensors/humidity-sensors-bme280/). This is a sensor from Bosch proven to work on HAB flights. Measures temperature, pressure, and humidity.
+ - **Boost Converter** - [TPS61200](https://www.ti.com/product/TPS61200). This is a boost converter from Texas Instruments. This is used to convert from 1.5v battery level to 3.3v for the rest of the board.
+ - **LDO Step-Down** - [MCP1700](https://www.microchip.com/en-us/product/mcp1700). This is a step down from Microchip.
+
+This list is not at all comprehensive, but this list features the basic components. There are plenty of other passives outlined in the schematic files if you're curious.
+
+## The Codebase
+This code is modular and separated into several different files for easy expansion. These files are listed below:
+
+ - **Tiny4FSK.ino** - Main Arduino file with control flow.
+ - **config.h** - Configuration file for user parameters.
+ - **crc_calc.cpp and crc_calc.h** - CRC16 generator files for parity bits.
+ - **horus_l2.cpp and horus_l2.h** - Horus layer 2 file. Golay error correction algorithm.
+ - **voltage.cpp and voltage.h** - Voltage detection using ADC values.
+
+## Configuration
+User configuration of this tracker is **required**. As this system uses amateur radio, you will need a Technician's level license (US). Configuration file is located in **config.h**. Here are instruction for configuration of these parameters.
+`HORUS_ID` - This setting is your Horus ID number. Information on how to get one in next section.
+`FSK_FREQ` - This is setting for your preferred TX frequency. If in US, best to keep the same as the PCB is built around 433.200 MHz. Minor modifications in the 70 cm band are fine though.
+`FSK_BAUD` - FSK baud rate. No need to change, as most RX station use the baud rate. 
+`FSK_SPACING` - FSK spacing in Hz. Once again, most station are set to this value.
+`STATUS_LED` - Comment out to disable verbose status LEDs on PCB.
+`DEV_MODE` - Comment out for flight mode. Disables Serial and enables deep sleep modes for lower power consumption.
+**Everything below these value in configuration file can go unchanged.** These are pin numbers, and unless you are making your own PCB, leave them be.
+
+`NSS_PIN`- Si4063 SS pin
+`RESET_PIN` - Si4063 RST pin
+`DIO0_PIN` - Si4063 GPIO0 pin
+`DIO1_PIN` - Si4063 GPIO1 pin
+`EXTINT` - GPS EXTINT pin for longer packet delays.
+`SUCCESS_LED` - Success LED pin.
+`ERROR_LED` - Error LED pin.
+
+## How do I get a Horus v2 ID?
+If you are going to fly your own payload using Horus Binary, you must get a payload ID allocated for your use. This can be done by  [submitting an issue](https://github.com/projecthorus/horusdemodlib/issues/new/choose)  or a pull request to this repository, or e-mailing VK5QI: vk5qi@rfhead.net
+
+**Do not use the testing (4FSKTEST-V2) payload ID on an actual launch! (ID 256)**
+## Cited Works and Sources
+https://github.com/mikaelnousiainen/RS41ng - RS41ng Project
+https://github.com/projecthorus/horusdemodlib - Horus Binary modulator and decoder repository
+https://www.microchip.com/en-us/product/atsamd21g18 - SAMD21 product page
+https://www.silabs.com/wireless/proprietary/ezradiopro-sub-ghz-ics/device.si4063 - Si4063 product page
+https://www.u-blox.com/en/product/max-m10-series - MAX-M10 product page
+https://www.bosch-sensortec.com/products/environmental-sensors/humidity-sensors-bme280 - BME280 product page
+https://www.ti.com/product/TPS61200 - TPS61200 product page
+https://www.microchip.com/en-us/product/mcp1700 - MCP1700 product page
+
+## Special Thanks
+This project would not be possible without the following individuals:
+ - Charlie Nicholson KC1SFR for working together on several parts
+ - Mark Jessop VK5QI for helping out with every part of this project
+ - Mike Hojnowski KD2EAT for helping out with software and hardware issues
+ - Bob Phinney K5TEC for providing funding for this project
+ - Brett Miwa for schematic and PCB design help
+ - Joe KM1P for help with much of the RF part of this project
+ - Seth and Jennifer Kendall (Mum and Dad!) for motivating me to work
+
+And these entities:
+
+ - New England Sci-Tech for providing a makerspace to work
+ - Sci-Tech Amateur Radio Society for providing expertise
+ - New England Weather Balloon Society for providing insights
+ - Digikey for being our part sourcing site
