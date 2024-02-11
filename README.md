@@ -3,7 +3,7 @@
 
 **WORK IN PROGRESS** - Please do not rely on this as your only tracking system yet. Tiny4FSK is still in the R&D phase of development and testing.
 
-**NEW** - KiCAD Schematic and PCB files uploaded (2/8/24)
+**NEW** - KiCAD Schematic and PCB files updated (2/11/24)
 
 **STATE** - Breadboard and prototyping has been completed. Schematic has been created and a first draft of the PCB has been created (being peer-reviewed).
 
