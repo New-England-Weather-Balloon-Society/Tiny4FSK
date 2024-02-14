@@ -65,13 +65,17 @@ The Tiny4FSK PCB has many configurable operating modes, pins and power sources. 
 The PCB contains two jumpers, JP1 and JP2.
 
 **JP1** - Cut (desolder) to enable SW3 for power.
+
 **JP2** - Control power source (USB and center for USB mode, center and BATT for battery mode).
 
 There are also two switches/buttons, SW1 and SW2.
+
 **SW1** - Reset button for the microcontroller.
+
 **SW2** - Battery power switch. Connects battery output to boost converter input.
 
 There are two antenna pads, AE1 is already soldered (GPS antenna). AE2 is the UHF antenna pad.
+
 **AE2** - 70cm antenna pad. For a guide to cut a proper antenna, refer to the following section.
 ## Antenna System
 This system relies on 70cm (420-450 MHz in the US). There is a pad that supports a quarter-wave monopole, but also provides grounding pads for a more advanced antenna. **Generally, a length of magnet wire ~16cm** should work just fine.
