@@ -5,6 +5,29 @@
 // Horus Binary modulation has been developed by Mark Jessop and the Project Horus team                 //
 // Made by Max Kendall W0MXX and the New England Weather Balloon Society (N.E.W.B.S.)                   //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+  MIT License
+
+  Copyright (c) 2023 New England Weather Balloon Society
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+*/
 
 // ***************
 // || Libraries ||
@@ -13,10 +36,12 @@
 #include <SparkFun_u-blox_GNSS_v3.h>
 #include <ArduinoLowPower.h>
 #include <RadioLib.h>
+#include <TinyBME280.h>
 #include "horus_l2.h"
 #include "config.h"
 #include "crc_calc.h"
 #include "voltage.h"
+#include "i2c_scan.h"
 
 // **********************
 // || Native USB Setup ||
@@ -48,7 +73,7 @@ struct HorusBinaryPacketV2 {
   uint16_t Altitude;
   uint8_t Speed;  // Speed in Knots (1-255 knots)
   uint8_t Sats;
-  int8_t Temp;          // Twos Complement Temp value.
+  int8_t Temp;
   uint8_t BattVoltage;  // 0 = 0.5v, 255 = 2.0V, linear steps in-between.
   // The following 9 bytes (up to the CRC) are user-customizable.
   uint8_t dummy1;     // unsigned int
@@ -80,7 +105,7 @@ void setup() {
   // Connect to u-blox GPS module
   while (gps.begin() == false) {
 #ifdef DEV_MODE
-    Serial.println(F("u-blox GNSS not detected at default I2C address. Retrying..."));
+    Serial.println(F("u-blox GNSS not detected at default I2C address. Printing I2C scan. Restarting..."));
 #endif
     delay(1000);
 #ifdef STATUS_LED
@@ -89,6 +114,7 @@ void setup() {
     digitalWrite(ERROR_LED, LOW);
     delay(500);
 #endif
+    showI2CAddresses();
   }
 #ifdef STATUS_LED
   digitalWrite(ERROR_LED, LOW);
@@ -111,9 +137,9 @@ void setup() {
   gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_BEIDOU);   // Disable BeiDou.
   gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_IMES);     // Disable IMES.
   gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_QZSS);     // Disable QZSS.
-  gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_GLONASS);  // Disable GLONASS.
+  gps.enableGNSS(true, SFE_UBLOX_GNSS_ID_GLONASS);   // Disable GLONASS.
 
-  setValueSuccess &= gps.setVal8(UBLOX_CFG_PM_OPERATEMODE, 2);   // Setting to PSMCT.
+  //setValueSuccess &= gps.setVal8(UBLOX_CFG_PM_OPERATEMODE, 2);   // Setting to PSMCT.
   setValueSuccess &= gps.setDynamicModel(DYN_MODEL_AIRBORNE1g);  // Setting Airborne Mode.
 
   // Print GPS configuration status
@@ -156,6 +182,8 @@ void setup() {
   delay(1000);
   digitalWrite(SUCCESS_LED, LOW);
 #endif
+  BME280setI2Caddress(0x76);
+  BME280setup();
 }
 
 void loop() {
@@ -214,19 +242,14 @@ void loop() {
   packet_count++;
 }
 
-// Build the Horus v2 Packet. This is where the GPS positions are organized to the struct.
+// Build the Horus v2 Packet. This is where the GPS positions and telemetry are organized to the struct.
 int build_horus_binary_packet_v2(char *buffer) {
   struct HorusBinaryPacketV2 BinaryPacketV2;
 
-  // Wake up GPS by pulsing to the EXTINT (External Interrupt) pin. 250 ms is probably more the needed,
-  // but nice to be safe.
-  /*digitalWrite(EXTINT, LOW);
-  delay(1000);
-  digitalWrite(EXTINT, HIGH);
-  delay(1000);
-  digitalWrite(EXTINT, LOW);*/
+  // Wake up the BME280
+  BME280setup();
 
-  // Filled with GPS readings.
+  // Fill with GPS readings.
   BinaryPacketV2.Hours = gps.getHour();
   BinaryPacketV2.Minutes = gps.getMinute();
   BinaryPacketV2.Seconds = gps.getSecond();
@@ -246,11 +269,11 @@ int build_horus_binary_packet_v2(char *buffer) {
   BinaryPacketV2.PayloadID = 256;
   BinaryPacketV2.Counter = packet_count;
   BinaryPacketV2.BattVoltage = readVoltage();
-  BinaryPacketV2.Temp = 20;           // BME280
+  BinaryPacketV2.Temp = BME280temperature() / 100.00;
 
   // User-Customizable Fields
-  BinaryPacketV2.dummy1 = 1;
-  BinaryPacketV2.dummy2 = 2;
+  BinaryPacketV2.dummy1 = BME280pressure() / 100.00;
+  BinaryPacketV2.dummy2 = BME280humidity() / 100.00;
   BinaryPacketV2.dummy3 = 3;
   BinaryPacketV2.dummy4 = 4;
   BinaryPacketV2.dummy5 = 5;
@@ -265,14 +288,22 @@ int build_horus_binary_packet_v2(char *buffer) {
   Serial.print(", Longitude: ");
   Serial.print(BinaryPacketV2.Longitude, 7);
   Serial.print(", Sats: ");
-  Serial.println(gps.getSIV());
+  Serial.print(gps.getSIV());
+  Serial.print(", Voltage: ");
+  Serial.print(readVoltage());
+  Serial.print(", Temperature: ");
+  Serial.print(BME280temperature() / 100.00);
+  Serial.print(", Pressure: ");
+  Serial.print(BME280pressure() / 100.00);
+  Serial.print(", Humidity: ");
+  Serial.println(BME280humidity() / 100.00);
 #endif
+
+  // Put the BME280 back to sleep
+  BME280sleep();
 
   // Copy the binary packet to the buffer
   memcpy(buffer, &BinaryPacketV2, sizeof(BinaryPacketV2));
-
-  // Put GPS back to sleep.
-  //gps.powerOffWithInterrupt(10000, VAL_RXM_PMREQ_WAKEUPSOURCE_EXTINT0, true);
 
   return sizeof(struct HorusBinaryPacketV2);
 }
