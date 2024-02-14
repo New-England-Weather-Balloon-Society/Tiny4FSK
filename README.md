@@ -1,4 +1,5 @@
 
+
 ![Tiny4FSK_Logo](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/assets/66796793/ab7b77fc-2d4b-4a5b-8a1d-bdfebb96c139)
 # Tiny4FSK - The lightweight Horus Binary tracker built for HABs
 **WORK IN PROGRESS** - Please do not rely on this as your only tracking system. Tiny4FSK is still in the R&D phase of development and testing.
@@ -37,7 +38,30 @@ This project is based on the Arduino IDE workflow. Below steps outline steps nec
 
  1. Install [Arduino IDE](https://www.arduino.cc/en/software) from [here](https://www.arduino.cc/en/software).
  2. [Download the Arduino SAMD core](https://docs.arduino.cc/learn/starting-guide/cores/).
- 3. Open Tiny4FSK.ino by double-clicking it (should open Arduino IDE).
+ 3. Download necessary libraries from library manager:
+	 a. ArduinoLowPower
+	 b. RadioLib
+	 c. Sparkfun GNSS v3
+ 4. To following needs to be downloaded directly from GitHub:
+	a. TinyBME280
+ 4. Open Tiny4FSK.ino by double-clicking it (should open Arduino IDE).
+
+The SAMD goes to sleep to save power. To achieve proper sleep, some edits to the SAMD core are necessary. To find the wiring.c file on your computer, [follow this guide](https:support.arduino.cc/hc/en-us/articles/4415103213714-Find-sketches-libraries-board-cores-and-other-files-on-your-computer).
+Once there, comment out or completely delete this line as shown:
+
+ 
+
+    // Defining VERY_LOW_POWER breaks Arduino APIs since all pins are considered INPUT at startup
+    // However, it really lowers the power consumption by a factor of 20 in low power mode (0.03mA vs 0.6mA)
+    #ifndef VERY_LOW_POWER
+      // Setup all pins (digital and analog) in INPUT mode (default is nothing)
+      for (uint32_t ul = 0 ; ul < NUM_DIGITAL_PINS ; ul++ )
+      {
+        pinMode( ul, INPUT ) ;
+      }
+    #endif
+
+Arduino gives you an official warning: "This breaks Arduino APIs since all pins are considered INPUT at startup. However, it really lowers the power consumption by a factor of 20 in low power mode (0.03mA vs 0.6mA)". However, from testing, it doesn't affect anything.
 
 ## Code Configuration
 User configuration of this tracker is **required**. As this system uses amateur radio, you will need a Technician's level license (US). Configuration file is located in **config.h**. Here are instruction for configuration of these parameters.
