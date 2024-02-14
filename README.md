@@ -39,11 +39,17 @@ This project is based on the Arduino IDE workflow. Below steps outline steps nec
  1. Install [Arduino IDE](https://www.arduino.cc/en/software) from [here](https://www.arduino.cc/en/software).
  2. [Download the Arduino SAMD core](https://docs.arduino.cc/learn/starting-guide/cores/).
  3. Download necessary libraries from library manager:
+
 	 a. ArduinoLowPower
+
 	 b. RadioLib
+
 	 c. Sparkfun GNSS v3
- 4. To following needs to be downloaded directly from GitHub:
+
+ 5. To following needs to be downloaded directly from GitHub:
+    
 	a. TinyBME280
+
  4. Open Tiny4FSK.ino by double-clicking it (should open Arduino IDE).
 
 The SAMD goes to sleep to save power. To achieve proper sleep, some edits to the SAMD core are necessary. To find the wiring.c file on your computer, [follow this guide](https:support.arduino.cc/hc/en-us/articles/4415103213714-Find-sketches-libraries-board-cores-and-other-files-on-your-computer).
