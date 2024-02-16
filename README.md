@@ -125,12 +125,19 @@ There are two antenna pads, AE1 is already soldered (GPS antenna). AE2 is the UH
 This system relies on 70cm (420-450 MHz in the US). There is a pad that supports a quarter-wave monopole, but also provides grounding pads for a more advanced antenna. **Generally, a length of magnet wire ~16cm** should work just fine.
 ## Cited Works and Sources
 https://github.com/mikaelnousiainen/RS41ng - RS41ng Project
+
 https://github.com/projecthorus/horusdemodlib - Horus Binary modulator and decoder repository
+
 https://www.microchip.com/en-us/product/atsamd21g18 - SAMD21 product page
+
 https://www.silabs.com/wireless/proprietary/ezradiopro-sub-ghz-ics/device.si4063 - Si4063 product page
+
 https://www.u-blox.com/en/product/max-m10-series - MAX-M10 product page
+
 https://www.bosch-sensortec.com/products/environmental-sensors/humidity-sensors-bme280 - BME280 product page
+
 https://www.ti.com/product/TPS61200 - TPS61200 product page
+
 https://www.microchip.com/en-us/product/mcp1700 - MCP1700 product page
 ## Special Thanks
 This project would not be possible without the following individuals:
