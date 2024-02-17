@@ -6,7 +6,7 @@
 
 **NEW** - KiCAD Schematic and PCB files uploaded (2/13/24). I2C scanning capabilities added.
 
-**STATE** - Breadboard and prototyping has been completed. Schematic has been created and a first draft of the PCB has been created (being peer-reviewed).
+**STATE** - Breadboard and prototyping has been completed. Schematic has been created and a first draft of the PCB has been created PCBs soon to be ordered.
 
 ## What is the Tiny4FSK project?
 Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It runs on 1 AAA battery that can last for ~12 hours. It runs on 4FSK (4-frequency shift keying), which means that is separated tones into 4 separate frequencies. (Figure 1.1). Upon this, it uses the [Horus Binary v2](https://github.com/projecthorus/horusdemodlib/wiki/2---Modem-Details#horus-binary-v1-mode-4-fsk) system, which is a relatively modern system popularly used with [RS41ng](https://github.com/mikaelnousiainen/RS41ng).
