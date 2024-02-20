@@ -157,5 +157,5 @@ And these entities:
  - Digikey for being our part sourcing site
 
 ## License
-The source code is under the MIT license, the documentation under the x license, and the hardware under the xx license.
+Both the software and documentation are under the MIT license, and the hardware is under the xx license.
 (will be updated soon)
