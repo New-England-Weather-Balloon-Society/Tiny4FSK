@@ -155,3 +155,7 @@ And these entities:
  - Sci-Tech Amateur Radio Society for providing expertise
  - New England Weather Balloon Society for providing insights
  - Digikey for being our part sourcing site
+
+## License
+The source code is under the MIT license, the documentation under the x license, and the hardware under the xx license.
+(will be updated soon)
