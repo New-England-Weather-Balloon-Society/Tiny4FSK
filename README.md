@@ -9,7 +9,7 @@
 **STATE** - Breadboard and prototyping has been completed. Schematic has been created and a first draft of the PCB has been created PCBs soon to be ordered.
 
 ## What is the Tiny4FSK project?
-Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It runs on 1 AAA battery that can last for ~12 hours. It runs on 4FSK (4-frequency shift keying), which means that is separated tones into 4 separate frequencies. (Figure 1.1). Upon this, it uses the [Horus Binary v2](https://github.com/projecthorus/horusdemodlib/wiki/2---Modem-Details#horus-binary-v1-mode-4-fsk) system, which is a relatively modern system popularly used with [RS41ng](https://github.com/mikaelnousiainen/RS41ng).
+Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It aims to run on 1 AAA battery that should last for ~12 hours. It runs on 4FSK (4-frequency shift keying), which means that is separated tones into 4 separate frequencies. (Figure 1.1). Upon this, it uses the [Horus Binary v2](https://github.com/projecthorus/horusdemodlib/wiki/2---Modem-Details#horus-binary-v1-mode-4-fsk) system, which is a relatively modern system popularly used with [RS41ng](https://github.com/mikaelnousiainen/RS41ng).
 ## What are High-Altitude Balloons?
 
 High-Altitude Ballooning (HAB) offers a formally structured yet thrilling hobby, launching payloads to near-space (30km) for atmospheric research, breathtaking imagery, and scientific experimentation. While demanding meticulous planning, safety adherence, and technical skill in electronics and mechanics, HAB rewards hobbyists with hands-on engineering challenges and atmospheric understanding.
