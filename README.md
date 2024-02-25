@@ -1,7 +1,7 @@
 
 
 ![Tiny4FSK_Logo](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/assets/66796793/ab7b77fc-2d4b-4a5b-8a1d-bdfebb96c139)
-# Tiny4FSK - The lightweight Horus Binary tracker built for HABs
+# Tiny4FSK - The Lightweight Horus Binary tracker Built for HABs
 **WORK IN PROGRESS** - Please do not rely on this as your only tracking system. Tiny4FSK is still in the R&D phase of development and testing.
 
 **NEW** - KiCAD Schematic and PCB files uploaded (2/13/24). I2C scanning capabilities added.
@@ -157,4 +157,4 @@ And these entities:
  - Digikey for being our part sourcing site
 
 ## License
-Both the software and documentation are under the MIT license, and the hardware will be licensed soon.
+Both the software and documentation are under the MIT license, and the hardware is licensed with the OSHW Open Source Hardware license.
