@@ -159,4 +159,4 @@ And these entities:
  - Digikey for being our part sourcing site
 
 ## License
-Both the software and documentation are under the MIT license, and the hardware is licensed with the OSHW Open Source Hardware license.
+Both the software and documentation are under the MIT license, and the hardware is to be licensed soon.
