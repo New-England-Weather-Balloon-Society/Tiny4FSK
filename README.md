@@ -124,7 +124,7 @@ There are two antenna pads, AE1 is already soldered (GPS antenna). AE2 is the UH
 ## Antenna System
 This system relies on 70cm (420-450 MHz in the US). There is a pad that supports a quarter-wave monopole, but also provides grounding pads for a more advanced antenna. **Generally, a length of magnet wire ~16cm** should work just fine.
 ## Contact Me!
-To ask questions, kindly donate, or even say hi, fell free to contact me at this email: tiny4fsk@gmail.com. Thanks!
+To ask questions, kindly donate, or even say hi, feel free to contact me at this email: tiny4fsk@gmail.com. Thanks!
 ## Cited Works and Sources
 https://github.com/mikaelnousiainen/RS41ng - RS41ng Project
 
