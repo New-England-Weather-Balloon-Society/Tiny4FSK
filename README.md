@@ -8,8 +8,6 @@
 
 **STATE** - PCBs have been ordered and arrived on 3/2/24. They have been assembled and thouroghly tested. Just a few issues have been fixed in the new PCB order, arriving on 3/26/24.
 
-![image](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/assets/66796793/5e9ff67a-ee2b-4ce7-aadf-ad8f836a545c)
-
 ## What is the Tiny4FSK project?
 Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It aims to run on 1 AAA battery that should last for ~12 hours. It runs on 4FSK (4-frequency shift keying), which means that is separated tones into 4 separate frequencies. (Figure 1.1). Upon this, it uses the [Horus Binary v2](https://github.com/projecthorus/horusdemodlib/wiki/2---Modem-Details#horus-binary-v1-mode-4-fsk) system, which is a relatively modern system popularly used with [RS41ng](https://github.com/mikaelnousiainen/RS41ng).
 ## What are High-Altitude Balloons?
@@ -162,3 +160,9 @@ And these entities:
 
 ## License
 Both the software and documentation are under the MIT license, and the hardware is to be licensed soon.
+
+## Pictures!!!
+
+![image](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/assets/66796793/5e9ff67a-ee2b-4ce7-aadf-ad8f836a545c)
+![image](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/assets/66796793/9a1558d4-905e-4641-ae64-c050302dbd42)
+
