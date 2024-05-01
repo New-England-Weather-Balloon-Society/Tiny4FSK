@@ -72,7 +72,7 @@ Once there, comment out or completely delete this line as shown:
 Arduino gives you an official warning: "This breaks Arduino APIs since all pins are considered INPUT at startup. However, it really lowers the power consumption by a factor of 20 in low power mode (0.03mA vs 0.6mA)". However, from testing, it doesn't affect anything.
 
 ## Code Configuration
-User configuration of this tracker is **required**. As this system uses amateur radio, you will need a Technician's level license (US). Configuration file is located in **config.h**. Here are instruction for configuration of these parameters.
+User configuration of this tracker is **required**. As this system uses amateur radio, you will need at least a Technician's level license (US). Configuration file is located in **config.h**. Here are instruction for configuration of these parameters.
 
 `HORUS_ID` - This setting is your Horus ID number. Information on how to get one in next section.
 
