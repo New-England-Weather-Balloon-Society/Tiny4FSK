@@ -1,6 +1,6 @@
 // MFSK Modulation
 
-#include <RadioLib.h>
+/*#include <RadioLib.h>
 
 uint32_t fsk4_base = 0, fsk4_baseHz = 0;
 uint32_t fsk4_shift = 0, fsk4_shiftHz = 0;
@@ -99,5 +99,5 @@ void fsk4_write(PhysicalLayer* phy, char* buff, size_t len){
   for(size_t i = 0; i < len; i++) {
     n += fsk4_writebyte(phy, buff[i]);
   }
-  fsk4_standby(phy);
+  fsk4_standby(phy);*/
 }
