@@ -1,4 +1,3 @@
-#include <Adafruit_BMP280.h>
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Tiny4FSK                                                                                             //
 // The lightweight, small Horus Binary v2 4FSK tracker                                                  //
@@ -249,20 +248,20 @@ void loop()
   Serial.println(F("Transmitting Horus Binary v2 Packet"));
 #endif
 
-  SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
-  si4063_enable_tx();
-  SPI.endTransaction();
+  //SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
+  //si4063_enable_tx();
+  //SPI.endTransaction();
 
   fsk4_preamble(8);
   fsk4_write(codedbuffer, coded_len);
 
-  SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
+  //SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
   //si4063_wait_for_cts();
   
-  si4063_set_state(SI4063_STATE_READY);
+  //si4063_set_state(SI4063_STATE_READY);
 
   //si4063_wait_for_cts();
-  SPI.endTransaction();
+  //SPI.endTransaction();
 
 #ifdef DEV_MODE
   Serial.println(F("Transmission complete!"));
@@ -377,7 +376,7 @@ void configureSi4063()
   }
   delay(100);
   Serial.print("Part Number: 0x"); Serial.println(si4063_read_part_info(), HEX);
-  //si4063_enable_tx();
+  si4063_enable_tx();
   SPI.endTransaction();
 }
 
