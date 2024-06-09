@@ -42,13 +42,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 // *********************
 
 // You most likely do not need to touch these, if you are using the PCB.
-// Mostly for indivisual development or shields.
-
-// SX1278 Pins. These are in junction with normal SPI pins (MISO, MOSI, SCK).
-#define NSS_PIN 10
-#define DIO0_PIN 2
-#define RESET_PIN 9
-#define DIO1_PIN 3
+// Mostly for individual development or shields.
 
 // GPS External interrupt Pin. In junction with I2C pins.
 #define EXTINT 8
