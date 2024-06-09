@@ -565,6 +565,7 @@ void si4063_set_state(si4063_state state)
 
 int si4063_wait_for_cts()
 {
+  //SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
   uint16_t timeout = 0xFFFF;
   uint8_t response;
 
@@ -579,16 +580,17 @@ int si4063_wait_for_cts()
 
   if (timeout == 0)
   {
-    Serial.println("ERROR: Si4063 timeout\n");
+    ;
   }
+  //SPI.endTransaction();
   return timeout > 0 ? HAL_OK : HAL_ERROR;
 }
 
 void si4063_send_command(si4063_command command, uint8_t length, uint8_t *data)
 {
-  SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
   si4063_wait_for_cts();
 
+  //SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
   digitalWrite(NSEL, LOW);
 
   SPI.transfer(command);
@@ -599,11 +601,12 @@ void si4063_send_command(si4063_command command, uint8_t length, uint8_t *data)
   }
 
   digitalWrite(NSEL, HIGH);
-  SPI.endTransaction();
+  //SPI.endTransaction();
 }
 
 int si4063_read_response(uint8_t length, uint8_t *data)
 {
+  //SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
   uint16_t timeout = 0xFFFF;
   uint8_t response;
 
@@ -624,7 +627,6 @@ int si4063_read_response(uint8_t length, uint8_t *data)
 
   if (timeout == 0)
   {
-    Serial.println("ERROR: Si4063 timeout\n");
     digitalWrite(NSEL, HIGH);
     return HAL_ERROR;
   }
@@ -636,6 +638,7 @@ int si4063_read_response(uint8_t length, uint8_t *data)
   }
 
   digitalWrite(NSEL, HIGH);
+  //SPI.endTransaction();
 
   return HAL_OK;
 }
