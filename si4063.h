@@ -1,7 +1,6 @@
 // Basic Si4063 implementation - MINIMAL DRIVER
 
-#ifndef SI4063_H
-#define SI4063_H
+#pragma once
 
 #include <stdint.h>
 
@@ -103,5 +102,3 @@ int si4063_wait_for_cts();
 void si4063_send_command(si4063_command command, uint8_t length, uint8_t *data);
 int si4063_read_response(uint8_t length, uint8_t *data);
 uint8_t spi_read();
-
-#endif

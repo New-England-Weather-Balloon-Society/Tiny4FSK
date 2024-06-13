@@ -1,8 +1,7 @@
-#ifndef VOLTAGE
-#define VOLTAGE
+// Voltage reading function
+
+#pragma once
 
 #include <stdint.h>
 
 double readVoltage();
-
-#endif // VOLTAGE

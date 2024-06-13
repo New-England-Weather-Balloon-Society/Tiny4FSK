@@ -62,7 +62,8 @@ SFE_UBLOX_GNSS gps;
 // Horus Binary Structures & Variables
 
 // Horus v2 Structure of Packet
-struct HorusBinaryPacketV2 {
+struct HorusBinaryPacketV2
+{
   uint16_t PayloadID;
   uint16_t Counter;
   uint8_t Hours;
@@ -71,26 +72,27 @@ struct HorusBinaryPacketV2 {
   float Latitude;
   float Longitude;
   uint16_t Altitude;
-  uint8_t Speed;  // Speed in Knots (1-255 knots)
+  uint8_t Speed; // Speed in Knots (1-255 knots)
   uint8_t Sats;
   int8_t Temp;
-  uint8_t BattVoltage;  // 0 = 0.5v, 255 = 2.0V, linear steps in-between.
+  uint8_t BattVoltage; // 0 = 0.5v, 255 = 2.0V, linear steps in-between.
   // The following 9 bytes (up to the CRC) are user-customizable.
-  uint8_t dummy1;     // unsigned int
-  float dummy2;       // Float
-  uint8_t dummy3;     // battery voltage test
-  uint8_t dummy4;     // divide by 10
-  uint16_t dummy5;    // divide by 100
-  uint16_t Checksum;  // CRC16-CCITT Checksum.
+  uint8_t dummy1;    // unsigned int
+  float dummy2;      // Float
+  uint8_t dummy3;    // battery voltage test
+  uint8_t dummy4;    // divide by 10
+  uint16_t dummy5;   // divide by 100
+  uint16_t Checksum; // CRC16-CCITT Checksum.
 } __attribute__((packed));
 
 // Buffers and counters.
-char rawbuffer[128];        // Buffer to temporarily store a raw binary packet.
-char codedbuffer[128];      // Buffer to store an encoded binary packet
-char debugbuffer[256];      // Buffer to store debug strings
-uint16_t packet_count = 1;  // Packet counter
+char rawbuffer[128];       // Buffer to temporarily store a raw binary packet.
+char codedbuffer[128];     // Buffer to store an encoded binary packet
+char debugbuffer[256];     // Buffer to store debug strings
+uint16_t packet_count = 1; // Packet counter
 
-void setup() {
+void setup()
+{
   Serial.begin(9600);
 
   // Initialize Si4063 radio with default settings
@@ -109,64 +111,61 @@ void setup() {
   Wire.begin();
 
   // Connect to u-blox GPS module
-  while (gps.begin() == false) {
+  while (gps.begin() == false)
+  {
 #ifdef DEV_MODE
     Serial.println(F("u-blox GNSS not detected at default I2C address. Printing I2C scan. Restarting..."));
 #endif
     delay(1000);
-#ifdef STATUS_LED
     digitalWrite(ERROR_LED, HIGH);
     delay(500);
     digitalWrite(ERROR_LED, LOW);
     delay(500);
-#endif
     showI2CAddresses();
   }
-#ifdef STATUS_LED
   digitalWrite(ERROR_LED, LOW);
-#endif
 
   // ***********************
   // || GPS Configuration ||
   // ***********************
   gps.setI2COutput(COM_TYPE_UBX);
-  gps.factoryDefault();  // Clear any saved configuration
+  gps.factoryDefault(); // Clear any saved configuration
 
   bool setValueSuccess = true;
 
-  gps.enableGNSS(true, SFE_UBLOX_GNSS_ID_GPS);       // Enable GPS, disable everything else for lower power.
-  gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_SBAS);     // Disable SBAS.
-  gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_GALILEO);  // Disable Galileo.
-  gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_BEIDOU);   // Disable BeiDou.
-  gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_IMES);     // Disable IMES.
-  gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_QZSS);     // Disable QZSS.
-  gps.enableGNSS(true, SFE_UBLOX_GNSS_ID_GLONASS);   // Disable GLONASS.
+  gps.enableGNSS(true, SFE_UBLOX_GNSS_ID_GPS);      // Enable GPS, disable everything else for lower power.
+  gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_SBAS);    // Disable SBAS.
+  gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_GALILEO); // Disable Galileo.
+  gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_BEIDOU);  // Disable BeiDou.
+  gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_IMES);    // Disable IMES.
+  gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_QZSS);    // Disable QZSS.
+  gps.enableGNSS(true, SFE_UBLOX_GNSS_ID_GLONASS);  // Disable GLONASS.
 
   // setValueSuccess &= gps.setVal8(UBLOX_CFG_PM_OPERATEMODE, 2);   // Setting to PSMCT.
-  setValueSuccess &= gps.setDynamicModel(DYN_MODEL_AIRBORNE1g);  // Setting Airborne Mode.
+  setValueSuccess &= gps.setDynamicModel(DYN_MODEL_AIRBORNE1g); // Setting Airborne Mode.
 
   // Print GPS configuration status
-  if (setValueSuccess == true) {
+  if (setValueSuccess == true)
+  {
     gps.saveConfiguration();
 #ifdef DEV_MODE
     Serial.println("GPS Config Success!");
 #endif
-#ifdef STATUS_LED
     digitalWrite(SUCCESS_LED, HIGH);
     delay(1000);
     digitalWrite(SUCCESS_LED, LOW);
-#endif
-  } else {
-    while (1) {
+  }
+  else
+  {
+    while (1)
+    {
 #ifdef DEV_MODE
       Serial.println("GPS Config Failed!");
 #endif
-#ifdef STATUS_LED
       digitalWrite(ERROR_LED, HIGH);
       delay(500);
       digitalWrite(ERROR_LED, LOW);
       delay(500);
-#endif
     }
   }
 
@@ -179,19 +178,18 @@ void setup() {
 #ifdef DEV_MODE
   Serial.println(F("Radio Initialized!"));
 #endif
-#ifdef STATUS_LED
   digitalWrite(SUCCESS_LED, HIGH);
   delay(1000);
   digitalWrite(SUCCESS_LED, LOW);
-#endif
 
   // ***********************
   // || Initialize BME280 ||
   // ***********************
-  //BME280setup();
+  // BME280setup();
 }
 
-void loop() {
+void loop()
+{
   // *********************
   // || Local Variables ||
   // *********************
@@ -237,20 +235,20 @@ void loop() {
   // || Sleep Mode Time! ||
   // **********************
 #ifndef DEV_MODE
-  LowPower.deepSleep(PACKET_DELAY);
+  LowPower.sleep(PACKET_DELAY);
 #endif
 #ifdef DEV_MODE
   delay(PACKET_DELAY);
 #endif
 }
 
-
 // **********************
 // || Custom Functions ||
 // **********************
 
 // Build the Horus v2 Packet. This is where the GPS positions and telemetry are organized to the struct.
-int build_horus_binary_packet_v2(char *buffer) {
+int build_horus_binary_packet_v2(char *buffer)
+{
   struct HorusBinaryPacketV2 BinaryPacketV2;
 
   // Wake up the BME280
@@ -318,7 +316,8 @@ int build_horus_binary_packet_v2(char *buffer) {
   return sizeof(struct HorusBinaryPacketV2);
 }
 
-void configureSi4063() {
+void configureSi4063()
+{
   chip_parameters si_params;
   si_params.gpio0 = 0x00;
   si_params.gpio1 = 0x00;
@@ -328,13 +327,14 @@ void configureSi4063() {
   si_params.clock = 26000000UL;
 
   radio_parameters rf_params;
-  rf_params.frequency_hz = FSK_FREQ*1000000;
+  rf_params.frequency_hz = FSK_FREQ * 1000000;
   rf_params.power = 0x30;
   rf_params.type = SI4063_MODULATION_TYPE_CW;
   rf_params.offset = 0;
   rf_params.deviation_hz = 0x00;
 
-  if (si4063_init(rf_params, si_params) != HAL_OK) {
+  if (si4063_init(rf_params, si_params) != HAL_OK)
+  {
     // Handle initialization error
     Serial.println("Initialization Error!");
     Serial.print("Part Number: 0x");
@@ -345,9 +345,10 @@ void configureSi4063() {
   delay(100);
   Serial.print("Part Number: 0x");
   Serial.println(si4063_read_part_info(), HEX);
-  //si4063_enable_tx();
+  // si4063_enable_tx();
 }
 
-double mapf(double x, double in_min, double in_max, double out_min, double out_max) {
-    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+double mapf(double x, double in_min, double in_max, double out_min, double out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
