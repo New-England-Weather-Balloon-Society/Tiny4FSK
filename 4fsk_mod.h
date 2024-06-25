@@ -1,3 +1,5 @@
+#pragma once
+
 #include <Arduino.h>
 #include "si4063.h"
 #include "delay_timer.h"

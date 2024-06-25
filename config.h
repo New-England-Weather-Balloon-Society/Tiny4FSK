@@ -2,6 +2,8 @@
 // Please read comments for each section, even though some settings are self-explanatory.
 // Feel free to add an issue or PR on GitHub for any questions or bugs.
 
+#pragma once
+
 // **********************
 // || Tracker Settings ||
 // **********************
@@ -15,7 +17,17 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 -Name Here
 */
 
-#define HORUS_ID 380 // Replace with the assigned Horus v2 ID
+// Replace with the assigned Horus v2 ID
+#define HORUS_ID 256
+
+// Amateur radio license required! Give callsign here.
+#define CALLSIGN "CHANGEME"
+
+// Transmits callsign in CW to stay legal. Keep at 20 or below.
+#define CALLSIGN_WPM 20
+
+// Interval to send the CW in milliseconds.
+#define CALLSIGN_INTERVAL 600000
 
 // FSK Center Frequency in MHz. Ensure SDR is tuned to this frequency.
 #define FSK_FREQ 433.200
@@ -27,7 +39,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 #define FSK_SPACING 270
 
 // Delay between each packet, in milliseconds.
-#define PACKET_DELAY 1000
+#define PACKET_DELAY 10000
 
 // ****************************
 // || General Board Settings ||
@@ -41,19 +53,22 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 // Disable for flights to conserve power.
 #define DEV_MODE
 
+// EXPERIMENTAL - optimise for EXTREMELY low power draw
+//#define ULTRA_LOW_POWER
+
 // *********************
 // || Pin Definitions ||
 // *********************
 
 // You most likely do not need to touch these, if you are using the PCB.
-// Mostly for indivisual development or shields.
+// Mostly for individual development or shields.
 
 // Si4063 Pins. These are in junction with normal SPI pins (MISO, MOSI, SCK).
 #define NSEL_PIN 10
 #define SDN_PIN 11
 
 // GPS External interrupt Pin. In junction with I2C pins.
-#define EXTINT 8
+#define EXTINT_GPS 8
 
 // Status LED Pins
 #define ERROR_LED 5
