@@ -97,7 +97,10 @@ int call_count = 0;
 #endif
 
 void setup() {
-// Begin the Serial Monitor
+  // ****************************
+  // || Runtime Initialization ||
+  // ****************************
+  // Begin the Serial Monitor
 #ifdef DEV_MODE
   Serial.begin(9600);
 #endif
@@ -141,7 +144,7 @@ void setup() {
   // || GPS Configuration ||
   // ***********************
   gps.setI2COutput(COM_TYPE_UBX);
-  gps.factoryDefault();  // Clear any saved configuration
+  gps.factoryDefault();
 
   bool setValueSuccess = true;
 
