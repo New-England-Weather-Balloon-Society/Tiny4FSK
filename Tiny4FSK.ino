@@ -92,6 +92,10 @@ char debugbuffer[256];      // Buffer to store debug strings
 uint16_t packet_count = 1;  // Packet counter
 int call_count = 0;
 
+#if CALLSIGN_INTERVAL > 600000
+#error "Please set the CALLSIGN_INTERVAL to less than or equal to 10 minutes to keep this legal!
+#endif
+
 void setup() {
 // Begin the Serial Monitor
 #ifdef DEV_MODE
@@ -272,8 +276,30 @@ void loop() {
 // Build the Horus v2 Packet. This is where the GPS positions and telemetry are organized to the struct.
 int build_horus_binary_packet_v2(char *buffer) {
   struct HorusBinaryPacketV2 BinaryPacketV2;
+// Fill with GPS readings, with a GPS sanity check
+#ifdef FLAG_BAD_PACKET
+  if (gps.getAltitudeMSL() > 0 && gps.getGnssFixOk()) {
+    BinaryPacketV2.Hours = gps.getHour();
+    BinaryPacketV2.Minutes = gps.getMinute();
+    BinaryPacketV2.Seconds = gps.getSecond();
+    BinaryPacketV2.Latitude = gps.getLatitude() / 10000000.00;
+    BinaryPacketV2.Longitude = gps.getLongitude() / 10000000.00;
+    BinaryPacketV2.Altitude = gps.getAltitudeMSL() / 1000.00;
+    BinaryPacketV2.Speed = gps.getGroundSpeed();
+    BinaryPacketV2.Sats = gps.getSIV();
+  } else {
+    BinaryPacketV2.Hours = 0;
+    BinaryPacketV2.Minutes = 0;
+    BinaryPacketV2.Seconds = 0;
+    BinaryPacketV2.Latitude = 0;
+    BinaryPacketV2.Longitude = 0;
+    BinaryPacketV2.Altitude = 0;
+    BinaryPacketV2.Speed = 0;
+    BinaryPacketV2.Sats = gps.getSIV();
+  }
+#else
 
-  // Fill with GPS readings.
+  // Or, if you prefer no sanity check, force GPS positions into struct
   BinaryPacketV2.Hours = gps.getHour();
   BinaryPacketV2.Minutes = gps.getMinute();
   BinaryPacketV2.Seconds = gps.getSecond();
@@ -282,6 +308,7 @@ int build_horus_binary_packet_v2(char *buffer) {
   BinaryPacketV2.Altitude = gps.getAltitudeMSL() / 1000.00;
   BinaryPacketV2.Speed = gps.getGroundSpeed();
   BinaryPacketV2.Sats = gps.getSIV();
+#endif
 #ifdef STATUS_LED
   digitalWrite(SUCCESS_LED, HIGH);
   delay(500);
