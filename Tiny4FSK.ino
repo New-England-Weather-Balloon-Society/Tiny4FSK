@@ -376,8 +376,8 @@ void configureSi4063() {
   rf_params.offset = 0;
   rf_params.deviation_hz = 0x00;
 
+  // Handle initialization error
   if (si4063_init(rf_params, si_params) != HAL_OK) {
-// Handle initialization error
 #ifdef DEV_MODE
     Serial.println("Initialization Error!");
 #endif
