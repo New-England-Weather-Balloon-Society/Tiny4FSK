@@ -63,6 +63,7 @@ SFE_UBLOX_GNSS gps;
 // Horus Binary Structures & Variables
 
 // Horus v2 Structure of Packet
+// https://github.com/projecthorus/horusdemodlib/wiki/4-Packet-Format-Details#packet-formats
 struct HorusBinaryPacketV2 {
   uint16_t PayloadID;
   uint16_t Counter;
@@ -75,14 +76,14 @@ struct HorusBinaryPacketV2 {
   uint8_t Speed;
   uint8_t Sats;
   int8_t Temp;
-  uint8_t BattVoltage;  // 0 = 0.5v, 255 = 5.0, linear steps in-between.
-  // The following 9 bytes (up to the CRC) are Vuser-customizable.
+  uint8_t BattVoltage;
+  // The following bytes (up until the CRC) are user-customizable.
   uint8_t dummy1;
   float dummy2;
   uint8_t dummy3;
   uint8_t dummy4;
   uint16_t dummy5;
-  uint16_t Checksum;  // CRC16-CCITT Checksum.
+  uint16_t Checksum;
 } __attribute__((packed));
 
 // Buffers and counters.

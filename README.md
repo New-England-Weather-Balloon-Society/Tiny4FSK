@@ -2,9 +2,9 @@
 # Tiny4FSK - The Lightweight Horus Binary Tracker Built for HABs
 **WORK IN PROGRESS** - Please do not rely on this as your only tracking system. Tiny4FSK is still in the R&D phase of development and testing.
 
-**NEW** - New Si4063 changes have been implemented to include all of the features of the Tiny4FSK PCB. Improved schematic and PCB files uploaded. (6/8/2024). Disable TX between packets (6/9/2024).
+**NEW** - CW Callsign Identification added (6/26/24).
 
-**STATE** - Implemented Si4063 functionality on the MAIN branch. Fully working tracker board!
+**STATE** - Fully working tracker board! In the phase of testing and minor tweaks.
 
 ## What is the Tiny4FSK project?
 Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It aims to run on 1 AA battery that lasts for 10-12 hours (a few seconds between position updates, can run longer if there's a longer delay). It runs on 4FSK (4-frequency shift keying), which means that it separates tones into 4 separate frequencies. Upon this, it uses the [Horus Binary v2](https://github.com/projecthorus/horusdemodlib/wiki/2---Modem-Details#horus-binary-v1-mode-4-fsk) system, which is a relatively modern system popularly used with [RS41ng](https://github.com/mikaelnousiainen/RS41ng).
