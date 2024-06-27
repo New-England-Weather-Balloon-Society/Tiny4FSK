@@ -137,9 +137,9 @@ And these entities:
 
 ## License
 Software and Documentation:
-- MIT License
+- (GNU GPL v3 license)[https://choosealicense.com/licenses/gpl-3.0/]
 Hardware License
-- OSHW (US002611) and TAPR license
+- OSHW (US002611) and CERN Open Hardware Licence Version 2 - Weakly Reciprocal
 
 ## Pictures
 ![IMG_0972](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/assets/66796793/eb7dd175-a9ce-46be-b1bb-37f851c07086)
