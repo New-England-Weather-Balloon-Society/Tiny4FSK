@@ -2,7 +2,7 @@
 # Tiny4FSK - The Lightweight Horus Binary Tracker Built for HABs
 **WORK IN PROGRESS** - Please do not rely on this as your only tracking system. Tiny4FSK is still in the R&D phase of development and testing.
 
-**NEW** - CW Callsign Identification added (6/26/24).
+**NEW** - Significant repository structure overhaul (6/27/24).
 
 **STATE** - Fully working tracker board! In the phase of testing and minor tweaks.
 
