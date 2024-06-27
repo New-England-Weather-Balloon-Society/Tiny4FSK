@@ -5,29 +5,6 @@
 // Horus Binary modulation has been developed by Mark Jessop and the Project Horus team                 //
 // Made by Max Kendall W0MXX and the New England Weather Balloon Society (N.E.W.B.S.)                   //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-  MIT License
-
-  Copyright (c) 2023 New England Weather Balloon Society
-
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of this software and associated documentation files (the "Software"), to deal
-  in the Software without restriction, including without limitation the rights
-  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-  copies of the Software, and to permit persons to whom the Software is
-  furnished to do so, subject to the following conditions:
-
-  The above copyright notice and this permission notice shall be included in all
-  copies or substantial portions of the Software.
-
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-  SOFTWARE.
-*/
 
 // ***************
 // || Libraries ||
@@ -91,8 +68,9 @@ char rawbuffer[128];        // Buffer to temporarily store a raw binary packet.
 char codedbuffer[128];      // Buffer to store an encoded binary packet
 char debugbuffer[256];      // Buffer to store debug strings
 uint16_t packet_count = 1;  // Packet counter
-int call_count = 0;
+int call_count = 0;         // Counter to sense when to send callsign
 
+// Make sure interval is at the legal limit!
 #if CALLSIGN_INTERVAL > 600000
 #error "Please set the CALLSIGN_INTERVAL to less than or equal to 10 minutes to keep this legal!
 #endif

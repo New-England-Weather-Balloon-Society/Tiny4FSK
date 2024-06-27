@@ -1,39 +1,12 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
 launch.json
 debug_custom.json
 .theia
 .vs
 .vscode
 output
+fp-info-cache
+*.kicad_prl
+fp-lib-table
+*.lck
+Tiny4FSK-backups
+.git
