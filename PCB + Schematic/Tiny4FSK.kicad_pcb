@@ -6774,18 +6774,7 @@
 			(pintype "input")
 			(uuid "7444f0e2-f241-4a59-9cb5-450abb5c1a54")
 		)
-		(model "${KICAD6_3DMODEL_DIR}/RF_GPS.3dshapes/ublox_MAX.wrl"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
-		(model "C:/Users/maxsr/Downloads/User Library-MAX-M8 u-blox M8 Concurrent GNSS Module.step"
+		(model "${KIPRJMOD}/3D/User Library-MAX-M8 u-blox M8 Concurrent GNSS Module.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -16273,7 +16262,7 @@
 				)
 			)
 		)
-		(model "C:/Users/maxsr/Downloads/1575AT43A0040E (1)/ANT_1575AT_JOT.step"
+		(model "${KIPRJMOD}/3D/ANT_1575AT_JOT.step"
 			(offset
 				(xyz 0 0 0)
 			)

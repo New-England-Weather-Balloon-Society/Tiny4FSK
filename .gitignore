@@ -10,3 +10,4 @@ fp-lib-table
 *.lck
 Tiny4FSK-backups
 .git
+Code/Tiny4FSK/config.h

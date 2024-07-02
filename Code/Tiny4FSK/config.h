@@ -18,10 +18,10 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 */
 
 // Replace with the assigned Horus v2 ID
-#define HORUS_ID 256
+#define HORUS_ID 554
 
 // Amateur radio license required! Give callsign here.
-#define CALLSIGN "CHANGEME"
+#define CALLSIGN "KC1SFR"
 
 // Transmits callsign in CW to stay legal. Keep at 20 or below.
 #define CALLSIGN_WPM 20
