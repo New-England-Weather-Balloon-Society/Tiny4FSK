@@ -11298,7 +11298,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Oscillator_TCXO:ATXK-H11-E-32.768KHZ-E50-T3"
+		(property "Footprint" "Oscillator_TCXO:KDS-1XZA032768AD19"
 			(at 247.65 118.11 0)
 			(effects
 				(font
