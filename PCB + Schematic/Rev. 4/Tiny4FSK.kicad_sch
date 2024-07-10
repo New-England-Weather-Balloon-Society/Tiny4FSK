@@ -1331,178 +1331,6 @@
 				)
 			)
 		)
-		(symbol "Battery_Cell_1"
-			(pin_numbers hide)
-			(pin_names
-				(offset 0) hide)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "BT2"
-				(at 3.048 3.1115 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Value" "AAA"
-				(at 3.048 0.5715 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" "BatteryExtended:BAT_BK-82"
-				(at -4.064 1.524 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 1.524 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Single-cell battery"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "battery cell"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Battery_Cell_1_0_1"
-				(rectangle
-					(start -2.286 1.778)
-					(end 2.286 1.524)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start -1.524 1.016)
-					(end 1.524 0.508)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0.762) (xy 0 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 1.778) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.762 3.048) (xy 1.778 3.048)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 3.556) (xy 1.27 2.54)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "Battery_Cell_1_1_1"
-				(pin passive line
-					(at 0 5.08 270)
-					(length 2.54)
-					(name "+"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "+"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -2.54 90)
-					(length 2.54)
-					(name "-"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "-"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "Connector_Generic:Conn_01x03"
 			(pin_names
 				(offset 1.016) hide)
@@ -2754,6 +2582,178 @@
 					(at 2.54 -5.08 90)
 					(length 2.54)
 					(name "Shield"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Device:Battery_Cell"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "BT"
+				(at 2.54 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "Battery_Cell"
+				(at 2.54 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 1.524 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 1.524 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Single-cell battery"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "battery cell"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Battery_Cell_0_1"
+				(rectangle
+					(start -2.286 1.778)
+					(end 2.286 1.524)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start -1.524 1.016)
+					(end 1.524 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0.762) (xy 0 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 1.778) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 3.048) (xy 1.778 3.048)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 3.556) (xy 1.27 2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "Battery_Cell_1_1"
+				(pin passive line
+					(at 0 5.08 270)
+					(length 2.54)
+					(name "+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 90)
+					(length 2.54)
+					(name "-"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4190,203 +4190,6 @@
 						)
 					)
 					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
-		(symbol "Jumper:Jumper_3_Open"
-			(pin_names
-				(offset 0) hide)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "JP"
-				(at -2.54 -2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Jumper_3_Open"
-				(at 0 2.794 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Jumper, 3-pole, both open"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "Jumper SPDT"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "Jumper* TestPoint*3Pads* TestPoint*Bridge*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Jumper_3_Open_0_0"
-				(circle
-					(center -3.302 0)
-					(radius 0.508)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 0 0)
-					(radius 0.508)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 3.302 0)
-					(radius 0.508)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "Jumper_3_Open_0_1"
-				(arc
-					(start -0.254 1.016)
-					(mid -1.651 1.4992)
-					(end -3.048 1.016)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 -0.508) (xy 0 -1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 3.048 1.016)
-					(mid 1.651 1.4992)
-					(end 0.254 1.016)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "Jumper_3_Open_1_1"
-				(pin passive line
-					(at -6.35 0 0)
-					(length 2.54)
-					(name "A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -3.81 90)
-					(length 2.54)
-					(name "C"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 6.35 0 180)
-					(length 2.54)
-					(name "B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -7690,6 +7493,12 @@
 		(uuid "1ad3d1e1-c760-4c58-a208-449781608cc9")
 	)
 	(junction
+		(at 214.63 35.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "20d92b1a-f5b4-4b88-84e0-2232c1a182d7")
+	)
+	(junction
 		(at 128.27 53.34)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7810,22 +7619,10 @@
 		(uuid "7e6d72e9-b943-4cc6-8fbd-d952290336ad")
 	)
 	(junction
-		(at 153.7752 126.238)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "87756754-1ee4-4687-ad3d-6656becc0cce")
-	)
-	(junction
 		(at 26.67 142.24)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "8ce9139a-ddf3-406d-96fa-bde9f08e8cad")
-	)
-	(junction
-		(at 214.63 35.56)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "8cf1509f-4609-43e2-9bc1-9007522e2d1c")
 	)
 	(junction
 		(at 87.63 77.47)
@@ -7886,6 +7683,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "cc7e12da-d439-40f1-9923-f43869b04325")
+	)
+	(junction
+		(at 180.34 35.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d0eb7f18-54c6-4d15-a646-46a6e00b00f2")
 	)
 	(junction
 		(at 203.2 71.12)
@@ -8035,16 +7838,6 @@
 	)
 	(wire
 		(pts
-			(xy 147.4252 126.238) (xy 153.7752 126.238)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "03b87838-ce9e-48a7-b882-6772f8b8f0ff")
-	)
-	(wire
-		(pts
 			(xy 161.29 35.56) (xy 170.18 35.56)
 		)
 		(stroke
@@ -8112,16 +7905,6 @@
 			(type default)
 		)
 		(uuid "0fd25d05-fb8e-4b36-8343-920b819903ff")
-	)
-	(wire
-		(pts
-			(xy 141.0752 132.588) (xy 143.6152 132.588)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1402392b-2c5d-4f45-b512-3b1cf0e9202c")
 	)
 	(wire
 		(pts
@@ -8205,16 +7988,6 @@
 	)
 	(wire
 		(pts
-			(xy 203.2 36.83) (xy 203.2 35.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2a0853e6-9192-4a8b-8a99-0ca70fe90aa6")
-	)
-	(wire
-		(pts
 			(xy 50.8 135.636) (xy 50.8 142.24)
 		)
 		(stroke
@@ -8242,16 +8015,6 @@
 			(type default)
 		)
 		(uuid "2f2a90b9-074f-4c96-92d8-887f4419ac74")
-	)
-	(wire
-		(pts
-			(xy 203.2 35.56) (xy 204.47 35.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "34a4d3e0-5840-4d4c-8b33-8c61faf09ec5")
 	)
 	(wire
 		(pts
@@ -8362,6 +8125,16 @@
 			(type default)
 		)
 		(uuid "57d6f8d8-d610-4b58-a488-ce7b0721a61e")
+	)
+	(wire
+		(pts
+			(xy 180.34 33.02) (xy 180.34 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5dd8b60a-7a68-4ba7-a888-0e4f51870a8f")
 	)
 	(wire
 		(pts
@@ -8545,16 +8318,6 @@
 	)
 	(wire
 		(pts
-			(xy 212.09 35.56) (xy 214.63 35.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "87fc05ee-a0e9-4c63-a532-a55dd8c0db59")
-	)
-	(wire
-		(pts
 			(xy 99.06 21.59) (xy 99.06 24.13)
 		)
 		(stroke
@@ -8602,6 +8365,16 @@
 			(type default)
 		)
 		(uuid "943e8adc-367f-40dc-9b24-5e25edc7a1c9")
+	)
+	(wire
+		(pts
+			(xy 214.63 45.72) (xy 214.63 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a9661ee-542b-4bc9-b483-607fe779a694")
 	)
 	(wire
 		(pts
@@ -8952,6 +8725,16 @@
 			(type default)
 		)
 		(uuid "dbf295df-9a32-4ab8-9e8d-1d69f25ee27b")
+	)
+	(wire
+		(pts
+			(xy 207.01 36.83) (xy 207.01 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dd863b42-9a47-4bd7-9816-bcd69ac28e00")
 	)
 	(wire
 		(pts
@@ -9314,7 +9097,7 @@
 		)
 		(uuid "8fafe2f0-ac19-418b-ad1a-a41eeb41212b")
 	)
-	(text "SAMD21G18A MCU + Voltmeter + USB\n"
+	(text "SAMD21G18A MCU + Voltmeter\n"
 		(exclude_from_sim no)
 		(at 163.83 60.452 0)
 		(effects
@@ -9348,7 +9131,7 @@
 	)
 	(text "Battery"
 		(exclude_from_sim no)
-		(at 191.77 20.32 0)
+		(at 191.516 19.05 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10035,28 +9818,6 @@
 			)
 		)
 	)
-	(global_label "BOOST"
-		(shape input)
-		(at 141.0752 132.588 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "702fc23f-152c-4935-a1e8-b60167f6f82e")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 131.9819 132.588 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "BATT_SENSE"
 		(shape input)
 		(at 246.38 151.13 180)
@@ -10203,28 +9964,6 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "BOOST"
-		(shape input)
-		(at 170.18 35.56 90)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "a3d9fe1c-307e-49c2-8704-e03d4ab2c6a1")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 170.18 26.4667 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 				(hide yes)
 			)
 		)
@@ -10660,28 +10399,6 @@
 		(uuid "e998eef1-fed8-4d94-a4e8-ccd248b556c1")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 227.7147 118.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "LDO"
-		(shape input)
-		(at 143.6152 119.888 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "ea31f826-fa50-4d79-bb13-bcfffba979a2")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 150.229 119.888 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11878,7 +11595,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "5M"
+		(property "Value" "1M"
 			(at 163.83 39.3699 0)
 			(effects
 				(font
@@ -11949,7 +11666,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 170.434 153.67 0)
+			(at 164.338 152.4 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12172,7 +11889,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "900k"
+		(property "Value" "180k"
 			(at 163.83 44.4499 0)
 			(effects
 				(font
@@ -12713,7 +12430,7 @@
 	(symbol
 		(lib_name "+3.3V_9")
 		(lib_id "power:+3.3V")
-		(at 153.7752 126.238 0)
+		(at 180.34 33.02 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -12723,7 +12440,7 @@
 		(fields_autoplaced yes)
 		(uuid "2e17d25b-a4d9-4653-b6c8-125606a8485d")
 		(property "Reference" "#PWR033"
-			(at 153.7752 130.048 0)
+			(at 180.34 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12732,7 +12449,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 156.3152 124.9679 0)
+			(at 182.88 31.7499 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12741,7 +12458,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 153.7752 126.238 0)
+			(at 180.34 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12750,7 +12467,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 153.7752 126.238 0)
+			(at 180.34 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12759,7 +12476,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 153.7752 126.238 0)
+			(at 180.34 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12854,88 +12571,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C_Small")
-		(at 153.7752 128.778 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board no)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "32451a10-8ead-48aa-808f-62fa0153927f")
-		(property "Reference" "C23"
-			(at 156.3152 127.5142 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1uF"
-			(at 156.3152 130.0542 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 153.7752 128.778 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 153.7752 128.778 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 153.7752 128.778 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "96dad796-2d14-4551-8aab-e23729eb31b2")
-		)
-		(pin "2"
-			(uuid "4e1c0cb1-d7f1-448e-99e6-1de6b0c653b6")
-		)
-		(instances
-			(project "samdFlightController"
-				(path "/4d52b0cb-138f-4b09-bd59-357cba8009fd"
-					(reference "C23")
-					(unit 1)
-				)
-			)
-			(project "littleLoRa"
-				(path "/a5a889c1-410f-46fe-abfd-162a711bc057"
-					(reference "C9")
-					(unit 1)
-				)
-			)
-			(project "Tiny4FSK"
-				(path "/afd8b0bc-328a-481f-8ddf-c1252dc3b440"
-					(reference "C26")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:LED")
 		(at 114.4052 132.588 90)
 		(unit 1)
@@ -13006,79 +12641,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Jumper:Jumper_3_Open")
-		(at 143.6152 126.238 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board no)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "3674b6e9-53dd-49d9-b14f-0c6c58d81722")
-		(property "Reference" "JP2"
-			(at 141.0752 124.9679 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "Source"
-			(at 141.0752 127.5079 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Jumper:SolderJumper-3_P1.3mm_Open_Pad1.0x1.5mm_NumberLabels"
-			(at 143.6152 126.238 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 143.6152 126.238 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Jumper, 3-pole, both open"
-			(at 143.6152 126.238 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "bcdc0fd0-aca1-49fe-9d2d-d2f28333e4bd")
-		)
-		(pin "1"
-			(uuid "ae4d3411-1b3e-492e-ae49-68be6af260b3")
-		)
-		(pin "2"
-			(uuid "15bf85bc-edb4-4eb5-944a-4261efbc5d0f")
-		)
-		(instances
-			(project "Tiny4FSK"
-				(path "/afd8b0bc-328a-481f-8ddf-c1252dc3b440"
-					(reference "JP2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C_Small")
 		(at 213.36 71.12 90)
 		(unit 1)
@@ -13096,7 +12658,7 @@
 				)
 			)
 		)
-		(property "Value" "100nF"
+		(property "Value" "100 nF"
 			(at 213.3663 67.31 90)
 			(effects
 				(font
@@ -16144,74 +15706,6 @@
 		)
 	)
 	(symbol
-		(lib_name "Earth_2")
-		(lib_id "power:Earth")
-		(at 203.2 36.83 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "8e065445-34fc-4720-8487-65fe9602f0c5")
-		(property "Reference" "#PWR041"
-			(at 203.2 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "Earth"
-			(at 203.2 40.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 203.2 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 203.2 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 203.2 36.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2f62622d-5c47-4f36-9a15-da33bc29a838")
-		)
-		(instances
-			(project "Tiny4FSK"
-				(path "/afd8b0bc-328a-481f-8ddf-c1252dc3b440"
-					(reference "#PWR041")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_name "+3.3V_1")
 		(lib_id "power:+3.3V")
 		(at 25.4 30.48 0)
@@ -16414,6 +15908,74 @@
 			(project "Tiny4FSK"
 				(path "/afd8b0bc-328a-481f-8ddf-c1252dc3b440"
 					(reference "#PWR064")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_name "Earth_2")
+		(lib_id "power:Earth")
+		(at 207.01 36.83 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8fceaca6-7074-4f7f-ab95-ecfd255459a9")
+		(property "Reference" "#PWR03"
+			(at 207.01 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "Earth"
+			(at 207.01 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 207.01 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 207.01 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 207.01 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cac71707-6b56-4dcf-b0ae-08b0a9180f36")
+		)
+		(instances
+			(project "Tiny4FSK"
+				(path "/afd8b0bc-328a-481f-8ddf-c1252dc3b440"
+					(reference "#PWR03")
 					(unit 1)
 				)
 			)
@@ -16786,7 +16348,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100nF"
+		(property "Value" "10 uF"
 			(at 111.76 27.9462 0)
 			(effects
 				(font
@@ -17515,7 +17077,7 @@
 	(symbol
 		(lib_name "Earth_2")
 		(lib_id "power:Earth")
-		(at 214.63 44.45 0)
+		(at 214.63 45.72 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17524,7 +17086,7 @@
 		(fields_autoplaced yes)
 		(uuid "af058f07-5f50-45c7-9d48-5643fdfca6cb")
 		(property "Reference" "#PWR046"
-			(at 214.63 50.8 0)
+			(at 214.63 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17533,7 +17095,7 @@
 			)
 		)
 		(property "Value" "Earth"
-			(at 214.63 48.26 0)
+			(at 214.63 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17542,7 +17104,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 214.63 44.45 0)
+			(at 214.63 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17551,7 +17113,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 214.63 44.45 0)
+			(at 214.63 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17560,7 +17122,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 214.63 44.45 0)
+			(at 214.63 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17799,6 +17361,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C5447805"
+			(at 44.45 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "7303c35c-ec41-4e31-9fc3-f806d4661a36")
 		)
@@ -17877,93 +17448,6 @@
 			(project "Tiny4FSK"
 				(path "/afd8b0bc-328a-481f-8ddf-c1252dc3b440"
 					(reference "#PWR042")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_name "Battery_Cell_1")
-		(lib_id "Device:Battery_Cell")
-		(at 207.01 35.56 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "b8998d41-a637-4c0b-b4f1-915d2e4a6e34")
-		(property "Reference" "BT2"
-			(at 208.8515 27.94 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "AAA"
-			(at 208.8515 30.48 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "BatteryExtended:BAT_BK-82"
-			(at 208.534 31.496 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 208.534 35.56 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Single-cell battery"
-			(at 207.01 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "+"
-			(uuid "080dd451-7213-491e-a35e-723ae370af42")
-		)
-		(pin "-"
-			(uuid "e37141d0-3a36-4ee0-ba66-360cd4124174")
-		)
-		(instances
-			(project "samdFlightController"
-				(path "/4d52b0cb-138f-4b09-bd59-357cba8009fd"
-					(reference "BT2")
-					(unit 1)
-				)
-			)
-			(project "ubloxBreakout"
-				(path "/995809ec-0f11-4b83-b269-8284ebe8d806"
-					(reference "BT1")
-					(unit 1)
-				)
-			)
-			(project "littleLoRa"
-				(path "/a5a889c1-410f-46fe-abfd-162a711bc057"
-					(reference "BT2")
-					(unit 1)
-				)
-			)
-			(project "Tiny4FSK"
-				(path "/afd8b0bc-328a-481f-8ddf-c1252dc3b440"
-					(reference "BT1")
 					(unit 1)
 				)
 			)
@@ -18235,10 +17719,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "c17c059c-a85d-4a0b-9e71-0f68d896c655")
 		(property "Reference" "C2"
-			(at 101.6 25.4062 0)
+			(at 100.838 26.416 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18246,8 +17729,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10uF"
-			(at 101.6 27.9462 0)
+		(property "Value" "100 nF"
+			(at 100.584 28.194 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18629,6 +18112,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C5186894"
+			(at 34.29 38.1 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "9ec49c2f-b701-4011-aeb8-355b936cb554")
 		)
@@ -18661,7 +18153,7 @@
 				)
 			)
 		)
-		(property "Value" "100nF"
+		(property "Value" "10 uF"
 			(at 212.598 77.47 90)
 			(effects
 				(font
@@ -18915,75 +18407,6 @@
 			(project "Tiny4FSK"
 				(path "/afd8b0bc-328a-481f-8ddf-c1252dc3b440"
 					(reference "L5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_name "Earth_2")
-		(lib_id "power:Earth")
-		(at 153.7752 131.318 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "d3f6f7a3-92f1-4d55-b7b6-aeafb7acd3c5")
-		(property "Reference" "#PWR072"
-			(at 153.7752 137.668 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "Earth"
-			(at 153.7752 135.128 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 153.7752 131.318 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 153.7752 131.318 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 153.7752 131.318 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0a714049-e118-4bb2-a0fc-92363b81d17f")
-		)
-		(instances
-			(project "Tiny4FSK"
-				(path "/afd8b0bc-328a-481f-8ddf-c1252dc3b440"
-					(reference "#PWR072")
 					(unit 1)
 				)
 			)
@@ -19905,6 +19328,74 @@
 			(project "Tiny4FSK"
 				(path "/afd8b0bc-328a-481f-8ddf-c1252dc3b440"
 					(reference "U4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:Battery_Cell")
+		(at 209.55 35.56 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e475bb91-04c9-4c07-b9ea-0c16d87007cc")
+		(property "Reference" "BT1"
+			(at 211.3915 27.94 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Battery_Cell"
+			(at 211.3915 30.48 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "BatteryExtended:BAT_53"
+			(at 211.074 35.56 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 211.074 35.56 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Single-cell battery"
+			(at 209.55 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "43dfbddd-3948-4ce6-86ed-4a4d01923e0e")
+		)
+		(pin "1"
+			(uuid "25bffab4-29b8-42c3-b486-3a9922eeb6e3")
+		)
+		(instances
+			(project "Tiny4FSK"
+				(path "/afd8b0bc-328a-481f-8ddf-c1252dc3b440"
+					(reference "BT1")
 					(unit 1)
 				)
 			)
