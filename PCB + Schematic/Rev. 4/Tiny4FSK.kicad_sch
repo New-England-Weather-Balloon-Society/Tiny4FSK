@@ -18021,7 +18021,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "RF_Antenna_Extended:ANT_1575AT_JOT"
+		(property "Footprint" "RF_Antenna_Extended:GPS1003"
 			(at 72.39 66.04 0)
 			(effects
 				(font
