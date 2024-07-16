@@ -14546,6 +14546,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C32949"
+			(at 59.69 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "2ab1512b-8465-46ed-bb97-f5d3e6c3ba0c")
 		)
@@ -16962,7 +16971,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 170.18 38.1 0)
 			(effects
 				(font
@@ -16981,6 +16990,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 170.18 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C59461"
 			(at 170.18 38.1 0)
 			(effects
 				(font
@@ -17442,7 +17460,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C5447805"
+		(property "LCSC" "C1548"
 			(at 44.45 40.64 0)
 			(effects
 				(font
@@ -18238,7 +18256,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C5186894"
+		(property "LCSC" "C161337"
 			(at 34.29 38.1 90)
 			(effects
 				(font
