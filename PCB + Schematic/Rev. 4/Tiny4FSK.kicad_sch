@@ -10945,6 +10945,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C23138"
+			(at 114.3 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c7edfea4-ff0c-46b5-a061-7ae3bfb3af33")
 		)
@@ -13175,6 +13184,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C23138"
+			(at 144.78 113.03 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "8daed284-8b3b-420a-9bd6-aa5075601834")
 		)
@@ -14131,6 +14149,15 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
+			(at 180.34 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2888954"
 			(at 180.34 179.07 0)
 			(effects
 				(font
@@ -16948,6 +16975,15 @@
 		)
 		(property "Description" "Resistor, small US symbol"
 			(at 134.62 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C23138"
+			(at 134.62 113.03 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20231,6 +20267,15 @@
 			)
 		)
 		(property "Description" "Switch, single pole double throw"
+			(at 144.526 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C963206"
 			(at 144.526 138.43 0)
 			(effects
 				(font
