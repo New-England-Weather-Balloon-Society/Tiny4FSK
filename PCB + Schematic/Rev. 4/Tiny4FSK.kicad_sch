@@ -12026,6 +12026,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C307609"
+			(at 40.64 38.1 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "7836a138-1d63-4caa-916b-bb4da10d3215")
 		)
@@ -13021,6 +13030,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C86129"
+			(at 63.5 38.1 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "d130c00f-f623-4bfa-a7da-75e4d7b2875c")
 		)
@@ -13891,7 +13909,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C408700"
+		(property "LCSC" "C167476"
 			(at 55.88 38.1 90)
 			(effects
 				(font
@@ -15425,7 +15443,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Inductor_SMD:L_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
+		(property "Footprint" "Inductor_SMD:L_0402_1005Metric_Pad0.77x0.64mm_HandSolder"
 			(at 25.4 34.29 0)
 			(effects
 				(font
@@ -15444,6 +15462,15 @@
 			)
 		)
 		(property "Description" "Inductor"
+			(at 25.4 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C275307"
 			(at 25.4 34.29 0)
 			(effects
 				(font
@@ -18550,7 +18577,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C330865"
+		(property "LCSC" "C341687"
 			(at 48.26 38.1 90)
 			(effects
 				(font
@@ -20035,6 +20062,15 @@
 		)
 		(property "Description" "Inductor"
 			(at 68.58 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C307609"
+			(at 68.58 71.12 90)
 			(effects
 				(font
 					(size 1.27 1.27)
