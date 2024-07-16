@@ -13081,7 +13081,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "SWITCH_EN"
+		(property "Value" "Switch EN"
 			(at 127.762 135.89 90)
 			(effects
 				(font
@@ -15891,7 +15891,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Power"
+		(property "Value" "Power Ext"
 			(at 91.44 126.9999 0)
 			(effects
 				(font
@@ -16432,7 +16432,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C26083 "
+		(property "LCSC" "C26083"
 			(at 246.38 147.32 90)
 			(effects
 				(font
@@ -16586,6 +16586,15 @@
 			)
 		)
 		(property "Description" ""
+			(at 38.354 130.048 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C135223"
 			(at 38.354 130.048 0)
 			(effects
 				(font
@@ -19104,10 +19113,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "ddb08f54-3af9-4f8f-a871-1a03d576a51c")
 		(property "Reference" "AE2"
-			(at 86.36 27.3049 0)
+			(at 84.582 27.0509 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19115,8 +19123,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "ANT"
-			(at 86.36 29.8449 0)
+		(property "Value" "TX Antenna"
+			(at 84.582 29.5909 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19547,7 +19555,7 @@
 				)
 			)
 		)
-		(property "Value" "Battery_Cell"
+		(property "Value" "BK-53"
 			(at 211.3915 30.48 90)
 			(effects
 				(font
@@ -20240,7 +20248,7 @@
 				)
 			)
 		)
-		(property "Value" "BATT PWR"
+		(property "Value" "Power Switch"
 			(at 144.78 143.002 0)
 			(effects
 				(font
