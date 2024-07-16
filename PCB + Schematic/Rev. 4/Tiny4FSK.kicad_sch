@@ -491,126 +491,6 @@
 				)
 			)
 		)
-		(symbol "+3.3V_3"
-			(power)
-			(pin_numbers hide)
-			(pin_names
-				(offset 0) hide)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "#PWR"
-				(at 0 -3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Value" "+3.3V_3"
-				(at 0 3.556 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "global power"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "+3.3V_3_0_1"
-				(polyline
-					(pts
-						(xy -0.762 1.27) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "+3.3V_3_1_1"
-				(pin power_in line
-					(at 0 0 90)
-					(length 0) hide
-					(name "+3.3V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "+3.3V_5"
 			(power)
 			(pin_numbers hide)
@@ -7493,12 +7373,6 @@
 		(uuid "168b22db-e9c7-42f6-bfea-37decd56df92")
 	)
 	(junction
-		(at 205.74 80.01)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "18e9e3fe-d4d4-4876-9fd0-0160780e7a51")
-	)
-	(junction
 		(at 31.75 68.58)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7631,6 +7505,12 @@
 		(uuid "7e6d72e9-b943-4cc6-8fbd-d952290336ad")
 	)
 	(junction
+		(at 205.74 71.12)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8ba37f77-a593-4b16-b644-f1466c602a3b")
+	)
+	(junction
 		(at 26.67 142.24)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -7707,6 +7587,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e0a49995-cd17-4bc4-9949-c37614c42201")
+	)
+	(junction
+		(at 205.74 80.01)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e8a9a4f3-5d3f-445c-aa06-c430cdc87797")
 	)
 	(junction
 		(at 52.07 38.1)
@@ -8027,6 +7913,16 @@
 			(type default)
 		)
 		(uuid "3fa888c7-73ad-4959-ae43-030c8911c217")
+	)
+	(wire
+		(pts
+			(xy 205.74 71.12) (xy 205.74 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4544c925-9984-4d56-9c3e-4aa732cc603f")
 	)
 	(wire
 		(pts
@@ -8680,6 +8576,16 @@
 	)
 	(wire
 		(pts
+			(xy 205.74 71.12) (xy 210.82 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c9d19c7a-d13d-4ba8-adff-9661d7034568")
+	)
+	(wire
+		(pts
 			(xy 21.59 93.98) (xy 24.13 93.98)
 		)
 		(stroke
@@ -8740,7 +8646,7 @@
 	)
 	(wire
 		(pts
-			(xy 203.2 71.12) (xy 210.82 71.12)
+			(xy 203.2 71.12) (xy 205.74 71.12)
 		)
 		(stroke
 			(width 0)
@@ -10882,7 +10788,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C100820"
+		(property "LCSC" "C4177"
 			(at 175.26 142.24 90)
 			(effects
 				(font
@@ -11256,6 +11162,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C2844756"
+			(at 130.81 24.13 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "45e12833-9e07-4efa-bc49-198be27e31e9")
 		)
@@ -11616,7 +11531,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder"
 			(at 251.46 147.32 0)
 			(effects
 				(font
@@ -11643,7 +11558,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C313849"
+		(property "LCSC" "C26083"
 			(at 251.46 147.32 90)
 			(effects
 				(font
@@ -11695,7 +11610,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder"
 			(at 161.29 38.1 0)
 			(effects
 				(font
@@ -11722,7 +11637,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C313849"
+		(property "LCSC" "C26083"
 			(at 161.29 38.1 0)
 			(effects
 				(font
@@ -12007,7 +11922,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder"
 			(at 161.29 43.18 0)
 			(effects
 				(font
@@ -12034,7 +11949,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C160534"
+		(property "LCSC" "C100276"
 			(at 161.29 43.18 0)
 			(effects
 				(font
@@ -13762,7 +13677,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C100820"
+		(property "LCSC" "C4177"
 			(at 175.26 152.4 90)
 			(effects
 				(font
@@ -14944,7 +14859,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 202.946 67.818 0)
+			(at 201.676 67.564 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15220,7 +15135,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder"
 			(at 156.21 88.9 0)
 			(effects
 				(font
@@ -15247,7 +15162,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C2961403"
+		(property "LCSC" "C25744"
 			(at 156.21 88.9 90)
 			(effects
 				(font
@@ -16199,7 +16114,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder"
 			(at 41.91 64.77 0)
 			(effects
 				(font
@@ -16226,7 +16141,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C5186766"
+		(property "LCSC" "C1546"
 			(at 41.91 64.77 0)
 			(effects
 				(font
@@ -16427,7 +16342,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder"
 			(at 246.38 147.32 0)
 			(effects
 				(font
@@ -16454,7 +16369,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C313849"
+		(property "LCSC" "C26083 "
 			(at 246.38 147.32 90)
 			(effects
 				(font
@@ -16486,10 +16401,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "9b2a057e-6424-4511-a57d-a9ac83886bf8")
 		(property "Reference" "C9"
-			(at 111.76 25.4062 0)
+			(at 111.252 26.6762 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16498,7 +16412,7 @@
 			)
 		)
 		(property "Value" "10 uF"
-			(at 111.76 27.9462 0)
+			(at 110.998 28.4542 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18066,7 +17980,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder"
 			(at 257.81 119.38 0)
 			(effects
 				(font
@@ -18093,7 +18007,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C5186766"
+		(property "LCSC" "C1546"
 			(at 257.81 119.38 0)
 			(effects
 				(font
@@ -18618,6 +18532,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C330865"
+			(at 48.26 38.1 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "8f71970c-c9c9-4074-8f2b-ee1d5526ecf7")
 		)
@@ -18634,79 +18557,6 @@
 		)
 	)
 	(symbol
-		(lib_name "+3.3V_3")
-		(lib_id "power:+3.3V")
-		(at 205.74 80.01 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d57f7c62-0297-49bc-b87c-a8b82f07e74e")
-		(property "Reference" "#PWR013"
-			(at 205.74 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3.3V"
-			(at 203.454 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 205.74 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 205.74 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 205.74 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "702d85a1-b7e5-4e84-89e6-e654caec3d8d")
-		)
-		(instances
-			(project "littleLoRa"
-				(path "/a5a889c1-410f-46fe-abfd-162a711bc057"
-					(reference "#PWR013")
-					(unit 1)
-				)
-			)
-			(project "Tiny4FSK"
-				(path "/afd8b0bc-328a-481f-8ddf-c1252dc3b440"
-					(reference "#PWR045")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C_Small")
 		(at 198.12 71.12 90)
 		(unit 1)
@@ -18714,7 +18564,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "d5b12a62-72b3-4847-97a2-98640b287b68")
 		(property "Reference" "C6"
 			(at 198.1263 64.77 90)
@@ -18844,7 +18693,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C100308"
+		(property "LCSC" "C25091"
 			(at 185.42 184.15 0)
 			(effects
 				(font
@@ -18896,7 +18745,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder"
 			(at 153.67 69.85 0)
 			(effects
 				(font
@@ -18923,7 +18772,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C2961403"
+		(property "LCSC" "C25744"
 			(at 153.67 69.85 0)
 			(effects
 				(font
