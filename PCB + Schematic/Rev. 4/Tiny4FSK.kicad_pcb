@@ -4059,6 +4059,7 @@
 		(property "Reference" "G***"
 			(at 0 0 -90)
 			(layer "F.SilkS")
+			(hide yes)
 			(uuid "32b7509e-ee48-4825-b168-1a9523b7c052")
 			(effects
 				(font
@@ -5682,6 +5683,7 @@
 		(property "Reference" "G***"
 			(at 0 0 0)
 			(layer "F.SilkS")
+			(hide yes)
 			(uuid "9bc4cfab-b0e1-4966-ac85-efc352b22236")
 			(effects
 				(font
@@ -7584,7 +7586,7 @@
 			(effects
 				(font
 					(size 0.5 0.5)
-					(thickness 0.7)
+					(thickness 0.125)
 					(bold yes)
 				)
 			)
@@ -7655,8 +7657,6 @@
 			)
 		)
 		(path "/bec0f38f-55ca-4078-89a1-78a170d22747")
-		(sheetname "Root")
-		(sheetfile "Tiny4FSK.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start 5.13 -5.534)
@@ -7728,275 +7728,6 @@
 			(fill none)
 			(layer "F.SilkS")
 			(uuid "957ffba4-4ead-4eab-a3ef-e7ba2bb25a49")
-		)
-		(fp_poly
-			(pts
-				(xy 4.9 -4.2) (xy 4 -4.2) (xy 4 -5) (xy 4.9 -5)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "d3ee336a-ec68-45a3-9fdb-f5832d2858e5")
-		)
-		(fp_poly
-			(pts
-				(xy -4.8 -4.2) (xy -3.9 -4.2) (xy -3.9 -5) (xy -4.8 -5)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "ec8566c9-fda3-430b-9cbc-db5301321dd6")
-		)
-		(fp_poly
-			(pts
-				(xy 4.9 -3.1) (xy 4 -3.1) (xy 4 -3.9) (xy 4.9 -3.9)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "a8f24898-6842-4d12-81a6-25404eeb8976")
-		)
-		(fp_poly
-			(pts
-				(xy -4.8 -3.1) (xy -3.9 -3.1) (xy -3.9 -3.9) (xy -4.8 -3.9)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "0edcfb81-8ef3-4db5-8c7e-3fd59e992295")
-		)
-		(fp_poly
-			(pts
-				(xy 4.9 -2) (xy 4 -2) (xy 4 -2.8) (xy 4.9 -2.8)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "76c1da56-0325-4e20-829a-285963b5191f")
-		)
-		(fp_poly
-			(pts
-				(xy -4.8 -2) (xy -3.9 -2) (xy -3.9 -2.8) (xy -4.8 -2.8)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "93c4b9e7-12a3-4fc0-8c03-8fd72168540a")
-		)
-		(fp_poly
-			(pts
-				(xy 4.9 -0.9) (xy 4 -0.9) (xy 4 -1.7) (xy 4.9 -1.7)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "a7023dac-a83f-462a-a7a7-88333416cf42")
-		)
-		(fp_poly
-			(pts
-				(xy -4.8 -0.9) (xy -3.9 -0.9) (xy -3.9 -1.7) (xy -4.8 -1.7)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "034c89e4-7b73-43ac-8b3f-493e82944026")
-		)
-		(fp_poly
-			(pts
-				(xy 4.9 0.2) (xy 4 0.2) (xy 4 -0.6) (xy 4.9 -0.6)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "02a57cb6-f583-4b51-8d01-f666aff702ee")
-		)
-		(fp_poly
-			(pts
-				(xy -4.8 0.2) (xy -3.9 0.2) (xy -3.9 -0.6) (xy -4.8 -0.6)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "9b2d1ae4-4ec0-4353-a9fa-a0bbe75842b4")
-		)
-		(fp_poly
-			(pts
-				(xy 4.9 1.3) (xy 4 1.3) (xy 4 0.5) (xy 4.9 0.5)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "5abf8b18-eecd-4894-bf77-6e8d085a39fa")
-		)
-		(fp_poly
-			(pts
-				(xy -4.8 1.3) (xy -3.9 1.3) (xy -3.9 0.5) (xy -4.8 0.5)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "a2dcf2c4-c410-438b-af08-8fe544f62a9c")
-		)
-		(fp_poly
-			(pts
-				(xy 4.9 2.4) (xy 4 2.4) (xy 4 1.6) (xy 4.9 1.6)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "53183572-0702-4966-989e-f33584e7950a")
-		)
-		(fp_poly
-			(pts
-				(xy -4.8 2.4) (xy -3.9 2.4) (xy -3.9 1.6) (xy -4.8 1.6)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "7490d5b8-1bfa-42fc-bdb8-30fa872aa6ff")
-		)
-		(fp_poly
-			(pts
-				(xy 4.9 3.5) (xy 4 3.5) (xy 4 2.7) (xy 4.9 2.7)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "92849b9f-d3a1-44f3-a775-09c68abb1675")
-		)
-		(fp_poly
-			(pts
-				(xy -4.8 3.5) (xy -3.9 3.5) (xy -3.9 2.7) (xy -4.8 2.7)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "1fb0e376-b34d-4634-9393-08ad078ca003")
-		)
-		(fp_poly
-			(pts
-				(xy 4.9 4.6) (xy 4 4.6) (xy 4 3.8) (xy 4.9 3.8)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "d42b449b-0cb6-4e7a-9a73-d62dc541befe")
-		)
-		(fp_poly
-			(pts
-				(xy -4.8 4.6) (xy -3.9 4.6) (xy -3.9 3.8) (xy -4.8 3.8)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.1")
-			(uuid "a737dd89-20dc-4405-b691-47c3256fdbbc")
-		)
-		(fp_line
-			(start 4.9 -5.25)
-			(end -4.8 -5.25)
-			(stroke
-				(width 0.051)
-				(type default)
-			)
-			(layer "User.2")
-			(uuid "522e3652-fa16-44d5-bcb0-5eddaaaa077c")
-		)
-		(fp_line
-			(start -4.8 -5.25)
-			(end -4.8 4.85)
-			(stroke
-				(width 0.051)
-				(type default)
-			)
-			(layer "User.2")
-			(uuid "3b7e3912-0930-46cf-b43d-fd33a40fd47c")
-		)
-		(fp_line
-			(start 4.9 4.85)
-			(end 4.9 -5.25)
-			(stroke
-				(width 0.051)
-				(type default)
-			)
-			(layer "User.2")
-			(uuid "ceb7b2f9-ff54-44a1-96aa-fc8a50a7f061")
-		)
-		(fp_line
-			(start -4.8 4.85)
-			(end 4.9 4.85)
-			(stroke
-				(width 0.051)
-				(type default)
-			)
-			(layer "User.2")
-			(uuid "18ad4983-e0bd-4e36-ac46-fd53ee2c1b06")
-		)
-		(fp_poly
-			(pts
-				(xy -4.74 -5.25) (xy -4.757574 -5.292426) (xy -4.8 -5.31) (xy -4.842426 -5.292426) (xy -4.86 -5.25)
-				(xy -4.842426 -5.207574) (xy -4.8 -5.19) (xy -4.757574 -5.207574)
-			)
-			(stroke
-				(width 0)
-				(type default)
-			)
-			(fill solid)
-			(layer "User.3")
-			(uuid "18f7b01f-6b36-4922-82a2-b9a65264fe77")
 		)
 		(fp_text user "${REFERENCE}"
 			(at 0 2.5 90)
@@ -10105,6 +9836,19 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C84256"
+			(at 0 0 -90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1041a6fd-cc89-4b46-baca-5508a37b5341")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -22998,7 +22742,7 @@
 		(path "/e475bb91-04c9-4c07-b9ea-0c16d87007cc")
 		(sheetname "Root")
 		(sheetfile "Tiny4FSK.kicad_sch")
-		(attr smd)
+		(attr smd dnp)
 		(fp_line
 			(start -24.3363 6.91)
 			(end -17.9863 6.91)
