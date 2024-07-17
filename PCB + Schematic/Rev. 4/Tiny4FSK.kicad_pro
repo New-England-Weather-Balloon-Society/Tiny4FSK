@@ -495,9 +495,9 @@
       "plot": "Production/gerbers/",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "3D/Tiny4FSK.step",
       "svg": "Stencil/Rev_3/",
-      "vrml": "Tiny4FSK_Model.wrl"
+      "vrml": "3D/shapes3D/Tiny4FSK_Model.wrl"
     },
     "page_layout_descr_file": ""
   },
