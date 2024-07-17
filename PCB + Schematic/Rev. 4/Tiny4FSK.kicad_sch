@@ -14976,7 +14976,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "71553623-8037-48ef-9caf-19c795a32f95")
-		(property "Reference" "IC1"
+		(property "Reference" "U3"
 			(at 52.07 80.0414 0)
 			(effects
 				(font
@@ -15157,7 +15157,7 @@
 		(instances
 			(project "Tiny4FSK"
 				(path "/afd8b0bc-328a-481f-8ddf-c1252dc3b440"
-					(reference "IC1")
+					(reference "U3")
 					(unit 1)
 				)
 			)
@@ -16550,7 +16550,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9bce2266-0789-4a72-af68-d5c70b620a2d")
-		(property "Reference" "XTAL1"
+		(property "Reference" "U7"
 			(at 36.195 128.27 0)
 			(effects
 				(font
@@ -16618,7 +16618,7 @@
 		(instances
 			(project "Tiny4FSK"
 				(path "/afd8b0bc-328a-481f-8ddf-c1252dc3b440"
-					(reference "XTAL1")
+					(reference "U7")
 					(unit 1)
 				)
 			)
