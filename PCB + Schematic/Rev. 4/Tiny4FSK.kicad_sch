@@ -14970,7 +14970,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "3f3da641-c7ae-47f2-947a-b14592530935")
 		(property "Reference" "JP1"
 			(at 133.604 133.604 90)
@@ -21792,7 +21792,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "ddb08f54-3af9-4f8f-a871-1a03d576a51c")
 		(property "Reference" "AE2"
 			(at 84.582 27.0509 0)

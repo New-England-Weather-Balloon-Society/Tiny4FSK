@@ -1,4 +1,4 @@
-Designators,Val,Package,Mid X,Mid Y,Rotation,Layer
+Designator,Val,Package,Mid X,Mid Y,Rotation,Layer
 AE1,GPS1003,GPS1003,156.5,-45.323,-90,top
 C1,4.5 nF,C_0805_2012Metric_Pad1.18x1.45mm_HandSolder,138.381627,-93.242616,-90,top
 C2,1uF,C_0402_1005Metric_Pad0.74x0.62mm_HandSolder,142.894561,-55.018579,180,top
