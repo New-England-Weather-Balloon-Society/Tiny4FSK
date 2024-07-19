@@ -14276,7 +14276,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_DFN_QFN:DFN-6-1EP_2x2mm_P0.65mm_EP1x1.6mm"
+		(property "Footprint" "LDO:DFN-6_L1.6-W1.0-P0.55-BL"
 			(at 136.144 164.846 0)
 			(effects
 				(font
