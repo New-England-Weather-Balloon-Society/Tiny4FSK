@@ -30,7 +30,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 #define CALLSIGN_INTERVAL 600000
 
 // FSK Center Frequency in MHz. Ensure SDR is tuned to this frequency.
-#define FSK_FREQ 433.200
+#define FSK_FREQ 432.608
 
 // Baud Rate of FSK Packet. No need to change.
 #define FSK_BAUD 100
