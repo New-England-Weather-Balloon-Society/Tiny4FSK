@@ -70,6 +70,7 @@ char codedbuffer[128];      // Buffer to store an encoded binary packet
 char debugbuffer[256];      // Buffer to store debug strings
 uint16_t packet_count = 1;  // Packet counter
 int call_count = 0;         // Counter to sense when to send callsign
+uint16_t pastAltitude = 0;  // For ascent rate calculation
 
 // Make sure interval is at the legal limit!
 #if CALLSIGN_INTERVAL > 600000
@@ -181,6 +182,11 @@ void setup() {
   // || Initialize BME280 ||
   // ***********************
   BME280setup();
+
+  // ******************************
+  // || Send Morse Code Callsign ||
+  // ******************************
+  sendCallsign();
 }
 
 void loop() {
@@ -189,7 +195,7 @@ void loop() {
   // ***************************
 
   // Check if it's the right time to send the callsign
-  if (call_count * PACKET_DELAY >= CALLSIGN_INTERVAL) {
+  if (call_count * PACKET_INTERVAL >= CALLSIGN_INTERVAL) {
     // Send the callsign, and reset the counter
     sendCallsign();
     call_count = 0;
@@ -244,10 +250,10 @@ void loop() {
   // || Sleep Mode Time! ||
   // **********************
 #ifndef DEV_MODE
-  LowPower.deepSleep(PACKET_DELAY);
+  LowPower.deepSleep(PACKET_INTERVAL);
 #endif
 #ifdef DEV_MODE
-  delay(PACKET_DELAY);
+  delay(PACKET_INTERVAL);
 #endif
 }
 
@@ -259,6 +265,7 @@ void loop() {
 // Build the Horus v2 Packet. This is where the GPS positions and telemetry are organized to the struct.
 int build_horus_binary_packet_v2(char *buffer) {
   struct HorusBinaryPacketV2 BinaryPacketV2;
+  
 // Fill with GPS readings, with a GPS sanity check
 #ifdef FLAG_BAD_PACKET
   if (gps.getAltitudeMSL() > 0 && gps.getGnssFixOk()) {
@@ -270,6 +277,7 @@ int build_horus_binary_packet_v2(char *buffer) {
     BinaryPacketV2.Altitude = gps.getAltitudeMSL() / 1000.00;
     BinaryPacketV2.Speed = gps.getGroundSpeed();
     BinaryPacketV2.Sats = gps.getSIV();
+    BinaryPacketV2.AscentRate = (pastAltitude / BinaryPacketV2.Altitude) / PACKET_INTERVAL;
   } else {
     BinaryPacketV2.Hours = 0;
     BinaryPacketV2.Minutes = 0;
@@ -302,7 +310,7 @@ int build_horus_binary_packet_v2(char *buffer) {
   BinaryPacketV2.PayloadID = HORUS_ID;
   BinaryPacketV2.Counter = packet_count;
   BinaryPacketV2.BattVoltage = (int)mapf((double)readVoltage(), 0.00, 5.00, 0, 255);
-  BinaryPacketV2.Temp = (int8_t)BME280temperature() / 100.00;
+  BinaryPacketV2.Temp = BME280temperature() / 100.00;
 
   // User-Customizable Fields
   BinaryPacketV2.AscentRate = 0;
@@ -315,7 +323,9 @@ int build_horus_binary_packet_v2(char *buffer) {
 
   // Dump the sensor values to Serial Monitor
 #ifdef DEV_MODE
-  Serial.print("Latitude: ");
+  Serial.print("Frame Count: ");
+  Serial.print(packet_count);
+  Serial.print(", Latitude: ");
   Serial.print(BinaryPacketV2.Latitude, 7);
   Serial.print(", Longitude: ");
   Serial.print(BinaryPacketV2.Longitude, 7);
@@ -336,6 +346,8 @@ int build_horus_binary_packet_v2(char *buffer) {
   Serial.print(", Humidity: ");
   Serial.println(BinaryPacketV2.Humidity);
 #endif
+
+  pastAltitude = BinaryPacketV2.Altitude / 1000;
 
   // Copy the binary packet to the buffer
   memcpy(buffer, &BinaryPacketV2, sizeof(BinaryPacketV2));
