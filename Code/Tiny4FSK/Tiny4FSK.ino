@@ -54,12 +54,13 @@ struct HorusBinaryPacketV2 {
   uint8_t Sats;
   int8_t Temp;
   uint8_t BattVoltage;
-  // The following bytes (up until the CRC) are user-customizable.
+  // The following bytes (up until the CRC) are user-customizable. These can be changed by using a custom field list (see horusdemodlib)
+  int16_t AscentRate; // Divide by 100
+  int16_t ExtTemp; // Divide by 10
+  uint8_t Humidity; // No post-processing
+  uint16_t ExtPress; // Divide by 10
   uint8_t dummy1;
-  float dummy2;
-  uint8_t dummy3;
-  uint8_t dummy4;
-  uint16_t dummy5;
+  uint8_t dummy2;
   uint16_t Checksum;
 } __attribute__((packed));
 
@@ -288,7 +289,7 @@ int build_horus_binary_packet_v2(char *buffer) {
   BinaryPacketV2.Latitude = gps.getLatitude() / 10000000.00;
   BinaryPacketV2.Longitude = gps.getLongitude() / 10000000.00;
   BinaryPacketV2.Altitude = gps.getAltitudeMSL() / 1000.00;
-  BinaryPacketV2.Speed = gps.getGroundSpeed();
+  BinaryPacketV2.Speed = gps.getGroundSpeed() * 10;
   BinaryPacketV2.Sats = gps.getSIV();
 #endif
 #ifdef STATUS_LED
@@ -301,14 +302,13 @@ int build_horus_binary_packet_v2(char *buffer) {
   BinaryPacketV2.PayloadID = HORUS_ID;
   BinaryPacketV2.Counter = packet_count;
   BinaryPacketV2.BattVoltage = (int)mapf((double)readVoltage(), 0.00, 5.00, 0, 255);
-  BinaryPacketV2.Temp = BME280temperature() / 100.00;
+  BinaryPacketV2.Temp = (int8_t)BME280temperature() / 100.00;
 
   // User-Customizable Fields
-  BinaryPacketV2.dummy1 = BME280pressure() / 100.00;
-  BinaryPacketV2.dummy2 = BME280humidity() / 100.00;
-  BinaryPacketV2.dummy3 = 0;
-  BinaryPacketV2.dummy4 = 0;
-  BinaryPacketV2.dummy5 = 0;
+  BinaryPacketV2.AscentRate = 0;
+  BinaryPacketV2.ExtTemp = (int16_t)(BME280temperature() / 10);
+  BinaryPacketV2.Humidity = (int8_t)(BME280humidity() / 100);
+  BinaryPacketV2.ExtPress = (int16_t)(BME280pressure() / 10);
 
   // End the packet off with a CRC checksum.
   BinaryPacketV2.Checksum = (uint16_t)crc16((unsigned char *)&BinaryPacketV2, sizeof(BinaryPacketV2) - 2);
@@ -328,11 +328,13 @@ int build_horus_binary_packet_v2(char *buffer) {
   Serial.print(", Voltage (Scaled): ");
   Serial.print(BinaryPacketV2.BattVoltage);
   Serial.print(", Temperature: ");
-  Serial.print(BME280temperature() / 100.00);
+  Serial.print(BinaryPacketV2.Temp);
+  Serial.print(", External Temperature: ");
+  Serial.print(BinaryPacketV2.ExtTemp);
   Serial.print(", Pressure: ");
-  Serial.print(BME280pressure() / 100.00);
+  Serial.print(BinaryPacketV2.ExtPress);
   Serial.print(", Humidity: ");
-  Serial.println(BME280humidity() / 100.00);
+  Serial.println(BinaryPacketV2.Humidity);
 #endif
 
   // Copy the binary packet to the buffer
@@ -353,7 +355,7 @@ void configureSi4063() {
 
   radio_parameters rf_params;
   rf_params.frequency_hz = FSK_FREQ * 1000000;
-  rf_params.power = 0x30;
+  rf_params.power = OUTPUT_POWER;
   rf_params.type = SI4063_MODULATION_TYPE_CW;
   rf_params.offset = 0;
   rf_params.deviation_hz = 0x00;
