@@ -127,7 +127,7 @@ This project would not be possible without the following individuals:
  - Bob Phinney K5TEC for providing funding for this project.
  - Brett Miwa for schematic and PCB design help.
  - Joe KM1P for RF help.
- - Seth and Jennifer Kendall (Mum and Dad!) for motivation.
+ - My parents for motivation.
 
 And these entities:
  - New England Sci-Tech for providing a makerspace.
