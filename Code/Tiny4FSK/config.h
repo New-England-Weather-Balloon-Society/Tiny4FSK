@@ -30,7 +30,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 #define CALLSIGN_INTERVAL 600000
 
 // FSK Center Frequency in MHz. Ensure SDR is tuned to this frequency.
-#define FSK_FREQ 433.200
+#define FSK_FREQ 432.620
 
 // Baud Rate of FSK Packet. No need to change.
 #define FSK_BAUD 100
@@ -39,7 +39,10 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 #define FSK_SPACING 270
 
 // Delay between each packet, in milliseconds.
-#define PACKET_DELAY 10000
+#define PACKET_INTERVAL 10000
+
+// Si4063 Transmit Power Level
+#define OUTPUT_POWER 127
 
 // If the GPS position seems to be a bad position (alititude less than zero, GPS reports bad fix),
 // then transmit all zeros.
