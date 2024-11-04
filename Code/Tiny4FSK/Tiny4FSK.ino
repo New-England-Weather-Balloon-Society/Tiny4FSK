@@ -55,6 +55,11 @@ struct HorusBinaryPacketV2 {
   int8_t Temp;
   uint8_t BattVoltage;
   // The following bytes (up until the CRC) are user-customizable.
+  // The following bytes (up until the CRC) are user-customizable. These can be changed by using a custom field list (see horusdemodlib)
+  int16_t AscentRate;  // Divide by 100
+  int16_t ExtTemp;     // Divide by 10
+  uint8_t Humidity;    // No post-processing
+  uint16_t ExtPress;   // Divide by 10
   uint8_t dummy1;
   float dummy2;
   uint8_t dummy3;

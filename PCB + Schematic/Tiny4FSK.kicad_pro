@@ -494,7 +494,7 @@
       "plot": "Tiny4FSK_Gerbers_Draft5/",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "Tiny4FSK.step",
       "svg": "Stencil/Rev_3/",
       "vrml": "Tiny4FSK_Model.wrl"
     },
