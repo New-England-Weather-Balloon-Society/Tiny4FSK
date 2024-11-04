@@ -6785,17 +6785,6 @@
 				(xyz -90 0 180)
 			)
 		)
-		(model "${KIPRJMOD}/Production/3D/User Library-MAX-M8 u-blox M8 Concurrent GNSS Module.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz -90 0 -180)
-			)
-		)
 	)
 	(footprint "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 		(layer "F.Cu")
@@ -16274,17 +16263,6 @@
 			)
 		)
 		(model "${KIPRJMOD}/3D/ANT_1575AT_JOT.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
-		(model "${KIPRJMOD}/Production/3D/ANT_1575AT_JOT.step"
 			(offset
 				(xyz 0 0 0)
 			)
