@@ -12600,7 +12600,7 @@
 				)
 			)
 		)
-		(property "Value" "1XZA032768AD19"
+		(property "Value" "ECS-327TXO-2012"
 			(at 247.65 118.364 0)
 			(effects
 				(font
@@ -12608,7 +12608,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Oscillator_TCXO:KDS-1XZA032768AD19"
+		(property "Footprint" "Oscillator_TCXO:ECS-327TXO-2012"
 			(at 247.65 118.11 0)
 			(effects
 				(font
@@ -18935,7 +18935,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "OSC:OSC_ECS-TXO-32CSMV-260-AN-TR"
+		(property "Footprint" "Oscillator_TCXO:ECS-TXO-20CSMV4"
 			(at 38.354 130.048 0)
 			(effects
 				(font
