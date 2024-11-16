@@ -131,6 +131,9 @@ This project would not be possible without the following individuals:
  - My parents for motivation.
 
 And these entities:
+ - PCBWay for PCB prototyping and sponsorship!
+ - Bagel Fund for sponsorship!
+ - Hack Club for support and sponsorship!
  - New England Sci-Tech for providing a makerspace.
  - Sci-Tech Amateur Radio Society for expertise.
  - New England Weather Balloon Society for insights.
