@@ -113,7 +113,7 @@ void setup() {
   // ***********************
 
   // Set to Airborne Mode (<1g)
-  Serial1.print("$PCAS11,5*18\r\n");
+  Serial1.write("$PCAS11,5*18\r\n");
 
 #ifdef STATUS_LED
   digitalWrite(SUCCESS_LED, HIGH);
@@ -329,6 +329,9 @@ void configureSi4063() {
     while (1)
       ;
   }
+
+  // Disable TX if in reset mode
+  si4063_inhibit_tx();
 }
 
 // Custom map function that supports floating-point mapping
