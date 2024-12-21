@@ -18,10 +18,10 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 */
 
 // Replace with the assigned Horus v2 ID
-#define HORUS_ID 638
+#define HORUS_ID 256
 
 // Amateur radio license required! Give callsign here.
-#define CALLSIGN "W0MXX"
+#define CALLSIGN "N0CALL"
 
 // Transmits callsign in CW to stay legal. Keep at 20 or below.
 #define CALLSIGN_WPM 20
@@ -46,7 +46,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 
 // If the GPS position seems to be a bad position (alititude less than zero, GPS reports bad fix),
 // then transmit all zeros.
-//#define FLAG_BAD_PACKET
+#define FLAG_BAD_PACKET
 
 // ****************************
 // || General Board Settings ||
