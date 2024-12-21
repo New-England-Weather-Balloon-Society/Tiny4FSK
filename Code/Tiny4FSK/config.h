@@ -41,6 +41,9 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 // Delay between each packet, in milliseconds.
 #define PACKET_DELAY 1000
 
+// Si4063 Transmit Power Level
+#define OUTPUT_POWER 127
+
 // If the GPS position seems to be a bad position (alititude less than zero, GPS reports bad fix),
 // then transmit all zeros.
 //#define FLAG_BAD_PACKET
