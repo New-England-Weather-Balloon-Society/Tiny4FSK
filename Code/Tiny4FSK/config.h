@@ -39,7 +39,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 #define FSK_SPACING 270
 
 // Delay between each packet, in milliseconds.
-#define PACKET_DELAY 1000
+#define PACKET_INTERVAL 1000
 
 // Si4063 Transmit Power Level
 #define OUTPUT_POWER 127
