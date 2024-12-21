@@ -54,13 +54,12 @@ struct HorusBinaryPacketV2 {
   uint8_t Sats;
   int8_t Temp;
   uint8_t BattVoltage;
-  // The following bytes (up until the CRC) are user-customizable. These can be changed by using a custom field list (see horusdemodlib)
-  int16_t AscentRate; // Divide by 100
-  int16_t ExtTemp; // Divide by 10
-  uint8_t Humidity; // No post-processing
-  uint16_t ExtPress; // Divide by 10
+  // The following bytes (up until the CRC) are user-customizable.
   uint8_t dummy1;
-  uint8_t dummy2;
+  float dummy2;
+  uint8_t dummy3;
+  uint8_t dummy4;
+  uint16_t dummy5;
   uint16_t Checksum;
 } __attribute__((packed));
 
@@ -70,7 +69,6 @@ char codedbuffer[128];      // Buffer to store an encoded binary packet
 char debugbuffer[256];      // Buffer to store debug strings
 uint16_t packet_count = 1;  // Packet counter
 int call_count = 0;         // Counter to sense when to send callsign
-uint16_t pastAltitude = 0;  // For ascent rate calculation
 
 // Make sure interval is at the legal limit!
 #if CALLSIGN_INTERVAL > 600000
@@ -143,11 +141,6 @@ void setup() {
   Wire.begin();
   BME280setI2Caddress(0x76);
   BME280setup();
-
-  // ******************************
-  // || Send Morse Code Callsign ||
-  // ******************************
-  sendCallsign();
 }
 
 void loop() {
@@ -274,19 +267,18 @@ int build_horus_binary_packet_v2(char *buffer) {
   BinaryPacketV2.Temp = BME280temperature() / 100.00;
 
   // User-Customizable Fields
-  BinaryPacketV2.AscentRate = 0;
-  BinaryPacketV2.ExtTemp = (int16_t)(BME280temperature() / 10);
-  BinaryPacketV2.Humidity = (int8_t)(BME280humidity() / 100);
-  BinaryPacketV2.ExtPress = (int16_t)(BME280pressure() / 10);
+  BinaryPacketV2.dummy1 = BME280pressure() / 100.00;
+  BinaryPacketV2.dummy2 = BME280humidity() / 100.00;
+  BinaryPacketV2.dummy3 = 0;
+  BinaryPacketV2.dummy4 = 0;
+  BinaryPacketV2.dummy5 = 0;
 
   // End the packet off with a CRC checksum.
   BinaryPacketV2.Checksum = (uint16_t)crc16((unsigned char *)&BinaryPacketV2, sizeof(BinaryPacketV2) - 2);
 
   // Dump the sensor values to Serial Monitor
 #ifdef DEV_MODE
-  Serial.print("Frame Count: ");
-  Serial.print(packet_count);
-  Serial.print(", Latitude: ");
+  Serial.print("Latitude: ");
   Serial.print(BinaryPacketV2.Latitude, 7);
   Serial.print(", Longitude: ");
   Serial.print(BinaryPacketV2.Longitude, 7);
@@ -299,16 +291,12 @@ int build_horus_binary_packet_v2(char *buffer) {
   Serial.print(", Voltage (Scaled): ");
   Serial.print(BinaryPacketV2.BattVoltage);
   Serial.print(", Temperature: ");
-  Serial.print(BinaryPacketV2.Temp);
-  Serial.print(", External Temperature: ");
-  Serial.print(BinaryPacketV2.ExtTemp);
+  Serial.print(BME280temperature() / 100.00);
   Serial.print(", Pressure: ");
-  Serial.print(BinaryPacketV2.ExtPress);
+  Serial.print(BME280pressure() / 100.00);
   Serial.print(", Humidity: ");
-  Serial.println(BinaryPacketV2.Humidity);
+  Serial.println(BME280humidity() / 100.00);
 #endif
-
-  pastAltitude = BinaryPacketV2.Altitude / 1000;
 
   // Copy the binary packet to the buffer
   memcpy(buffer, &BinaryPacketV2, sizeof(BinaryPacketV2));
@@ -328,7 +316,7 @@ void configureSi4063() {
 
   radio_parameters rf_params;
   rf_params.frequency_hz = FSK_FREQ * 1000000;
-  rf_params.power = OUTPUT_POWER;
+  rf_params.power = 0x30;
   rf_params.type = SI4063_MODULATION_TYPE_CW;
   rf_params.offset = 0;
   rf_params.deviation_hz = 0x00;
