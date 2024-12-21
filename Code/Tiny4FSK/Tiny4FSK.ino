@@ -12,7 +12,7 @@
 #include <Wire.h>
 #include <SPI.h>
 #include <ArduinoLowPower.h>
-#include <SparkFun_u-blox_GNSS_v3.h>
+#include <TinyGPSPlus.h>
 #include <TinyBME280.h>
 #include "horus_l2.h"
 #include "config.h"
@@ -34,8 +34,8 @@
 // || Variable Declarations ||
 // ***************************
 
-// New UBLOX object
-SFE_UBLOX_GNSS gps;
+// New GPS object
+TinyGPSPlus gps;
 
 // Horus Binary Structures & Variables
 
@@ -96,72 +96,31 @@ void setup() {
   // Initialize SPI for Si4063
   SPI.begin();
 
-  // Initialize I2C for GPS
-  Wire.begin();
+  // Initialize Serial1 for GPS
+  Serial1.begin(9600);
 
-  // Connect to u-blox GPS module
-  while (gps.begin() == false) {
-#ifdef DEV_MODE
-    Serial.println(F("u-blox GNSS not detected at default I2C address. Printing I2C scan. Restarting..."));
-#endif
-    delay(1000);
-#ifdef STATUS_LED
-    digitalWrite(ERROR_LED, HIGH);
-    delay(500);
-    digitalWrite(ERROR_LED, LOW);
-    delay(500);
-#endif
-#ifdef DEV_MODE
-    showI2CAddresses();
-#endif
+  // Connect to GPS module
+  while (!gps.location.isValid() && millis() < 5000) {
+    while (Serial1.available() > 0) {
+      gps.encode(Serial1.read());
+    }
   }
-#ifdef STATUS_LED
-  digitalWrite(ERROR_LED, LOW);
-#endif
+
+  Serial.println("GPS detected!");
 
   // ***********************
   // || GPS Configuration ||
   // ***********************
-  gps.setI2COutput(COM_TYPE_UBX);
-  gps.factoryDefault();
 
-  bool setValueSuccess = true;
+  // Set to Airborne Mode (<1g)
+  Serial1.print("$PCAS11,5*18\r\n");
 
-  gps.enableGNSS(true, SFE_UBLOX_GNSS_ID_GPS);       // Enable GPS, disable everything else for lower power.
-  gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_SBAS);     // Disable SBAS.
-  gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_GALILEO);  // Disable Galileo.
-  gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_BEIDOU);   // Disable BeiDou.
-  gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_IMES);     // Disable IMES.
-  gps.enableGNSS(false, SFE_UBLOX_GNSS_ID_QZSS);     // Disable QZSS.
-  gps.enableGNSS(true, SFE_UBLOX_GNSS_ID_GLONASS);   // Disable GLONASS.
-
-  // setValueSuccess &= gps.setVal8(UBLOX_CFG_PM_OPERATEMODE, 2);   // Setting to PSMCT.
-  setValueSuccess &= gps.setDynamicModel(DYN_MODEL_AIRBORNE1g);  // Setting Airborne Mode.
-
-  // Print GPS configuration status
-  if (setValueSuccess == true) {
-    gps.saveConfiguration();
-#ifdef DEV_MODE
-    Serial.println("GPS Config Success!");
-#endif
 #ifdef STATUS_LED
-    digitalWrite(SUCCESS_LED, HIGH);
-    delay(1000);
-    digitalWrite(SUCCESS_LED, LOW);
+  digitalWrite(SUCCESS_LED, HIGH);
+  delay(1000);
+  digitalWrite(SUCCESS_LED, LOW);
 #endif
-  } else {
-    while (1) {
-#ifdef DEV_MODE
-      Serial.println("GPS Config Failed!");
-#endif
-#ifdef STATUS_LED
-      digitalWrite(ERROR_LED, HIGH);
-      delay(500);
-      digitalWrite(ERROR_LED, LOW);
-      delay(500);
-#endif
-    }
-  }
+
 
   // **********************
   // || Initialize Radio ||
@@ -179,6 +138,8 @@ void setup() {
   // ***********************
   // || Initialize BME280 ||
   // ***********************
+  Wire.begin();
+  BME280setI2Caddress(0x76);
   BME280setup();
 }
 
@@ -194,7 +155,7 @@ void loop() {
     call_count = 0;
   }
 
-  // *********************
+  // *********************    
   // || Local Variables ||
   // *********************
   int coded_len;
@@ -258,17 +219,20 @@ void loop() {
 // Build the Horus v2 Packet. This is where the GPS positions and telemetry are organized to the struct.
 int build_horus_binary_packet_v2(char *buffer) {
   struct HorusBinaryPacketV2 BinaryPacketV2;
+   while (Serial1.available() > 0) {
+      gps.encode(Serial1.read());
+    }
 // Fill with GPS readings, with a GPS sanity check
 #ifdef FLAG_BAD_PACKET
-  if (gps.getAltitudeMSL() > 0 && gps.getGnssFixOk()) {
-    BinaryPacketV2.Hours = gps.getHour();
-    BinaryPacketV2.Minutes = gps.getMinute();
-    BinaryPacketV2.Seconds = gps.getSecond();
-    BinaryPacketV2.Latitude = gps.getLatitude() / 10000000.00;
-    BinaryPacketV2.Longitude = gps.getLongitude() / 10000000.00;
-    BinaryPacketV2.Altitude = gps.getAltitudeMSL() / 1000.00;
-    BinaryPacketV2.Speed = gps.getGroundSpeed();
-    BinaryPacketV2.Sats = gps.getSIV();
+  if (gps.altitude.meters() > 0 && gps.location.isValid()) {
+    BinaryPacketV2.Hours = gps.time.hour();
+    BinaryPacketV2.Minutes = gps.time.minute();
+    BinaryPacketV2.Seconds = gps.time.second();
+    BinaryPacketV2.Latitude = gps.location.lat();
+    BinaryPacketV2.Longitude = gps.location.lng();
+    BinaryPacketV2.Altitude = gps.altitude.meters();
+    BinaryPacketV2.Speed = gps.speed.kmph();
+    BinaryPacketV2.Sats = gps.satellites.value();
   } else {
     BinaryPacketV2.Hours = 0;
     BinaryPacketV2.Minutes = 0;
@@ -277,19 +241,18 @@ int build_horus_binary_packet_v2(char *buffer) {
     BinaryPacketV2.Longitude = 0;
     BinaryPacketV2.Altitude = 0;
     BinaryPacketV2.Speed = 0;
-    BinaryPacketV2.Sats = gps.getSIV();
+    BinaryPacketV2.Sats = gps.satellites.value();
   }
 #else
-
   // Or, if you prefer no sanity check, force GPS positions into struct
-  BinaryPacketV2.Hours = gps.getHour();
-  BinaryPacketV2.Minutes = gps.getMinute();
-  BinaryPacketV2.Seconds = gps.getSecond();
-  BinaryPacketV2.Latitude = gps.getLatitude() / 10000000.00;
-  BinaryPacketV2.Longitude = gps.getLongitude() / 10000000.00;
-  BinaryPacketV2.Altitude = gps.getAltitudeMSL() / 1000.00;
-  BinaryPacketV2.Speed = gps.getGroundSpeed();
-  BinaryPacketV2.Sats = gps.getSIV();
+  BinaryPacketV2.Hours = gps.time.hour();
+  BinaryPacketV2.Minutes = gps.time.minute();
+  BinaryPacketV2.Seconds = gps.time.second();
+  BinaryPacketV2.Latitude = gps.location.lat();
+  BinaryPacketV2.Longitude = gps.location.lng();
+  BinaryPacketV2.Altitude = gps.altitude.meters();
+  BinaryPacketV2.Speed = gps.speed.kmph();
+  BinaryPacketV2.Sats = gps.satellites.value();
 #endif
 #ifdef STATUS_LED
   digitalWrite(SUCCESS_LED, HIGH);
@@ -300,7 +263,7 @@ int build_horus_binary_packet_v2(char *buffer) {
   // Non-GPS values
   BinaryPacketV2.PayloadID = HORUS_ID;
   BinaryPacketV2.Counter = packet_count;
-  BinaryPacketV2.BattVoltage = (int)mapf((double)readVoltage(), 0.00, 5.00, 0, 255);
+  BinaryPacketV2.BattVoltage = (int)mapf((double)readVoltage(), 0.00, 3.30, 0, 255);
   BinaryPacketV2.Temp = BME280temperature() / 100.00;
 
   // User-Customizable Fields

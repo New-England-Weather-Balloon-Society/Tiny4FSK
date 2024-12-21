@@ -18,10 +18,10 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 */
 
 // Replace with the assigned Horus v2 ID
-#define HORUS_ID 554
+#define HORUS_ID 380
 
 // Amateur radio license required! Give callsign here.
-#define CALLSIGN "KC1SFR"
+#define CALLSIGN "W0MXX"
 
 // Transmits callsign in CW to stay legal. Keep at 20 or below.
 #define CALLSIGN_WPM 20
@@ -30,7 +30,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 #define CALLSIGN_INTERVAL 600000
 
 // FSK Center Frequency in MHz. Ensure SDR is tuned to this frequency.
-#define FSK_FREQ 432.608
+#define FSK_FREQ 432.620
 
 // Baud Rate of FSK Packet. No need to change.
 #define FSK_BAUD 100
@@ -39,11 +39,11 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 #define FSK_SPACING 270
 
 // Delay between each packet, in milliseconds.
-#define PACKET_DELAY 10000
+#define PACKET_DELAY 1000
 
 // If the GPS position seems to be a bad position (alititude less than zero, GPS reports bad fix),
 // then transmit all zeros.
-#define FLAG_BAD_PACKET
+//#define FLAG_BAD_PACKET
 
 // ****************************
 // || General Board Settings ||
