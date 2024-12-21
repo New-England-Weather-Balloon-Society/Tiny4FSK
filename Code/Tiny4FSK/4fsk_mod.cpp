@@ -8,7 +8,7 @@ void fsk4_writebyte(uint8_t b) {
     uint8_t symbol = (b & 0xC0) >> 6;
     // Modulate
     si4063_set_frequency_offset(22 * symbol);
-    delayWithTC3(10);
+    delay(10);
     // Shift to next symbol.
     b = b << 2;
   }

@@ -38,8 +38,8 @@
         "other_text_upright": false,
         "pads": {
           "drill": 0.0,
-          "height": 0.9,
-          "width": 2.3
+          "height": 1.4,
+          "width": 3.0
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -86,8 +86,8 @@
         "items_not_allowed": "error",
         "length_out_of_range": "error",
         "lib_footprint_issues": "warning",
-        "lib_footprint_mismatch": "warning",
-        "malformed_courtyard": "error",
+        "lib_footprint_mismatch": "ignore",
+        "malformed_courtyard": "warning",
         "microvia_drill_out_of_range": "error",
         "missing_courtyard": "ignore",
         "missing_footprint": "warning",
@@ -107,7 +107,7 @@
         "through_hole_pad_without_hole": "error",
         "too_many_vias": "error",
         "track_dangling": "warning",
-        "track_width": "error",
+        "track_width": "warning",
         "tracks_crossing": "error",
         "unconnected_items": "error",
         "unresolved_variable": "error",
@@ -135,7 +135,7 @@
         "min_via_diameter": 0.4,
         "solder_mask_clearance": 0.0,
         "solder_mask_min_width": 0.0,
-        "solder_mask_to_copper_clearance": 0.0,
+        "solder_mask_to_copper_clearance": 0.005,
         "use_height_for_length_calcs": true
       },
       "teardrop_options": [
@@ -189,7 +189,8 @@
         0.18,
         0.25,
         0.5,
-        0.75
+        0.75,
+        1.47
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -425,12 +426,12 @@
       "different_unit_net": "error",
       "duplicate_reference": "error",
       "duplicate_sheet_names": "error",
-      "endpoint_off_grid": "warning",
+      "endpoint_off_grid": "ignore",
       "extra_units": "error",
-      "global_label_dangling": "warning",
+      "global_label_dangling": "ignore",
       "hier_label_mismatch": "error",
       "label_dangling": "error",
-      "lib_symbol_issues": "warning",
+      "lib_symbol_issues": "ignore",
       "missing_bidi_pin": "warning",
       "missing_input_pin": "warning",
       "missing_power_pin": "error",
@@ -439,7 +440,7 @@
       "net_not_bus_member": "warning",
       "no_connect_connected": "warning",
       "no_connect_dangling": "warning",
-      "pin_not_connected": "ignore",
+      "pin_not_connected": "warning",
       "pin_not_driven": "ignore",
       "pin_to_pin": "ignore",
       "power_pin_not_driven": "ignore",
@@ -491,12 +492,12 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "Tiny4FSK_Gerbers_Draft5/",
-      "pos_files": "",
+      "plot": "Production/gerbers/",
+      "pos_files": "Production/",
       "specctra_dsn": "",
-      "step": "",
+      "step": "3D/Tiny4FSK.step",
       "svg": "Stencil/Rev_3/",
-      "vrml": "Tiny4FSK_Model.wrl"
+      "vrml": "3D/shapes3D/Tiny4FSK_Model.wrl"
     },
     "page_layout_descr_file": ""
   },
@@ -514,7 +515,7 @@
     },
     "bom_presets": [],
     "bom_settings": {
-      "exclude_dnp": false,
+      "exclude_dnp": true,
       "fields_ordered": [
         {
           "group_by": false,
@@ -605,6 +606,12 @@
           "label": "Description",
           "name": "Description",
           "show": false
+        },
+        {
+          "group_by": false,
+          "label": "LCSC",
+          "name": "LCSC",
+          "show": true
         }
       ],
       "filter_string": "",
