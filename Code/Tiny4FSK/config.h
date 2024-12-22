@@ -52,6 +52,13 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 // || General Board Settings ||
 // ****************************
 
+// Enable SD Card Logging. Requires an SD Card Module.
+// Disable for flights to conserve power.
+//#define SD_CARD_LOGGING
+
+// Interva to write SD card data, in milliseconds
+#define SD_INTERVAL 1000
+
 // Enable status mode LEDs for information on GPS initialization and issues.
 #define STATUS_LED
 
@@ -84,3 +91,6 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 
 // Voltage Divider Pin
 #define VOLTMETER_PIN A0
+
+// SD Card chip select pin
+#define SD_CS 13

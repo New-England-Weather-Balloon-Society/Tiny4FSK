@@ -15,6 +15,7 @@
 #include <TinyGPSPlus.h>
 #include <TinyBME280.h>
 #include <Scheduler.h>
+#include <SD.h>
 #include "horus_l2.h"
 #include "config.h"
 #include "crc_calc.h"
@@ -65,6 +66,9 @@ struct HorusBinaryPacketV2
   uint16_t Checksum;
 } __attribute__((packed));
 
+// Horus Binary V2 Packet
+struct HorusBinaryPacketV2 BinaryPacketV2;
+
 // Buffers and counters.
 char rawbuffer[128];       // Buffer to temporarily store a raw binary packet.
 char codedbuffer[128];     // Buffer to store an encoded binary packet
@@ -86,6 +90,8 @@ void setup()
   // Begin the Serial Monitor
 #ifdef DEV_MODE
   Serial.begin(9600);
+  while (!Serial)
+    ;
   Serial.println("Welcome to Tiny4FSK! Beginning initialization process.");
 #endif
 
@@ -94,13 +100,45 @@ void setup()
   pinMode(SUCCESS_LED, OUTPUT);
   pinMode(NSEL, OUTPUT);
   pinMode(SDN, OUTPUT);
+#ifdef SD_CARD_LOGGING
+  // pinMode(SD_CS,  OUTPUT);
+#endif
+
+  // ****************************
+  // || SD Card Initialization ||
+  // ****************************
+
+#ifdef DEV_MODE
+  Serial.println("Initializing SD Card...");
+#endif
+
+#ifdef SD_CARD_LOGGING
+  // Initialize SD Card
+  if (!SD.begin(SD_CS))
+  {
+#ifdef DEV_MODE
+    Serial.println("SD Card Initialization Failed!");
+#endif
+    // If SD Card fails to initialize, blink the error LED
+    while (1)
+    {
+#ifdef STATUS_LED
+      digitalWrite(ERROR_LED, HIGH);
+      delay(500);
+      digitalWrite(ERROR_LED, LOW);
+      delay(500);
+#endif
+    }
+  }
+  printCSVHeaders();
+#endif
 
   // ************************
   // || GPS Initialization ||
   // ************************
 
 #ifdef DEV_MODE
-  Serial.println("Initializing GPS module...");
+  Serial.println("SD Card Initialized! Initializing GPS module...");
 #endif
 
   // Initialize Serial1 for GPS
@@ -182,6 +220,9 @@ void setup()
   // || Scheduler Execution ||
   // *************************
   Scheduler.startLoop(gpsFeed);
+#ifdef SD_CARD_LOGGING
+  Scheduler.startLoop(sdLog);
+#endif
 }
 
 void loop()
@@ -261,7 +302,6 @@ void loop()
 // Build the Horus v2 Packet. This is where the GPS positions and telemetry are organized to the struct.
 int build_horus_binary_packet_v2(char *buffer)
 {
-  struct HorusBinaryPacketV2 BinaryPacketV2;
 // Fill with GPS readings, with a GPS sanity check
 #ifdef FLAG_BAD_PACKET
   if (gps.altitude.meters() > 0 && gps.location.isValid())
@@ -404,4 +444,38 @@ void sendCallsign()
 #endif
   si4063_set_frequency_offset(0);
   sendMorseString(CALLSIGN);
+}
+
+// Print named for CSV headers on SD card
+void printCSVHeaders()
+{
+  File dataFile = SD.open("datalog.csv", FILE_WRITE);
+  if (dataFile)
+  {
+    dataFile.println("Frame Count, Latitude, Longitude, Altitude, Satellites, Voltage, Temperature, Pressure, Humidity");
+  }
+  dataFile.close();
+}
+
+// SD Card Logging function
+void sdLog()
+{
+  delay(SD_INTERVAL);
+  // Open the file for writing
+  File dataFile = SD.open("datalog.csv", FILE_WRITE);
+
+  // Create a String to store data
+  String dataString = String(BinaryPacketV2.Counter) + ", " + String(BinaryPacketV2.Latitude, 7) + ", " + String(BinaryPacketV2.Longitude, 7) + ", " + String(BinaryPacketV2.Altitude) + ", " + String(BinaryPacketV2.Sats) + ", " + String(readVoltage()) + ", " + String(BinaryPacketV2.Temp) + ", " + String(BinaryPacketV2.ExtPress / 10.00) + ", " + String(BinaryPacketV2.Humidity);
+
+  // If the file is available, write to it
+  if (dataFile)
+  {
+    dataFile.print(dataString);
+    dataFile.close();
+    Serial.println("Data written to datalog.csv");
+  }
+  else
+  {
+    Serial.println("Error opening datalog.csv");
+  }
 }
