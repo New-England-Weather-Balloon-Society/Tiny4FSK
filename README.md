@@ -2,9 +2,9 @@
 # Tiny4FSK - The Lightweight Horus Binary Tracker Built for HABs
 **WORK IN PROGRESS** - Please do not rely on this as your only tracking system. Tiny4FSK is still in the R&D phase of development and testing.
 
-**NEW** - Significant repository structure overhaul (6/27/24).
+**NEW** - Incorporated new Rev. 4 PCB files and code (12/21/24).
 
-**STATE** - Fully working tracker board! In the phase of testing and minor tweaks.
+**STATE** - Rev. 4 is fully working! Currently sorting out some instability issues, then into testing..
 
 ## What is the Tiny4FSK project?
 Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It runs on 1 AA battery that lasts for 10-17 hours (a few seconds between position updates, can run longer if there's a longer delay). It runs on 4FSK (4-frequency shift keying), which means that it separates tones into 4 separate frequencies. Upon this, it uses the [Horus Binary v2](https://github.com/projecthorus/horusdemodlib/wiki/2---Modem-Details#horus-binary-v1-mode-4-fsk) system, which is a relatively modern system popularly used with [RS41ng](https://github.com/mikaelnousiainen/RS41ng).
@@ -13,7 +13,6 @@ Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It runs on 1 AA
 
 
 ## What are High-Altitude Balloons?
-
 High-Altitude Ballooning (HAB) offers a formally structured yet thrilling hobby, launching payloads to near-space (30km) for atmospheric research, breathtaking imagery, and scientific experimentation. While demanding meticulous planning, safety adherence, and technical skill in electronics and mechanics, HAB rewards hobbyists with hands-on engineering challenges and atmospheric understanding.
 ## Parts and Materials
 This codebase is meant to work with the Tiny4FSK PCB, also available on this GitHub repository. Key components include:
@@ -90,6 +89,9 @@ User configuration of this tracker is **required**. As this system uses amateur 
 If you are going to fly your own payload using Horus Binary, you must get a payload ID allocated for your use. This can be done by  [submitting an issue](https://github.com/projecthorus/horusdemodlib/issues/new/choose)  or a pull request to this repository, or e-mailing VK5QI: vk5qi@rfhead.net
 
 **Do not use the testing (4FSKTEST-V2) payload ID on an actual launch! (ID 256)**
+
+## PCBWay PCBs
+The new Revision 4 PCBs have been fabricated and assembled through PCBWay. Their high-quality fabrication and assembly services is truly commendable. I appreciated the ability to choose from many different component suppliers to select the exact components I needed. Additionally, their customer service is incredibly responsive and helpful, and quickly notified me of design issues. I highly recommend PCBWay for any of your PCB prototyping & assembly needs. Thank you, PCBWay, for graciously sponsoring this project!
 ## PCB Configuration
 The Tiny4FSK PCB has many configurable operating modes, pins and power sources. This section will outline these parts of the PCB.
 

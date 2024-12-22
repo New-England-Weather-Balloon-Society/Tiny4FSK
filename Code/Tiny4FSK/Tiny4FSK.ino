@@ -107,7 +107,8 @@ void setup()
   Serial1.begin(9600);
 
   // Connect to GPS module
-  while (!gps.location.isValid() && millis() < 5000)
+  int startTimer = millis();
+  while (!gps.location.isValid() && millis() - startTimer < 5000)
   {
     while (Serial1.available() > 0)
     {
