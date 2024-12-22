@@ -14,6 +14,7 @@
 #include <ArduinoLowPower.h>
 #include <TinyGPSPlus.h>
 #include <TinyBME280.h>
+#include <Scheduler.h>
 #include "horus_l2.h"
 #include "config.h"
 #include "crc_calc.h"
@@ -177,6 +178,11 @@ void setup()
   delay(1000);
   digitalWrite(SUCCESS_LED, LOW);
 #endif
+
+  // ************************
+  // || Scheduler Execution ||
+  // ************************
+  Scheduler.startLoop(gpsFeed);
 }
 
 void loop()
@@ -257,10 +263,6 @@ void loop()
 int build_horus_binary_packet_v2(char *buffer)
 {
   struct HorusBinaryPacketV2 BinaryPacketV2;
-  while (Serial1.available() > 0)
-  {
-    gps.encode(Serial1.read());
-  }
 // Fill with GPS readings, with a GPS sanity check
 #ifdef FLAG_BAD_PACKET
   if (gps.altitude.meters() > 0 && gps.location.isValid())
@@ -347,6 +349,16 @@ int build_horus_binary_packet_v2(char *buffer)
   return sizeof(struct HorusBinaryPacketV2);
 }
 
+// GPS Feed function to keep the GPS module updated
+void gpsFeed()
+{
+  while (Serial1.available() > 0)
+  {
+    gps.encode(Serial1.read());
+  }
+  yield();
+}
+
 // Configure the Si4063 to user values
 void configureSi4063()
 {
@@ -393,4 +405,14 @@ void sendCallsign()
 #endif
   si4063_set_frequency_offset(0);
   sendMorseString(CALLSIGN);
+}
+
+void smartDelay(unsigned long ms)
+{
+  unsigned long start = millis();
+  do 
+  {
+    while (Serial1.available())
+      gps.encode(Serial1.read());
+  } while (millis() - start < ms);
 }
