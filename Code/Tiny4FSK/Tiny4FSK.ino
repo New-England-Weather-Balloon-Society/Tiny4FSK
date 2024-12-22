@@ -108,7 +108,7 @@ void setup()
 
   // Connect to GPS module
   int startTimer = millis();
-  while (!gps.location.isValid() && millis() - startTimer < 5000)
+  while (!gps.location.isValid() && millis() - startTimer < 1000)
   {
     while (Serial1.available() > 0)
     {
@@ -120,7 +120,7 @@ void setup()
   Serial.println("GPS detected! Setting Airborne mode (<1g) configuration...");
 #endif
 
-  // Set to Airborne Mode (<1g)
+  // Set to Airborne Mode (<1g) using CASIC11 command
   Serial1.write("$PCAS11,5*18\r\n");
 
 #ifdef STATUS_LED
