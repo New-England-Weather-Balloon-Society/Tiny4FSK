@@ -41,7 +41,8 @@ TinyGPSPlus gps;
 
 // Horus v2 Structure of Packet
 // https://github.com/projecthorus/horusdemodlib/wiki/4-Packet-Format-Details#packet-formats
-struct HorusBinaryPacketV2 {
+struct HorusBinaryPacketV2
+{
   uint16_t PayloadID;
   uint16_t Counter;
   uint8_t Hours;
@@ -56,38 +57,37 @@ struct HorusBinaryPacketV2 {
   uint8_t BattVoltage;
   // The following bytes (up until the CRC) are user-customizable. These can be changed by using a custom field list (see horusdemodlib)
   int16_t AscentRate; // Divide by 100
-  int16_t ExtTemp; // Divide by 10
-  uint8_t Humidity; // No post-processing
-  uint16_t ExtPress; // Divide by 10
+  int16_t ExtTemp;    // Divide by 10
+  uint8_t Humidity;   // No post-processing
+  uint16_t ExtPress;  // Divide by 10
   uint8_t dummy1;
   uint8_t dummy2;
   uint16_t Checksum;
 } __attribute__((packed));
 
 // Buffers and counters.
-char rawbuffer[128];        // Buffer to temporarily store a raw binary packet.
-char codedbuffer[128];      // Buffer to store an encoded binary packet
-char debugbuffer[256];      // Buffer to store debug strings
-uint16_t packet_count = 1;  // Packet counter
-int call_count = 0;         // Counter to sense when to send callsign
-uint16_t pastAltitude = 0;  // For ascent rate calculation
+char rawbuffer[128];       // Buffer to temporarily store a raw binary packet.
+char codedbuffer[128];     // Buffer to store an encoded binary packet
+char debugbuffer[256];     // Buffer to store debug strings
+uint16_t packet_count = 1; // Packet counter
+int call_count = 0;        // Counter to sense when to send callsign
 
 // Make sure interval is at the legal limit!
 #if CALLSIGN_INTERVAL > 600000
 #error "Please set the CALLSIGN_INTERVAL to less than or equal to 10 minutes to keep this legal!
 #endif
 
-void setup() {
+void setup()
+{
   // ****************************
   // || Runtime Initialization ||
   // ****************************
+
   // Begin the Serial Monitor
 #ifdef DEV_MODE
   Serial.begin(9600);
+  Serial.println("Welcome to Tiny4FSK! Beginning initialization process.");
 #endif
-
-  // Initialize Si4063 radio with default settings
-  Serial.println(("Initializing Radio..."));
 
   // Pinmode Declarations
   pinMode(ERROR_LED, OUTPUT);
@@ -95,24 +95,29 @@ void setup() {
   pinMode(NSEL, OUTPUT);
   pinMode(SDN, OUTPUT);
 
-  // Initialize SPI for Si4063
-  SPI.begin();
+  // ************************
+  // || GPS Initialization ||
+  // ************************
+
+#ifdef DEV_MODE
+  Serial.println("Initializing GPS module...");
+#endif
 
   // Initialize Serial1 for GPS
   Serial1.begin(9600);
 
   // Connect to GPS module
-  while (!gps.location.isValid() && millis() < 5000) {
-    while (Serial1.available() > 0) {
+  while (!gps.location.isValid() && millis() < 5000)
+  {
+    while (Serial1.available() > 0)
+    {
       gps.encode(Serial1.read());
     }
   }
 
-  Serial.println("GPS detected!");
-
-  // ***********************
-  // || GPS Configuration ||
-  // ***********************
+#ifdef DEV_MODE
+  Serial.println("GPS detected! Setting Airborne mode (<1g) configuration...");
+#endif
 
   // Set to Airborne Mode (<1g)
   Serial1.write("$PCAS11,5*18\r\n");
@@ -123,50 +128,75 @@ void setup() {
   digitalWrite(SUCCESS_LED, LOW);
 #endif
 
-
   // **********************
   // || Initialize Radio ||
   // **********************
-  configureSi4063();
+
+  // Initialize Si4063 radio with default settings
 #ifdef DEV_MODE
-  Serial.println(F("Radio Initialized!"));
+  Serial.println("GPS initialized!\nInitializing radio...");
 #endif
-#ifdef STATUS_LED
-  digitalWrite(SUCCESS_LED, HIGH);
-  delay(1000);
-  digitalWrite(SUCCESS_LED, LOW);
+
+  // Initialize SPI for Si4063
+  SPI.begin();
+  configureSi4063();
+
+#ifdef DEV_MODE
+  Serial.println("Radio Initialized!");
 #endif
 
   // ***********************
   // || Initialize BME280 ||
   // ***********************
+
+#ifdef DEV_MODE
+  Serial.println("Initializing BME280...");
+#endif
+
   Wire.begin();
   BME280setI2Caddress(0x76);
   BME280setup();
 
+#ifdef DEV_MODE
+  Serial.println("BME280 initialized! Sending morse code identification now.");
+#endif
+
   // ******************************
   // || Send Morse Code Callsign ||
   // ******************************
+
   sendCallsign();
+
+#ifdef DEV_MODE
+  Serial.println("Setup done! Beginning control flow.");
+#endif
+
+#ifdef STATUS_LED
+  digitalWrite(SUCCESS_LED, HIGH);
+  delay(1000);
+  digitalWrite(SUCCESS_LED, LOW);
+#endif
 }
 
-void loop() {
+void loop()
+{
+  // *********************
+  // || Local Variables ||
+  // *********************
+  int coded_len;
+  int pkt_len;
+
   // ***************************
   // || Callsign Transmission ||
   // ***************************
 
   // Check if it's the right time to send the callsign
-  if (call_count * PACKET_INTERVAL >= CALLSIGN_INTERVAL) {
+  if (call_count * PACKET_INTERVAL >= CALLSIGN_INTERVAL)
+  {
     // Send the callsign, and reset the counter
     sendCallsign();
     call_count = 0;
   }
-
-  // *********************    
-  // || Local Variables ||
-  // *********************
-  int coded_len;
-  int pkt_len;
 
   // ***************************
   // || Generate Horus Packet ||
@@ -218,20 +248,22 @@ void loop() {
 #endif
 }
 
-
 // **********************
 // || Custom Functions ||
 // **********************
 
 // Build the Horus v2 Packet. This is where the GPS positions and telemetry are organized to the struct.
-int build_horus_binary_packet_v2(char *buffer) {
+int build_horus_binary_packet_v2(char *buffer)
+{
   struct HorusBinaryPacketV2 BinaryPacketV2;
-   while (Serial1.available() > 0) {
-      gps.encode(Serial1.read());
-    }
+  while (Serial1.available() > 0)
+  {
+    gps.encode(Serial1.read());
+  }
 // Fill with GPS readings, with a GPS sanity check
 #ifdef FLAG_BAD_PACKET
-  if (gps.altitude.meters() > 0 && gps.location.isValid()) {
+  if (gps.altitude.meters() > 0 && gps.location.isValid())
+  {
     BinaryPacketV2.Hours = gps.time.hour();
     BinaryPacketV2.Minutes = gps.time.minute();
     BinaryPacketV2.Seconds = gps.time.second();
@@ -240,7 +272,9 @@ int build_horus_binary_packet_v2(char *buffer) {
     BinaryPacketV2.Altitude = gps.altitude.meters();
     BinaryPacketV2.Speed = gps.speed.kmph();
     BinaryPacketV2.Sats = gps.satellites.value();
-  } else {
+  }
+  else
+  {
     BinaryPacketV2.Hours = 0;
     BinaryPacketV2.Minutes = 0;
     BinaryPacketV2.Seconds = 0;
@@ -306,8 +340,6 @@ int build_horus_binary_packet_v2(char *buffer) {
   Serial.println(BinaryPacketV2.Humidity);
 #endif
 
-  pastAltitude = BinaryPacketV2.Altitude / 1000;
-
   // Copy the binary packet to the buffer
   memcpy(buffer, &BinaryPacketV2, sizeof(BinaryPacketV2));
 
@@ -315,7 +347,8 @@ int build_horus_binary_packet_v2(char *buffer) {
 }
 
 // Configure the Si4063 to user values
-void configureSi4063() {
+void configureSi4063()
+{
   chip_parameters si_params;
   si_params.gpio0 = 0x00;
   si_params.gpio1 = 0x00;
@@ -332,7 +365,8 @@ void configureSi4063() {
   rf_params.deviation_hz = 0x00;
 
   // Handle initialization error
-  if (si4063_init(rf_params, si_params) != HAL_OK) {
+  if (si4063_init(rf_params, si_params) != HAL_OK)
+  {
 #ifdef DEV_MODE
     Serial.println("Initialization Error!");
 #endif
@@ -345,12 +379,14 @@ void configureSi4063() {
 }
 
 // Custom map function that supports floating-point mapping
-double mapf(double x, double in_min, double in_max, double out_min, double out_max) {
+double mapf(double x, double in_min, double in_max, double out_min, double out_max)
+{
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
 // Send out the Morse Code callsign
-void sendCallsign() {
+void sendCallsign()
+{
 #ifdef DEV_MODE
   Serial.println("Sending Morse Code Callsign!");
 #endif
