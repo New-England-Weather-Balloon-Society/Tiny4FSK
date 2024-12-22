@@ -19,9 +19,9 @@ This codebase is meant to work with the Tiny4FSK PCB, also available on this Git
 
  - **Microcontroller** - [SAMD21G18A](https://www.microchip.com/en-us/product/atsamd21g18). A modern Cortex-M0+ microcontroller by Microchip.
  - **TX Module** - [Si4063](https://www.silabs.com/wireless/proprietary/ezradiopro-sub-ghz-ics/device.si4063?tab=specs). A transceiver from Silicon Labs, similar to the Si4032 on RS41 radiosondes.
- - **GPS RX Module** - [MAX-M10S](https://www.u-blox.com/en/product/max-m10-series). A high-performance GPS module from Ublox.
+ - **GPS RX Module** - [ATGM336H](https://jlcpcb.com/partdetail/Zhongkewei-ATGM336H5N31/C90770). A cheap, high-performance GPS module from ZHONGKEWEI.
  - **Environmental Sensor** - [BME280](https://www.bosch-sensortec.com/products/environmental-sensors/humidity-sensors-bme280/). A proven sensor from Bosch for measuring temperature, pressure, and humidity.
- - **Boost Converter** - [TPS61200](https://www.ti.com/product/TPS61200). Boosts 1.5V battery level to 3.3V for the rest of the board.
+ - **Boost Converter** - [TPS61200](https://www.ti.com/product/TPS61200). Boosts 1.5V battery level to 3.3V for the rest of the board from Texas Instruments.
  - **LDO Step-Down** - [MCP1700](https://www.microchip.com/en-us/product/mcp1700). A step-down converter from Microchip.
 
 This list is not exhaustive. Additional components and passives are detailed in the schematic files.
@@ -34,9 +34,8 @@ This code is modular and separated into several different files for easy expansi
  - **horus_l2.cpp and horus_l2.h** - Horus layer 2 file, Golay error correction algorithm.
  - **voltage.cpp and voltage.h** - Voltage detection using ADC values.
  - **si4063.cpp and si4063.h** - Si4063 driver files for radio transmission.
- - **fsk4_mod.cpp and fsk4_mod.h** - 4FSK modulation functions.
+ - **4fsk_mod.cpp and 4fsk_mod.h** - 4FSK modulation functions.
  - **delay_timer.cpp and delay_timer.h** - Low-level delay functions based on timers.
- - **i2c_scan.cpp and i2c_scan.h** - I2C scanning for debugging utility.
 
 ## Setting up Arduino IDE
 This project is based on the Arduino IDE workflow. Below steps outline steps necessary to install Arduino IDE and configure it for the SAMD microcontroller.
@@ -45,7 +44,8 @@ This project is based on the Arduino IDE workflow. Below steps outline steps nec
  2. [Download the Arduino SAMD core](https://docs.arduino.cc/learn/starting-guide/cores/).
  3. Download necessary libraries from library manager:
 	a. ArduinoLowPower
-	b. Sparkfun GNSS v3
+	b. TinyGPSPlus
+  c. Scheduler
  5. To following needs to be downloaded directly from GitHub:
 	a. [TinyBME280](https://github.com/technoblogy/tiny-bme280/)
  4. Open Tiny4FSK.ino by double-clicking it (should open Arduino IDE).
@@ -69,11 +69,17 @@ Arduino gives you an official warning: "This breaks Arduino APIs since all pins 
 User configuration of this tracker is **required**. As this system uses amateur radio, you will need at least a Technician's level license (US). Configuration file is located in **config.h**. Here are the parameters that need to be changed.
 
 - `HORUS_ID` - This setting is your Horus ID number. Information on how to get one in next section.
-- `FSK_FREQ` - This is setting for your preferred TX frequency. If in US, best to keep the same as the PCB is built around 433.200 MHz. Minor modifications in the 70 cm band are fine though.
-- `FSK_BAUD` - FSK baud rate. No need to change, as most RX station use the baud rate. 
-- `FSK_SPACING` - FSK spacing in Hz. Once again, most station are set to this value.
+- `CALLSIGN` - Amateur radio callsign. This is required to stay legal!
+- `CALLSIGN_WPM` - Speed to send the callsign, in morse code.
+- `CALLSIGN_INTERVAL` - Interval to send the morse code callsign. Maximum interval in the US is 10 minutes.
+- `FSK_FREQ` - This is setting for your preferred TX frequency. The filter is optimized for 70cm radio band.
+- `FSK_BAUD` - FSK baud rate. No need to change, as most RX station use 100 baud. 
+- `FSK_SPACING` - FSK spacing in Hz. Once again, most station are set to this value (270hz).
 - `STATUS_LED` - Comment out to disable verbose status LEDs on PCB.
 - `DEV_MODE` - Comment out for flight mode. Disables Serial and enables deep sleep modes for lower power consumption.
+- `PACKET_INTERVAL` - Interval between 4FSK packets. The smaller the interval, the lower the battery life is.
+- `OUTPUT_POWER` - 0-127. This is the output power of the radio module.
+- `FLAG_BAD_PACKET` - If the latest GPS values are bad, send out all zeroes (for time, position, speed, and altitude).
 
 **Everything below the above values in the configuration file can go unchanged.** These are pin numbers, and unless you are making your own PCB, leave them be.
 
@@ -84,6 +90,7 @@ User configuration of this tracker is **required**. As this system uses amateur 
 - `EXTINT` - GPS EXTINT pin for longer packet delays.
 - `SUCCESS_LED` - Success LED pin.
 - `ERROR_LED` - Error LED pin.
+- `VOLTMETER_PIN` - Pin for the onboard voltage divider for voltage sensing.
 
 ## How do I get a Horus v2 ID?
 If you are going to fly your own payload using Horus Binary, you must get a payload ID allocated for your use. This can be done by  [submitting an issue](https://github.com/projecthorus/horusdemodlib/issues/new/choose)  or a pull request to this repository, or e-mailing VK5QI: vk5qi@rfhead.net
@@ -95,15 +102,14 @@ The new Revision 4 PCBs have been fabricated and assembled through PCBWay. Their
 ## PCB Configuration
 The Tiny4FSK PCB has many configurable operating modes, pins and power sources. This section will outline these parts of the PCB.
 
-The PCB contains two jumpers, JP1 and JP2.
+The PCB contains one jumper, JP1.
 
-- **JP1** - Cut (desolder) to enable SW3 for power.
-- **JP2** - Control power source (USB and center for USB mode, center and BATT for battery mode).
+- **JP1** - Cut (desolder) to enable SW1 for power. During flight, the mechanical shock from the landing can cause the power switch to flip, so solder this jumper to disable this risk.
 
 There are also two switches/buttons, SW1 and SW2.
 
-- **SW1** - Reset button for the microcontroller.
-- **SW2** - Battery power switch. Connects battery output to boost converter input.
+- **SW1** - Battery power switch. Connects battery output to boost converter input.
+- **SW2** - Reset button for the microcontroller.
 
 There are two antenna pads, AE1 and AE2.
 - **AE1** - L1 GPS band antenna
@@ -117,7 +123,7 @@ To ask questions, kindly donate, or even say hi, feel free to contact me at this
 - [Horus Binary modulator and decoder repository](https://github.com/projecthorus/horusdemodlib)
 - [SAMD21 product page](https://www.microchip.com/en-us/product/atsamd21g18)
 - [Si4063 product page](https://www.silabs.com/wireless/proprietary/ezradiopro-sub-ghz-ics/device.si4063)
-- [MAX-M10 product page](https://www.u-blox.com/en/product/max-m10-series)
+- [ATGM336H product page](https://www.u-blox.com/en/product/max-m10-series)
 - [BME280 product page](https://www.bosch-sensortec.com/products/environmental-sensors/humidity-sensors-bme280)
 - [TPS61200 product page](https://www.ti.com/product/TPS61200)
 - [MCP1700 product page](https://www.microchip.com/en-us/product/mcp1700)

@@ -19,7 +19,6 @@
 #include "config.h"
 #include "crc_calc.h"
 #include "voltage.h"
-#include "i2c_scan.h"
 #include "si4063.h"
 #include "4fsk_mod.h"
 #include "morse.h"
@@ -179,9 +178,9 @@ void setup()
   digitalWrite(SUCCESS_LED, LOW);
 #endif
 
-  // ************************
+  // *************************
   // || Scheduler Execution ||
-  // ************************
+  // *************************
   Scheduler.startLoop(gpsFeed);
 }
 
@@ -405,14 +404,4 @@ void sendCallsign()
 #endif
   si4063_set_frequency_offset(0);
   sendMorseString(CALLSIGN);
-}
-
-void smartDelay(unsigned long ms)
-{
-  unsigned long start = millis();
-  do 
-  {
-    while (Serial1.available())
-      gps.encode(Serial1.read());
-  } while (millis() - start < ms);
 }

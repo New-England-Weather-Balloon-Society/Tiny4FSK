@@ -18,7 +18,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 */
 
 // Replace with the assigned Horus v2 ID
-#define HORUS_ID 256
+#define HORUS_ID 683
 
 // Amateur radio license required! Give callsign here.
 #define CALLSIGN "W0MXX"
@@ -81,3 +81,6 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 // Status LED Pins
 #define ERROR_LED 5
 #define SUCCESS_LED 4
+
+// Voltage Divider Pin
+#define VOLTMETER_PIN A0
