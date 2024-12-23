@@ -41,6 +41,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "si4063.h"
 #include "4fsk_mod.h"
 #include "morse.h"
+#include "utils.h"
 
 // **********************
 // || Native USB Setup ||
@@ -406,7 +407,7 @@ int build_horus_binary_packet_v2(char *buffer)
   return sizeof(struct HorusBinaryPacketV2);
 }
 
-// GPS Feed function to keep the GPS module updated
+// GPS Feed loop to keep the GPS module updated
 void gpsFeed()
 {
   while (Serial1.available() > 0)
@@ -416,66 +417,7 @@ void gpsFeed()
   yield();
 }
 
-// Configure the Si4063 to user values
-void configureSi4063()
-{
-  chip_parameters si_params;
-  si_params.gpio0 = 0x00;
-  si_params.gpio1 = 0x00;
-  si_params.gpio2 = 0x00;
-  si_params.gpio3 = 0x00;
-  si_params.drive_strength = 0x00;
-  si_params.clock = 26000000UL;
-
-  radio_parameters rf_params;
-  rf_params.frequency_hz = FSK_FREQ * 1000000;
-  rf_params.power = OUTPUT_POWER;
-  rf_params.type = SI4063_MODULATION_TYPE_CW;
-  rf_params.offset = 0;
-  rf_params.deviation_hz = 0x00;
-
-  // Handle initialization error
-  if (si4063_init(rf_params, si_params) != HAL_OK)
-  {
-#ifdef DEV_MODE
-    Serial.println("Initialization Error!");
-#endif
-    while (1)
-      ;
-  }
-
-  // Disable TX if in reset mode
-  si4063_inhibit_tx();
-}
-
-// Custom map function that supports floating-point mapping
-double mapf(double x, double in_min, double in_max, double out_min, double out_max)
-{
-  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-}
-
-// Send out the Morse Code callsign
-void sendCallsign()
-{
-#ifdef DEV_MODE
-  Serial.println("Sending Morse Code Callsign!");
-#endif
-  si4063_set_frequency_offset(0);
-  sendMorseString(CALLSIGN);
-}
-
-// Print named for CSV headers on SD card
-void printCSVHeaders()
-{
-  File dataFile = SD.open("datalog.csv", FILE_WRITE);
-  if (dataFile)
-  {
-    dataFile.println("Frame Count, Latitude, Longitude, Altitude, Satellites, Voltage, Temperature, Pressure, Humidity");
-  }
-  dataFile.close();
-}
-
-// SD Card Logging function
+// SD Card Logging loop
 void sdLog()
 {
   delay(SD_INTERVAL);

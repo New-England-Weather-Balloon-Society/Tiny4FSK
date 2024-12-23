@@ -17,8 +17,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #include "si4063.h"
-#include <SPI.h>
-#include "config.h"
 
 uint32_t current_frequency_hz = 434000000UL;
 uint32_t current_deviation_hz = 0;

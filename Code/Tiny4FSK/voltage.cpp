@@ -17,7 +17,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #include "voltage.h"
-#include <Arduino.h>
 
 double readVoltage() {
   float firstVolt = (analogRead(VOLTMETER_PIN) * 2) * (3.3 / 1023.0);

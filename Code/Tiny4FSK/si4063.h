@@ -22,6 +22,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #pragma once
 
 #include <stdint.h>
+#include <SPI.h>
+#include "config.h"
 
 extern unsigned int SI4063_clock;
 extern unsigned int NSEL;

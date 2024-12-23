@@ -1,5 +1,5 @@
 /*
-crc_calc.h, part of Tiny4FSK, for a high-altitude tracker.
+utils.h, part of Tiny4FSK, for a high-altitude tracker.
 Copyright (C) 2024 Maxwell Kendall
 
 This program is free software: you can redistribute it and/or modify
@@ -16,14 +16,22 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-// CRC calculation for FEC in the packet. This SHOULD NOT BE TOUCHED
-// Only edit if you know what you are doing. If you accidentally deleted something (we all do that),
-// then you can copy it back from GitHub.
-
 #pragma once
 
-#include <stdint.h>
 #include <Arduino.h>
+#include "si4063.h"
+#include "config.h"
+#include "morse.h"
+#include <SD.h>
 
-uint16_t crc_xmodem_update(uint16_t crc, uint8_t data);
-unsigned int crc16(unsigned char *string, unsigned int len);
+// Send out the Morse Code callsign
+void sendCallsign();
+
+// Custom map function that supports floating-point mapping
+double mapf(double x, double in_min, double in_max, double out_min, double out_max);
+
+// Configure the Si4063 to user values
+void configureSi4063();
+
+// Print named for CSV headers on SD card
+void printCSVHeaders();

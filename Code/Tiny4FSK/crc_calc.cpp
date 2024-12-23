@@ -21,7 +21,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // then you can copy it back from GitHub.
 
 #include "crc_calc.h"
-#include <Arduino.h>
 
 uint16_t crc_xmodem_update(uint16_t crc, uint8_t data) {
   int i;

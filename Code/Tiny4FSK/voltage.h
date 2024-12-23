@@ -22,5 +22,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include <stdint.h>
 #include "config.h"
+#include <Arduino.h>
 
 double readVoltage();
