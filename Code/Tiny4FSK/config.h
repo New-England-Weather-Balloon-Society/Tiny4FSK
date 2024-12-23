@@ -1,3 +1,21 @@
+/*
+config.h, part of Tiny4FSK, for a high-altitude tracker.
+Copyright (C) 2024 Maxwell Kendall
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 // TINY4FSK CONFIG FILE
 // Please read comments for each section, even though some settings are self-explanatory.
 // Feel free to add an issue or PR on GitHub for any questions or bugs.
@@ -39,7 +57,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 #define FSK_SPACING 270
 
 // Delay between each packet, in milliseconds.
-#define PACKET_INTERVAL 1000
+#define PACKET_INTERVAL 10000
 
 // Si4063 Transmit Power Level
 #define OUTPUT_POWER 127
@@ -56,11 +74,11 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 // Disable for flights to conserve power.
 //#define SD_CARD_LOGGING
 
-// Interva to write SD card data, in milliseconds
+// Interval to write SD card data, in milliseconds
 #define SD_INTERVAL 1000
 
 // Enable status mode LEDs for information on GPS initialization and issues.
-#define STATUS_LED
+//#define STATUS_LED
 
 // Enable Serial Prints for debugging and sleep modes for MCU.
 // MCU sleep mode disabled debug messages, so disable for MCU sleep.

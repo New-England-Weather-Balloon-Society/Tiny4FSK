@@ -1,3 +1,21 @@
+/*
+Tiny4FSK.ino, part of Tiny4FSK, for a high-altitude tracker.
+Copyright (C) 2024 Maxwell Kendall
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Tiny4FSK                                                                                             //
 // The lightweight, small Horus Binary v2 4FSK tracker                                                  //
@@ -346,7 +364,7 @@ int build_horus_binary_packet_v2(char *buffer)
   // Non-GPS values
   BinaryPacketV2.PayloadID = HORUS_ID;
   BinaryPacketV2.Counter = packet_count;
-  BinaryPacketV2.BattVoltage = (int)mapf((double)readVoltage(), 0.00, 3.30, 0, 255);
+  BinaryPacketV2.BattVoltage = (int)mapf((double)readVoltage(), 0.00, 5.00, 0, 255);
   BinaryPacketV2.Temp = BME280temperature() / 100.00;
 
   // User-Customizable Fields
