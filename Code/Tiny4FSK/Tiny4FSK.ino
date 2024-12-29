@@ -1,3 +1,21 @@
+/*
+Tiny4FSK.ino, part of Tiny4FSK, for a high-altitude tracker.
+Copyright (C) 2024 Maxwell Kendall
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Tiny4FSK                                                                                             //
 // The lightweight, small Horus Binary v2 4FSK tracker                                                  //
@@ -23,6 +41,7 @@
 #include "si4063.h"
 #include "4fsk_mod.h"
 #include "morse.h"
+#include "utils.h"
 
 // **********************
 // || Native USB Setup ||
@@ -90,8 +109,7 @@ void setup()
   // Begin the Serial Monitor
 #ifdef DEV_MODE
   Serial.begin(9600);
-  while (!Serial)
-    ;
+  //while (!Serial);
   Serial.println("Welcome to Tiny4FSK! Beginning initialization process.");
 #endif
 
@@ -100,38 +118,6 @@ void setup()
   pinMode(SUCCESS_LED, OUTPUT);
   pinMode(NSEL, OUTPUT);
   pinMode(SDN, OUTPUT);
-#ifdef SD_CARD_LOGGING
-  // pinMode(SD_CS,  OUTPUT);
-#endif
-
-  // ****************************
-  // || SD Card Initialization ||
-  // ****************************
-
-#ifdef DEV_MODE
-  Serial.println("Initializing SD Card...");
-#endif
-
-#ifdef SD_CARD_LOGGING
-  // Initialize SD Card
-  if (!SD.begin(SD_CS))
-  {
-#ifdef DEV_MODE
-    Serial.println("SD Card Initialization Failed!");
-#endif
-    // If SD Card fails to initialize, blink the error LED
-    while (1)
-    {
-#ifdef STATUS_LED
-      digitalWrite(ERROR_LED, HIGH);
-      delay(500);
-      digitalWrite(ERROR_LED, LOW);
-      delay(500);
-#endif
-    }
-  }
-  printCSVHeaders();
-#endif
 
   // ************************
   // || GPS Initialization ||
@@ -220,9 +206,6 @@ void setup()
   // || Scheduler Execution ||
   // *************************
   Scheduler.startLoop(gpsFeed);
-#ifdef SD_CARD_LOGGING
-  Scheduler.startLoop(sdLog);
-#endif
 }
 
 void loop()
@@ -299,6 +282,16 @@ void loop()
 // || Custom Functions ||
 // **********************
 
+// GPS Feed loop to keep the GPS module updated
+void gpsFeed()
+{
+  while (Serial1.available() > 0)
+  {
+    gps.encode(Serial1.read());
+  }
+  yield();
+}
+
 // Build the Horus v2 Packet. This is where the GPS positions and telemetry are organized to the struct.
 int build_horus_binary_packet_v2(char *buffer)
 {
@@ -346,7 +339,7 @@ int build_horus_binary_packet_v2(char *buffer)
   // Non-GPS values
   BinaryPacketV2.PayloadID = HORUS_ID;
   BinaryPacketV2.Counter = packet_count;
-  BinaryPacketV2.BattVoltage = (int)mapf((double)readVoltage(), 0.00, 3.30, 0, 255);
+  BinaryPacketV2.BattVoltage = (int)mapf((double)readVoltage(), 0.00, 5.00, 0, 255);
   BinaryPacketV2.Temp = BME280temperature() / 100.00;
 
   // User-Customizable Fields
@@ -386,96 +379,4 @@ int build_horus_binary_packet_v2(char *buffer)
   memcpy(buffer, &BinaryPacketV2, sizeof(BinaryPacketV2));
 
   return sizeof(struct HorusBinaryPacketV2);
-}
-
-// GPS Feed function to keep the GPS module updated
-void gpsFeed()
-{
-  while (Serial1.available() > 0)
-  {
-    gps.encode(Serial1.read());
-  }
-  yield();
-}
-
-// Configure the Si4063 to user values
-void configureSi4063()
-{
-  chip_parameters si_params;
-  si_params.gpio0 = 0x00;
-  si_params.gpio1 = 0x00;
-  si_params.gpio2 = 0x00;
-  si_params.gpio3 = 0x00;
-  si_params.drive_strength = 0x00;
-  si_params.clock = 26000000UL;
-
-  radio_parameters rf_params;
-  rf_params.frequency_hz = FSK_FREQ * 1000000;
-  rf_params.power = OUTPUT_POWER;
-  rf_params.type = SI4063_MODULATION_TYPE_CW;
-  rf_params.offset = 0;
-  rf_params.deviation_hz = 0x00;
-
-  // Handle initialization error
-  if (si4063_init(rf_params, si_params) != HAL_OK)
-  {
-#ifdef DEV_MODE
-    Serial.println("Initialization Error!");
-#endif
-    while (1)
-      ;
-  }
-
-  // Disable TX if in reset mode
-  si4063_inhibit_tx();
-}
-
-// Custom map function that supports floating-point mapping
-double mapf(double x, double in_min, double in_max, double out_min, double out_max)
-{
-  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-}
-
-// Send out the Morse Code callsign
-void sendCallsign()
-{
-#ifdef DEV_MODE
-  Serial.println("Sending Morse Code Callsign!");
-#endif
-  si4063_set_frequency_offset(0);
-  sendMorseString(CALLSIGN);
-}
-
-// Print named for CSV headers on SD card
-void printCSVHeaders()
-{
-  File dataFile = SD.open("datalog.csv", FILE_WRITE);
-  if (dataFile)
-  {
-    dataFile.println("Frame Count, Latitude, Longitude, Altitude, Satellites, Voltage, Temperature, Pressure, Humidity");
-  }
-  dataFile.close();
-}
-
-// SD Card Logging function
-void sdLog()
-{
-  delay(SD_INTERVAL);
-  // Open the file for writing
-  File dataFile = SD.open("datalog.csv", FILE_WRITE);
-
-  // Create a String to store data
-  String dataString = String(BinaryPacketV2.Counter) + ", " + String(BinaryPacketV2.Latitude, 7) + ", " + String(BinaryPacketV2.Longitude, 7) + ", " + String(BinaryPacketV2.Altitude) + ", " + String(BinaryPacketV2.Sats) + ", " + String(readVoltage()) + ", " + String(BinaryPacketV2.Temp) + ", " + String(BinaryPacketV2.ExtPress / 10.00) + ", " + String(BinaryPacketV2.Humidity);
-
-  // If the file is available, write to it
-  if (dataFile)
-  {
-    dataFile.print(dataString);
-    dataFile.close();
-    Serial.println("Data written to datalog.csv");
-  }
-  else
-  {
-    Serial.println("Error opening datalog.csv");
-  }
 }

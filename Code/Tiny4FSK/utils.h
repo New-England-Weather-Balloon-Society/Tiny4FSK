@@ -1,5 +1,5 @@
 /*
-voltage.cpp, part of Tiny4FSK, for a high-altitude tracker.
+utils.h, part of Tiny4FSK, for a high-altitude tracker.
 Copyright (C) 2024 Maxwell Kendall
 
 This program is free software: you can redistribute it and/or modify
@@ -16,18 +16,24 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "voltage.h"
+#pragma once
 
-double readVoltage() {
-  const int numReadings = 3; // Number of readings to average
-  double totalVoltage = 0.0;
+#include <Arduino.h>
+#include "si4063.h"
+#include "config.h"
+#include "morse.h"
+#include <SD.h>
 
-  for (int i = 0; i < numReadings; i++) {
-    int rawValue = analogRead(VOLTMETER_PIN); // Read ADC value
-    double voltage = rawValue * (3.3 / 1023.0) * 2; // Convert to voltage
-    totalVoltage += voltage; // Accumulate the voltage
-    delay(5); // Small delay for noise reduction (optional)
-  }
+#define Serial SerialUSB
 
-  return totalVoltage / numReadings; // Return the average voltage
-}
+// Send out the Morse Code callsign
+void sendCallsign();
+
+// Custom map function that supports floating-point mapping
+double mapf(double x, double in_min, double in_max, double out_min, double out_max);
+
+// Configure the Si4063 to user values
+void configureSi4063();
+
+// Print named for CSV headers on SD card
+void printCSVHeaders();

@@ -1,3 +1,21 @@
+/*
+config.h, part of Tiny4FSK, for a high-altitude tracker.
+Copyright (C) 2024 Maxwell Kendall
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 // TINY4FSK CONFIG FILE
 // Please read comments for each section, even though some settings are self-explanatory.
 // Feel free to add an issue or PR on GitHub for any questions or bugs.
@@ -30,7 +48,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 #define CALLSIGN_INTERVAL 600000
 
 // FSK Center Frequency in MHz. Ensure SDR is tuned to this frequency.
-#define FSK_FREQ 432.620
+#define FSK_FREQ 432.630
 
 // Baud Rate of FSK Packet. No need to change.
 #define FSK_BAUD 100
@@ -46,7 +64,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 
 // If the GPS position seems to be a bad position (alititude less than zero, GPS reports bad fix),
 // then transmit all zeros.
-#define FLAG_BAD_PACKET
+//#define FLAG_BAD_PACKET
 
 // ****************************
 // || General Board Settings ||
@@ -56,7 +74,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 // Disable for flights to conserve power.
 //#define SD_CARD_LOGGING
 
-// Interva to write SD card data, in milliseconds
+// Interval to write SD card data, in milliseconds
 #define SD_INTERVAL 1000
 
 // Enable status mode LEDs for information on GPS initialization and issues.

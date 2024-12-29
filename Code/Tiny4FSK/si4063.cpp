@@ -1,6 +1,22 @@
+/*
+si4063.cpp, part of Tiny4FSK, for a high-altitude tracker.
+Copyright (C) 2024 Maxwell Kendall
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 #include "si4063.h"
-#include <SPI.h>
-#include "config.h"
 
 uint32_t current_frequency_hz = 434000000UL;
 uint32_t current_deviation_hz = 0;
@@ -50,6 +66,7 @@ int si4063_init(radio_parameters rp, chip_parameters cp)
   // Serial.println(part, HEX);
   // return HAL_ERROR;
   //}
+  Serial.print("Detected part number: 0x");
   Serial.println(part, HEX);
 
   si4063_configure_rf(rp);
