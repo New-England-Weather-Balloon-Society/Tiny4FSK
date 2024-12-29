@@ -1312,6 +1312,17 @@
 			(thermal_bridge_angle 45)
 			(uuid "3e50fad7-da56-4a26-ae54-2f5f64f0a8c0")
 		)
+		(model "${KIPRJMOD}/3D/CM7V-T1A-32.768K-12.5PF-20PPM-TA-QA.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 0)
+			)
+		)
 	)
 	(footprint "Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal"
 		(layer "F.Cu")
@@ -7506,7 +7517,7 @@
 			(pintype "no_connect")
 			(uuid "a030218e-4f30-42d0-8ae3-f865588ee8d0")
 		)
-		(model "C:/Users/maxsr/Downloads/User Library-MAX-M8 u-blox M8 Concurrent GNSS Module.step"
+		(model "${KIPRJMOD}/3D/User Library-MAX-M8 u-blox M8 Concurrent GNSS Module.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -14262,7 +14273,7 @@
 				(xyz 0 0 0)
 			)
 		)
-		(model "C:/Users/maxsr/Downloads/User Library-Bosch_BME280.step"
+		(model "${KIPRJMOD}/3D/shapes3D/shapes3D/User Library-Bosch_BME280.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -14270,7 +14281,7 @@
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz -90 0 0)
+				(xyz -90 0 180)
 			)
 		)
 	)
@@ -15749,7 +15760,7 @@
 			(pintype "passive")
 			(uuid "0eb854e0-1563-45c5-9471-ded827cf09bb")
 		)
-		(model "C:/Users/maxsr/Downloads/Coilcraft-LPS3015.step"
+		(model "${KIPRJMOD}/3D/Coilcraft-LPS3015.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -16376,6 +16387,17 @@
 			(pintype "power_in")
 			(thermal_bridge_angle 45)
 			(uuid "85a42867-4f2a-4353-aa46-dd91df057408")
+		)
+		(model "${KIPRJMOD}/3D/CM7V-T1A-32.768K-12.5PF-20PPM-TA-QA.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 0)
+			)
 		)
 	)
 	(footprint "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder"
@@ -18814,7 +18836,7 @@
 				)
 			)
 		)
-		(model "C:/Users/maxsr/Downloads/1575AT43A0040E/ANT_1575AT_JOT.step"
+		(model "${KIPRJMOD}/3D/ANT_1575AT_JOT.step"
 			(offset
 				(xyz 0 0 0)
 			)

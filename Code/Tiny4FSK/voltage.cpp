@@ -19,9 +19,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "voltage.h"
 
 double readVoltage() {
-  float firstVolt = (analogRead(VOLTMETER_PIN) * 2) * (3.3 / 1023.0);
-  delay(10);
-  float secondVolt = (analogRead(VOLTMETER_PIN) * 2) * (3.3 / 1023.0);
-  delay(5);
-  return ((firstVolt + secondVolt + (analogRead(VOLTMETER_PIN) * 2) * (3.3 / 1023.0)) / 3);
+  const int numReadings = 3; // Number of readings to average
+  double totalVoltage = 0.0;
+
+  for (int i = 0; i < numReadings; i++) {
+    int rawValue = analogRead(VOLTMETER_PIN); // Read ADC value
+    double voltage = rawValue * (3.3 / 1023.0) * 2; // Convert to voltage
+    totalVoltage += voltage; // Accumulate the voltage
+    delay(5); // Small delay for noise reduction (optional)
+  }
+
+  return totalVoltage / numReadings; // Return the average voltage
 }

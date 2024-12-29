@@ -109,8 +109,7 @@ void setup()
   // Begin the Serial Monitor
 #ifdef DEV_MODE
   Serial.begin(9600);
-  while (!Serial)
-    ;
+  //while (!Serial);
   Serial.println("Welcome to Tiny4FSK! Beginning initialization process.");
 #endif
 
@@ -119,38 +118,6 @@ void setup()
   pinMode(SUCCESS_LED, OUTPUT);
   pinMode(NSEL, OUTPUT);
   pinMode(SDN, OUTPUT);
-#ifdef SD_CARD_LOGGING
-  // pinMode(SD_CS,  OUTPUT);
-#endif
-
-  // ****************************
-  // || SD Card Initialization ||
-  // ****************************
-
-#ifdef DEV_MODE
-  Serial.println("Initializing SD Card...");
-#endif
-
-#ifdef SD_CARD_LOGGING
-  // Initialize SD Card
-  if (!SD.begin(SD_CS))
-  {
-#ifdef DEV_MODE
-    Serial.println("SD Card Initialization Failed!");
-#endif
-    // If SD Card fails to initialize, blink the error LED
-    while (1)
-    {
-#ifdef STATUS_LED
-      digitalWrite(ERROR_LED, HIGH);
-      delay(500);
-      digitalWrite(ERROR_LED, LOW);
-      delay(500);
-#endif
-    }
-  }
-  printCSVHeaders();
-#endif
 
   // ************************
   // || GPS Initialization ||
@@ -239,9 +206,6 @@ void setup()
   // || Scheduler Execution ||
   // *************************
   Scheduler.startLoop(gpsFeed);
-#ifdef SD_CARD_LOGGING
-  Scheduler.startLoop(sdLog);
-#endif
 }
 
 void loop()
@@ -317,6 +281,16 @@ void loop()
 // **********************
 // || Custom Functions ||
 // **********************
+
+// GPS Feed loop to keep the GPS module updated
+void gpsFeed()
+{
+  while (Serial1.available() > 0)
+  {
+    gps.encode(Serial1.read());
+  }
+  yield();
+}
 
 // Build the Horus v2 Packet. This is where the GPS positions and telemetry are organized to the struct.
 int build_horus_binary_packet_v2(char *buffer)
@@ -405,37 +379,4 @@ int build_horus_binary_packet_v2(char *buffer)
   memcpy(buffer, &BinaryPacketV2, sizeof(BinaryPacketV2));
 
   return sizeof(struct HorusBinaryPacketV2);
-}
-
-// GPS Feed loop to keep the GPS module updated
-void gpsFeed()
-{
-  while (Serial1.available() > 0)
-  {
-    gps.encode(Serial1.read());
-  }
-  yield();
-}
-
-// SD Card Logging loop
-void sdLog()
-{
-  delay(SD_INTERVAL);
-  // Open the file for writing
-  File dataFile = SD.open("datalog.csv", FILE_WRITE);
-
-  // Create a String to store data
-  String dataString = String(BinaryPacketV2.Counter) + ", " + String(BinaryPacketV2.Latitude, 7) + ", " + String(BinaryPacketV2.Longitude, 7) + ", " + String(BinaryPacketV2.Altitude) + ", " + String(BinaryPacketV2.Sats) + ", " + String(readVoltage()) + ", " + String(BinaryPacketV2.Temp) + ", " + String(BinaryPacketV2.ExtPress / 10.00) + ", " + String(BinaryPacketV2.Humidity);
-
-  // If the file is available, write to it
-  if (dataFile)
-  {
-    dataFile.print(dataString);
-    dataFile.close();
-    Serial.println("Data written to datalog.csv");
-  }
-  else
-  {
-    Serial.println("Error opening datalog.csv");
-  }
 }

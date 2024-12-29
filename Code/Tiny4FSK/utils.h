@@ -24,6 +24,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "morse.h"
 #include <SD.h>
 
+#define Serial SerialUSB
+
 // Send out the Morse Code callsign
 void sendCallsign();
 

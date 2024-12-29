@@ -25,6 +25,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include <SPI.h>
 #include "config.h"
 
+#define Serial SerialUSB
+
 extern unsigned int SI4063_clock;
 extern unsigned int NSEL;
 extern unsigned int SDN;

@@ -66,6 +66,7 @@ int si4063_init(radio_parameters rp, chip_parameters cp)
   // Serial.println(part, HEX);
   // return HAL_ERROR;
   //}
+  Serial.print("Detected part number: 0x");
   Serial.println(part, HEX);
 
   si4063_configure_rf(rp);
