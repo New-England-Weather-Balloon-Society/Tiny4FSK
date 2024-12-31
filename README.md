@@ -1,4 +1,4 @@
-![Tiny4FSK_Logo](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/assets/66796793/ab7b77fc-2d4b-4a5b-8a1d-bdfebb96c139)
+![Tiny4FSK_Logo](https://cloud-nhw66iv7j-hack-club-bot.vercel.app/0logo.svg)
 # Tiny4FSK - The Lightweight Horus Binary Tracker Built for HABs
 **WORK IN PROGRESS** - Please do not rely on this as your only tracking system. Tiny4FSK is still in the R&D phase of development and testing.
 
@@ -9,7 +9,7 @@
 ## What is the Tiny4FSK project?
 Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It runs on 1 AA battery that lasts for 10-17 hours (a few seconds between position updates, can run longer if there's a longer delay). It runs on 4FSK (4-frequency shift keying), which means that it separates tones into 4 separate frequencies. Upon this, it uses the [Horus Binary v2](https://github.com/projecthorus/horusdemodlib/wiki/2---Modem-Details#horus-binary-v1-mode-4-fsk) system, which is a relatively modern system popularly used with [RS41ng](https://github.com/mikaelnousiainen/RS41ng).
 
-![20240826_110047](https://github.com/user-attachments/assets/cf4503ab-3f1f-4d95-a258-a1770e397963)
+![20240826_110047](https://cloud-ivkikeghh-hack-club-bot.vercel.app/0img_20241231_123601.jpg)
 
 
 ## What are High-Altitude Balloons?
@@ -36,6 +36,7 @@ This code is modular and separated into several different files for easy expansi
  - **si4063.cpp and si4063.h** - Si4063 driver files for radio transmission.
  - **4fsk_mod.cpp and 4fsk_mod.h** - 4FSK modulation functions.
  - **delay_timer.cpp and delay_timer.h** - Low-level delay functions based on timers.
+ - **utile.cpp and utils.h** - A collection of utility functions.
 
 ## Setting up Arduino IDE
 This project is based on the Arduino IDE workflow. Below steps outline steps necessary to install Arduino IDE and configure it for the SAMD microcontroller.
@@ -150,13 +151,15 @@ And these entities:
 ## License
 Software and Documentation:
 - [GNU GPL v3 license](https://choosealicense.com/licenses/gpl-3.0/)
-Hardware License
+
+Hardware License:
 - [OSHW (US002611)](https://certification.oshwa.org/us002611.html) and [CERN Open Hardware Licence Version 2 - Weakly Reciprocal](https://choosealicense.com/licenses/cern-ohl-w-2.0/)
 
 ## Pictures
-![20240826_110047](https://github.com/user-attachments/assets/45754424-47cf-4b7b-9d6d-691e0b79e20f)
-![20240826_110054](https://github.com/user-attachments/assets/489bfe26-3689-47f6-83ca-874625a8805d)
-![IMG_0972](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/assets/66796793/eb7dd175-a9ce-46be-b1bb-37f851c07086)
-![IMG_0967](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/assets/66796793/8c1a57e0-a005-43ad-9a12-7db82b8bdd78)
-![IMG_0961](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/assets/66796793/18126cac-9f5c-447b-8d6e-ad13160e6982)
-![IMG_0959](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/assets/66796793/fce14f4f-bd4a-4b16-a40b-19e351b87616)
+![20240826_110047](https://cloud-ivkikeghh-hack-club-bot.vercel.app/0img_20241231_123601.jpg)
+![](https://cloud-as6j73c1n-hack-club-bot.vercel.app/0img_6985.jpg)
+![](https://cloud-as6j73c1n-hack-club-bot.vercel.app/1img_20241231_123232.jpg)
+![](https://cloud-as6j73c1n-hack-club-bot.vercel.app/2img_6986.jpghttps://cloud-as6j73c1n-hack-club-bot.vercel.app/0img_6985.jpg)
+![](https://cloud-as6j73c1n-hack-club-bot.vercel.app/3img_6981.jpg)
+![](https://cloud-as6j73c1n-hack-club-bot.vercel.app/0img_6985.jpg)
+![](https://cloud-as6j73c1n-hack-club-bot.vercel.app/4img_6980.jpg)
