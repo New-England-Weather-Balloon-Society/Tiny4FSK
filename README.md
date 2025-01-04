@@ -11,7 +11,6 @@ Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It runs on 1 AA
 
 ![20240826_110047](https://cloud-ivkikeghh-hack-club-bot.vercel.app/0img_20241231_123601.jpg)
 
-
 ## What are High-Altitude Balloons?
 High-Altitude Ballooning (HAB) offers a formally structured yet thrilling hobby, launching payloads to near-space (30km) for atmospheric research, breathtaking imagery, and scientific experimentation. While demanding meticulous planning, safety adherence, and technical skill in electronics and mechanics, HAB rewards hobbyists with hands-on engineering challenges and atmospheric understanding.
 ## Parts and Materials
