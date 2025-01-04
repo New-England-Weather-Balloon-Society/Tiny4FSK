@@ -1312,6 +1312,17 @@
 			(thermal_bridge_angle 45)
 			(uuid "3e50fad7-da56-4a26-ae54-2f5f64f0a8c0")
 		)
+		(model "${KIPRJMOD}/3D/CM7V-T1A-32.768K-12.5PF-20PPM-TA-QA.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 0)
+			)
+		)
 	)
 	(footprint "Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal"
 		(layer "F.Cu")
@@ -7506,7 +7517,7 @@
 			(pintype "no_connect")
 			(uuid "a030218e-4f30-42d0-8ae3-f865588ee8d0")
 		)
-		(model "C:/Users/maxsr/Downloads/User Library-MAX-M8 u-blox M8 Concurrent GNSS Module.step"
+		(model "${KIPRJMOD}/3D/User Library-MAX-M8 u-blox M8 Concurrent GNSS Module.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -13805,6 +13816,120 @@
 			)
 		)
 	)
+	(footprint "MountingHole:MountingHole_2.2mm_M2"
+		(layer "F.Cu")
+		(uuid "b2c7a639-effb-4fe1-bce5-bb47acce6299")
+		(at 114.975 64.675)
+		(descr "Mounting Hole 2.2mm, no annular, M2")
+		(tags "mounting hole 2.2mm no annular m2")
+		(property "Reference" "H3"
+			(at 0 -3.2 0)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "04194a61-682a-4be7-bbc3-f1e849e36452")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 0 3.2 0)
+			(layer "F.Fab")
+			(uuid "8f7b0dd9-35bb-46cd-b048-826fe9776766")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_2.2mm_M2"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4e07d0ac-9f51-44b6-a5b2-fa5fc72c412f")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2d4bc9b5-aa06-410d-8106-035ae0a88a1c")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "891b6d08-882e-4bdf-9ee4-827b6a0ceeaa")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property ki_fp_filters "MountingHole*")
+		(path "/5b2f3248-3d64-4d52-b0c1-e58a3c4e383d")
+		(sheetname "Root")
+		(sheetfile "Tiny4FSK.kicad_sch")
+		(attr exclude_from_pos_files exclude_from_bom)
+		(fp_circle
+			(center 0 0)
+			(end 2.2 0)
+			(stroke
+				(width 0.15)
+				(type solid)
+			)
+			(fill none)
+			(layer "Cmts.User")
+			(uuid "8e6c60a3-43ee-4808-8268-f12817a0c6ff")
+		)
+		(fp_circle
+			(center 0 0)
+			(end 2.45 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill none)
+			(layer "F.CrtYd")
+			(uuid "7f210794-84fe-43b7-9af3-3e12d8bc9e9b")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(uuid "233e8caa-74d9-44e6-9293-21414cdcd9e1")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(pad "" np_thru_hole circle
+			(at 0 0)
+			(size 2.2 2.2)
+			(drill 2.2)
+			(layers "*.Cu" "*.Mask")
+			(uuid "235dba0e-465b-4a43-9b8d-28f8e231fe97")
+		)
+	)
 	(footprint "Package_LGA:Bosch_LGA-8_2.5x2.5mm_P0.65mm_ClockwisePinNumbering"
 		(layer "F.Cu")
 		(uuid "b88b8255-2e6d-42d0-8134-d05785be12d1")
@@ -14148,7 +14273,7 @@
 				(xyz 0 0 0)
 			)
 		)
-		(model "C:/Users/maxsr/Downloads/User Library-Bosch_BME280.step"
+		(model "${KIPRJMOD}/3D/shapes3D/shapes3D/User Library-Bosch_BME280.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -14156,7 +14281,7 @@
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz -90 0 0)
+				(xyz -90 0 180)
 			)
 		)
 	)
@@ -15635,7 +15760,7 @@
 			(pintype "passive")
 			(uuid "0eb854e0-1563-45c5-9471-ded827cf09bb")
 		)
-		(model "C:/Users/maxsr/Downloads/Coilcraft-LPS3015.step"
+		(model "${KIPRJMOD}/3D/Coilcraft-LPS3015.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -16262,6 +16387,17 @@
 			(pintype "power_in")
 			(thermal_bridge_angle 45)
 			(uuid "85a42867-4f2a-4353-aa46-dd91df057408")
+		)
+		(model "${KIPRJMOD}/3D/CM7V-T1A-32.768K-12.5PF-20PPM-TA-QA.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 0)
+			)
 		)
 	)
 	(footprint "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder"
@@ -18700,7 +18836,7 @@
 				)
 			)
 		)
-		(model "C:/Users/maxsr/Downloads/1575AT43A0040E/ANT_1575AT_JOT.step"
+		(model "${KIPRJMOD}/3D/ANT_1575AT_JOT.step"
 			(offset
 				(xyz 0 0 0)
 			)
