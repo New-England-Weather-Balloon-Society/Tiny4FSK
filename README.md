@@ -12,7 +12,7 @@ Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It runs on 1 AA
 ![20240826_110047](https://cloud-ivkikeghh-hack-club-bot.vercel.app/0img_20241231_123601.jpg)
 
 ## What are High-Altitude Balloons?
-High-Altitude Ballooning (HAB) offers a formally structured yet thrilling hobby, launching payloads to near-space (30km) for atmospheric research, breathtaking imagery, and scientific experimentation. While demanding meticulous planning, safety adherence, and technical skill in electronics and mechanics, HAB rewards hobbyists with hands-on engineering challenges and atmospheric understanding.
+High altitude balloons (HABs) allow space science enthusiasts to launch their own payloads to near-space (30km) at a cost of hundreds of dollars instead of millions of dollars.  This can be done for atmospheric research, breathtaking imagery, and scientific experimentation. While demanding meticulous planning, safety adherence, and technical skill in electronics and mechanics, this hobby rewards makers with a chance to get hands on with projects like electronic data loggers, camera systems, wireless communications, and more.
 ## Parts and Materials
 This codebase is meant to work with the Tiny4FSK PCB, also available on this GitHub repository. Key components include:
 
@@ -44,12 +44,12 @@ This code is modular and separated into several different files for easy expansi
 2. Solder on the female 1x4 header row onto the underside of the USB breakout. Solder on the 1x4 male header row to the corresponding adjecent pins (labeled VSS, GND, D-, and D+).
 
 ![Solder diagram](https://cloud-15azhb7wk-hack-club-bot.vercel.app/0usb-solder.jpg)
-3. To program, insert the USB breakout such that it is self-contained.
+3. To program the board, attach the USB breakout board as shown in the photo.  Once the board is programmed, the USB breakout board can be removed for flight.
 
 ![USB Connection Diagram](https://cloud-fy2mwui0k-hack-club-bot.vercel.app/0usb-diagram.jpg)
 
 ## Antenna System
-This system relies on the 70cm amateur radio band (420-450 MHz in the US). A braided copper *monopole* is included cut to the perfect length for this frequency. The included antenna is a quarter-wave monopole, meaning that the antenna is just a quarter of the wavelength of the signal, and yet it maintains a good SWR (quantification of how much signal is reflected back into the transmitter). There is a pad that supports a quarter-wave monopole, but also provides grounding pads for a more advanced antenna.
+This system relies on the 70cm amateur radio band (420-450 MHz in the US), and requires an amateur radio license, issued by the FCC, to operate. A pre-cut braided copper *monopole* is included, optimized to transmit on this frequency. The included antenna is a quarter-wave monopole, meaning that the antenna is just a quarter of the wavelength of the signal, and yet it maintains a good SWR (quantification of how much signal is reflected back into the transmitter). There is a pad that supports a quarter-wave monopole, but also provides grounding pads for a coax connector if alternate antennas wish to be used.
 <details>
 <summary>Why does this work?</summary>
 A 1/4 wave monopole antenna works by using a quarter of the wavelength of the signal, which creates a resonant frequency that efficiently radiates radio waves. The ground plane acts as a reflector, effectively doubling the antenna's length and improving signal strength and quality.
@@ -58,23 +58,23 @@ A 1/4 wave monopole antenna works by using a quarter of the wavelength of the si
 
 Solder the copper wire onto the center pin of the antenna connector (as depicted below).
 
-<!-- ![Antenna Connection](https://cloud-nscrzqsdm-hack-club-bot.vercel.app/0antenna_diagram.png) -->
+![Antenna Connection](https://cloud-nscrzqsdm-hack-club-bot.vercel.app/0antenna_diagram.png)
 
 ## PCB Configuration
 The Tiny4FSK PCB has many configurable operating modes, pins and power sources. This section will outline these parts of the PCB.
 
 The PCB contains one jumper, JP1.
 
-- **JP1** - Cut (desolder) to enable SW1 for power. During flight, the mechanical shock from the landing can cause the power switch to flip, so solder this jumper to disable this risk.
+- **JP1** - Cut (desolder) to enable SW1 for power. During flight, the mechanical shock from the landing can cause the power switch to flip, so solder this jumper to disable this risk. (Bypasses SW1).
 
 There are also two switches/buttons, SW1 and SW2.
 
-- **SW1** - Battery power switch. Connects battery output to boost converter input.
+- **SW1** - Battery power switch. Connects battery output to boost converter input. When the battery is connected, this functions as the main power switch.
 - **SW2** - Reset button for the microcontroller.
 
 There are two antenna pads, AE1 and AE2.
 - **AE1** - L1 GPS band antenna
-- **AE2** - 70cm antenna pad. For a guide to cut a proper antenna, refer to the following section.
+- **AE2** - 70cm antenna pad. For a guide to cut a proper antenna, refer to the above section.
 
 ## Setting up the Code
 Now that you've got all the hardware set up, time for programming!
@@ -92,7 +92,7 @@ This project is based on the Arduino IDE workflow. Below steps outline steps nec
     * [TinyBME280](https://github.com/maxsrobotics/tiny-bme280/)
 
 **Optional** - The SAMD goes to sleep to save power. To achieve proper sleep, some edits to the SAMD core are necessary. To locate the wiring.c file on your computer, [follow this guide](https:support.arduino.cc/hc/en-us/articles/4415103213714-Find-sketches-libraries-board-cores-and-other-files-on-your-computer).
-Once there, comment out or completely delete this line as shown:
+Once there, comment out or completely delete these lines as shown:
 ```cpp
     // Defining VERY_LOW_POWER breaks Arduino APIs since all pins are considered INPUT at startup
     // However, it really lowers the power consumption by a factor of 20 in low power mode (0.03mA vs 0.6mA)
@@ -160,7 +160,9 @@ You should start decoding packets transmitted from the board with your configura
 
 
 ## PCBWay PCBs
-The new Revision 4 PCBs have been fabricated and assembled through PCBWay. Their high-quality fabrication and assembly services is truly commendable. I appreciated the ability to choose from many different component suppliers to select the exact components I needed. Additionally, their customer service is incredibly responsive and helpful, and quickly notified me of design issues. I highly recommend PCBWay for any of your PCB prototyping & assembly needs. Thank you, PCBWay, for graciously sponsoring this project!
+The new Revision 4 PCBs have been fabricated and assembled through PCBWay. Their high-quality fabrication and assembly services are truly commendable. I appreciated the ability to choose from many different component suppliers to select the exact components I needed. Additionally, their customer service is incredibly responsive and helpful, and quickly notified me of design issues. I highly recommend PCBWay for any of your PCB prototyping & assembly needs. Thank you, PCBWay, for graciously sponsoring this project!
+
+![alt text](https://cloud-2unmbbsvy-hack-club-bot.vercel.app/0pcbway.jpg)
 
 ## Contact Me!
 To ask questions, kindly donate, or even say hi, feel free to contact me at this email: tiny4fsk@gmail.com. Thanks!
