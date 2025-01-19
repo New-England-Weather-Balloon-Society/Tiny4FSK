@@ -189,6 +189,7 @@
         0.125,
         0.18,
         0.25,
+        0.35,
         0.5,
         0.75,
         1.47
@@ -504,6 +505,7 @@
   },
   "schematic": {
     "annotate_start_num": 0,
+    "bom_export_filename": "",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",
