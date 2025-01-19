@@ -41,7 +41,7 @@ This code is modular and separated into several different files for easy expansi
 # Step by Step Setup Guide
 ## Setting up the PCB
 1. **Carefully** snap off the USB breakout board from the board.
-2. Solder on the female 1x4 header row onto the underside of the USB breakout. Solder on the 1x4 male header row to the corresponding adjecent pins (labelled VSS, GND, D-, and D+).
+2. Solder on the female 1x4 header row onto the underside of the USB breakout. Solder on the 1x4 male header row to the corresponding adjecent pins (labeled VSS, GND, D-, and D+).
 
 ![Solder diagram](https://cloud-15azhb7wk-hack-club-bot.vercel.app/0usb-solder.jpg)
 3. To program, insert the USB breakout such that it is self-contained.
@@ -52,7 +52,7 @@ This code is modular and separated into several different files for easy expansi
 This system relies on the 70cm amateur radio band (420-450 MHz in the US). A braided copper *monopole* is included cut to the perfect length for this frequency. The included antenna is a quarter-wave monopole, meaning that the antenna is just a quarter of the wavelength of the signal, and yet it maintains a good SWR (quantification of how much signal is reflected back into the transmitter). There is a pad that supports a quarter-wave monopole, but also provides grounding pads for a more advanced antenna.
 <details>
 <summary>Why does this work?</summary>
-Blah blah blah. Consult an RF engineer?
+TODO
 </details>
 <br>
 
