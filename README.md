@@ -52,7 +52,7 @@ This code is modular and separated into several different files for easy expansi
 This system relies on the 70cm amateur radio band (420-450 MHz in the US). A braided copper *monopole* is included cut to the perfect length for this frequency. The included antenna is a quarter-wave monopole, meaning that the antenna is just a quarter of the wavelength of the signal, and yet it maintains a good SWR (quantification of how much signal is reflected back into the transmitter). There is a pad that supports a quarter-wave monopole, but also provides grounding pads for a more advanced antenna.
 <details>
 <summary>Why does this work?</summary>
-TODO
+A 1/4 wave monopole antenna works by using a quarter of the wavelength of the signal, which creates a resonant frequency that efficiently radiates radio waves. The ground plane acts as a reflector, effectively doubling the antenna's length and improving signal strength and quality.
 </details>
 <br>
 
