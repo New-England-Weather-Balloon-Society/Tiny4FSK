@@ -65,7 +65,7 @@ The Tiny4FSK PCB has many configurable operating modes, pins and power sources. 
 
 The PCB contains one jumper, JP1.
 
-- **JP1** - Cut (desolder) to enable SW1 for power. During flight, the mechanical shock from the landing can cause the power switch to flip, so solder this jumper to disable this risk. (Bypasses SW1).
+- **J1** - Cut (desolder) to enable SW1 for power. During flight, the mechanical shock from the landing can cause the power switch to flip, so solder this jumper to disable this risk. (Bypasses SW1).
 
 There are also two switches/buttons, SW1 and SW2.
 
@@ -92,7 +92,7 @@ This project is based on the Arduino IDE workflow. Below steps outline steps nec
     * [TinyBME280](https://github.com/maxsrobotics/tiny-bme280/)
 
 **Optional** - The SAMD goes to sleep to save power. To achieve proper sleep, some edits to the SAMD core are necessary. To locate the wiring.c file on your computer, [follow this guide](https:support.arduino.cc/hc/en-us/articles/4415103213714-Find-sketches-libraries-board-cores-and-other-files-on-your-computer).
-Once there, comment out or completely delete these lines as shown:
+Once there, comment out or completely delete the lines shown below:
 ```cpp
     // Defining VERY_LOW_POWER breaks Arduino APIs since all pins are considered INPUT at startup
     // However, it really lowers the power consumption by a factor of 20 in low power mode (0.03mA vs 0.6mA)
@@ -143,7 +143,7 @@ If you are going to fly your own payload using Horus Binary, you must get a payl
 **Do not use the testing (4FSKTEST-V2) payload ID on an actual launch! (ID 256)**
 
 ## Upload the Code!
-Once code configuration is complete, you may plug in a standard data USB-C cable into the breakout board, select the port in Arduino IDE, and select the upload button (marked by an arrow at the top).
+Once code configuration is complete, you may plug in a standard data USB-C cable into the breakout board, select the port in Arduino IDE, and select the upload button (marked by an arrow at the top). You should select the Arduino Zero (Native USB Port) as the board name.
 
 ## Testing
 Once the code is uploaded, you'll see the green LED light start to glow. The behavior of that LED is outlined [here](#led-default-behavior). Now you'll need to set up a receive station on either a [laptop or computer with an SDR](https://github.com/projecthorus/horusdemodlib/wiki/1.1-Horus-GUI-Reception-Guide-(Windows-Linux-OSX)), or a [Raspberry Pi board connected to an SDR](https://github.com/projecthorus/horusdemodlib/wiki/1.2--Raspberry-Pi-'Headless'-RX-Guide).
