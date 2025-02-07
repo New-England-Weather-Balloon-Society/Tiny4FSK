@@ -7,6 +7,7 @@ This is a compilation of the settings that I use for PCBWay fabrication.
 | Board thickness | 0.8mm |
 | Board Color | Red |
 | Components | Turnkey |
+| Layers | 4 |
 
 *Note*: The board quantity is separate from the assembly quantity. The assembly quantity designates how many of the board quantity is actually populated, and component cost will increase accordingly.
 
