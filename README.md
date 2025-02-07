@@ -65,7 +65,7 @@ The Tiny4FSK PCB has many configurable operating modes, pins and power sources. 
 
 The PCB contains one jumper, JP1.
 
-- **J1** - Cut (desolder) to enable SW1 for power. During flight, the mechanical shock from the landing can cause the power switch to flip, so solder this jumper to disable this risk. (Bypasses SW1).
+- **JP1** - Cut (desolder) to enable SW1 for power. During flight, the mechanical shock from the landing can cause the power switch to flip, so solder this jumper to disable this risk. (Bypasses SW1).
 
 There are also two switches/buttons, SW1 and SW2.
 
