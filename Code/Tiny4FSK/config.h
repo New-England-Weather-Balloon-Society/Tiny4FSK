@@ -83,7 +83,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 // Enable Serial Prints for debugging and sleep modes for MCU.
 // MCU sleep mode disabled debug messages, so disable for MCU sleep.
 // Disable for flights to conserve power.
-#define DEV_MODE
+//#define DEV_MODE
 
 // EXPERIMENTAL - optimise for EXTREMELY low power draw
 // Does not do anything yet!
