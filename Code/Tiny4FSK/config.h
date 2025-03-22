@@ -57,12 +57,12 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 #define FSK_SPACING 270
 
 // Delay between each packet, in milliseconds.
-#define PACKET_INTERVAL 1000
+#define PACKET_INTERVAL 5000
 
 // Si4063 Transmit Power Level
 #define OUTPUT_POWER 127
 
-// If the GPS position seems to be a bad position (alititude less than zero, GPS reports bad fix),
+// If the GPS position seems to be a bad position (altitude less than zero, GPS reports bad fix),
 // then transmit all zeros.
 //#define FLAG_BAD_PACKET
 
@@ -83,7 +83,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 // Enable Serial Prints for debugging and sleep modes for MCU.
 // MCU sleep mode disabled debug messages, so disable for MCU sleep.
 // Disable for flights to conserve power.
-//#define DEV_MODE
+#define DEV_MODE
 
 // EXPERIMENTAL - optimise for EXTREMELY low power draw
 // Does not do anything yet!
@@ -112,3 +112,11 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 
 // SD Card chip select pin
 #define SD_CS 13
+
+// *****************
+// || Custom Pins ||
+// *****************
+
+// If you have custom pins, define them here.
+// For example, if you have a custom sensor on pin 6:
+//#define CUSTOM_SENSOR 6
