@@ -236,6 +236,7 @@
       "mfg": "",
       "mpn": ""
     },
+    "layer_pairs": [],
     "layer_presets": [],
     "viewports": []
   },
@@ -497,7 +498,7 @@
       "plot": "Production/gerbers/",
       "pos_files": "Production/",
       "specctra_dsn": "",
-      "step": "3D/BoardModel/Tiny4FSK.step",
+      "step": "3D/BoardModel/Tiny4FSK-simple.step",
       "svg": "Stencil/Rev_3/",
       "vrml": "3D/BoardModel/Tiny4FSK_Model.wrl"
     },

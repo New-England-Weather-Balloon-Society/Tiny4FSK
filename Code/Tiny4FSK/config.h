@@ -57,7 +57,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 #define FSK_SPACING 270
 
 // Delay between each packet, in milliseconds.
-#define PACKET_INTERVAL 5000
+#define PACKET_INTERVAL 1000
 
 // Si4063 Transmit Power Level
 #define OUTPUT_POWER 127
@@ -120,3 +120,10 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 // If you have custom pins, define them here.
 // For example, if you have a custom sensor on pin 6:
 //#define CUSTOM_SENSOR 6
+
+//*****************************
+// || Tiny4FSK Shield Config ||
+//*****************************
+
+#define BME_ADDRESS 0x76
+#define IMU_ADDRESS 0x68
