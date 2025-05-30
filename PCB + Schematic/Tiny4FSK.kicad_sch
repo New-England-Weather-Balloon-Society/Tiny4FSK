@@ -13367,7 +13367,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Oscillator_TCXO:ECS-327TXO-2012"
+		(property "Footprint" "Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm"
 			(at 247.65 118.11 0)
 			(effects
 				(font
