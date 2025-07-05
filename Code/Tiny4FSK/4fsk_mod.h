@@ -1,6 +1,6 @@
 /*
 4fsk_mod.h, part of Tiny4FSK, for a high-altitude tracker.
-Copyright (C) 2024 Maxwell Kendall
+Copyright (C) 2025 Maxwell Kendall
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -27,4 +27,3 @@ void fsk4_writebyte(uint8_t b);
 void fsk4_write(char *buff, size_t len);
 void fsk4_preamble(uint8_t len);
 void fsk4_idle();
-void fsk4_test_packet(int buff);

@@ -1,6 +1,6 @@
 /*
 utils.h, part of Tiny4FSK, for a high-altitude tracker.
-Copyright (C) 2024 Maxwell Kendall
+Copyright (C) 2025 Maxwell Kendall
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -34,6 +34,3 @@ double mapf(double x, double in_min, double in_max, double out_min, double out_m
 
 // Configure the Si4063 to user values
 void configureSi4063();
-
-// Print named for CSV headers on SD card
-void printCSVHeaders();

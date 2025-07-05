@@ -16,67 +16,113 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+// Support interaction with the Tiny4FSK General Shield
+
 #include "shield.h"
 
-// Support interaction with the Tiny4FSK General Shield
-int* i2c_scan() {
+bool bme280_found = false;
+bool imu_found = false;
+bool oled_found = false;
+bool sd_found = true; // If begin fails then disable it
+
+void initialize_imu()
+{
+    if (imu_begin())
+    {
+        Serial.println("IMU Initialized!");
+    }
+    else
+    {
+        Serial.println("IMU Init Failed!");
+    }
+}
+
+void i2c_scan(int *allAddresses)
+{
     byte address, error;
     int devices = 0;
-    int allAddresses[127] = {0};
-    for (address=1; address<127; address++) {
+    for (int i = 0; i < 127; i++)
+    {
+        allAddresses[i] = 0;
+    }
+    for (address = 1; address < 127; address++)
+    {
         Wire.beginTransmission(address);
         error = Wire.endTransmission();
 
-        if(!error) {
-            Serial.print("Device found at 0x");
+        if (!error)
+        {
             allAddresses[devices] = address;
-            if(address < 16) {
-                Serial.print("0");
-            }
-            Serial.println(address, HEX);
             devices++;
-        } else if(error==4) {
-            Serial.print("Error at address 0x");
-            if(address < 16) {
-                Serial.print("0");
-            }
-            Serial.println(address, HEX);
         }
     }
-    !devices ? Serial.println("No devices found on I2C") : Serial.println("done i2c scan");
-    return allAddresses;
 }
 
-void initialize_shield() {
-    int* sensors = i2c_scan();
-    bool bme280_found = false;
-    bool imu_found = false;
-    bool oled_found = false;
+void initialize_shield()
+{
+    int sensors[127] = {0};
+    i2c_scan(sensors);
 
-    for(int i=0; i < sizeof(sensors); i++) {
-        if(sensors[i] == BME_ADDRESS) {
+    Serial.print("I2C addresses found: ");
+    for (int i = 0; i < 127; i++)
+    {
+        if (sensors[i] != 0)
+        {
+            Serial.print("0x");
+            if (sensors[i] < 16)
+                Serial.print("0");
+            Serial.print(sensors[i], HEX);
+            Serial.print(" ");
+        }
+    }
+    Serial.println();
+
+    for (int i = 0; i < (sizeof(sensors) / sizeof(sensors[0])); i++)
+    {
+        if (sensors[i] == BME_ADDRESS)
+        {
             bme280_found = true;
-        } else if(sensors[i] == IMU_ADDRESS) {
+        }
+        if (sensors[i] == IMU_ADDRESS)
+        {
             imu_found = true;
-        } else if(sensors[i] == 0xC3) {
+        }
+        if (sensors[i] == 0x3C)
+        {
             oled_found = true;
         }
     }
 
-    if(bme280_found) {
+    if (bme280_found)
+    {
         // initialize bme!
+/*         Serial.println("BME280 found! Initializing...");
         BME280setI2Caddress(BME_ADDRESS);
-        BME280setup();
-        // cooked
+        BME280setup(); */
     }
 
-    if(imu_found) {
-        // initialize imu!airtable automation please run to update my total time
-        //maybe in 5 hours?
-        //idk i'm done for todayy...
+    if (imu_found)
+    {
+        Serial.println("IMU Found! Initializing...");
+        initialize_imu();
     }
 
-    if(oled_found) {
-        // i have never worked with an oled
+    if (oled_found)
+    {
+        Serial.println("OLED Found! Initializing...");
+        oled_begin(128, 32);
+        oled_clearDisplay();
+        oled_setTextSize(1);
+        oled_setTextColor(1);
+        oled_setCursor(0, 0);
+        oled_print("Tiny4FSK Tracker");
+        oled_display();
+    }
+
+    if (sd_card_begin()) {
+        Serial.println("SD Card Initialized!");
+    } else {
+        Serial.println("No SD Card Detected...");
+        sd_found = false;
     }
 }

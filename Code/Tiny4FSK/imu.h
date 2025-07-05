@@ -1,5 +1,5 @@
 /*
-morse.h, part of Tiny4FSK, for a high-altitude tracker.
+imu.h, part of Tiny4FSK, for a high-altitude tracker.
 Copyright (C) 2025 Maxwell Kendall
 
 This program is free software: you can redistribute it and/or modify
@@ -16,20 +16,43 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-// Morse Code callsign sending routines
-
 #pragma once
 
-#include "si4063.h"
-#include "config.h"
 #include <Arduino.h>
+#include <Wire.h>
+#include "config.h"
 
-// Calculate the durations based on WPM
-#define DOT_DURATION (1200 / CALLSIGN_WPM)
-#define DASH_DURATION (3 * DOT_DURATION)
-#define SPACE_DURATION DOT_DURATION
-#define LETTER_SPACE_DURATION (3 * DOT_DURATION)
-#define WORD_SPACE_DURATION (7 * DOT_DURATION)
+// ICM-20948 Registers
+#define REG_BANK_SEL 0x7F
 
-void sendMorseChar(char c);
-void sendMorseString(const char *s);
+// Bank 0
+#define WHO_AM_I 0x00
+#define USER_CTRL 0x03
+#define PWR_MGMT_1 0x06
+#define PWR_MGMT_2 0x07
+#define ACCEL_XOUT_H 0x2D
+#define GYRO_XOUT_H 0x33
+
+// Bank 2
+#define GYRO_SMPLRT_DIV 0x00
+#define GYRO_CONFIG_1 0x01
+#define ACCEL_SMPLRT_DIV_1 0x10
+#define ACCEL_SMPLRT_DIV_2 0x11
+#define ACCEL_CONFIG 0x14
+
+
+bool imu_begin();
+
+struct ImuValues {
+    int16_t x;
+    int16_t y;
+    int16_t z;
+};
+
+struct ImuData {
+    ImuValues accel;
+    ImuValues gyro;
+};
+
+void imu_read(ImuData* data);
+

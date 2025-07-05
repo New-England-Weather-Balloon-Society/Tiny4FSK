@@ -1,5 +1,5 @@
 /*
-morse.h, part of Tiny4FSK, for a high-altitude tracker.
+oled.h, part of Tiny4FSK, for a high-altitude tracker.
 Copyright (C) 2025 Maxwell Kendall
 
 This program is free software: you can redistribute it and/or modify
@@ -16,20 +16,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-// Morse Code callsign sending routines
-
 #pragma once
 
-#include "si4063.h"
-#include "config.h"
 #include <Arduino.h>
+#include <Wire.h>
 
-// Calculate the durations based on WPM
-#define DOT_DURATION (1200 / CALLSIGN_WPM)
-#define DASH_DURATION (3 * DOT_DURATION)
-#define SPACE_DURATION DOT_DURATION
-#define LETTER_SPACE_DURATION (3 * DOT_DURATION)
-#define WORD_SPACE_DURATION (7 * DOT_DURATION)
+#define SSD1306_I2C_ADDRESS 0x3C
 
-void sendMorseChar(char c);
-void sendMorseString(const char *s);
+bool oled_begin(int16_t width, int16_t height, uint8_t i2c_addr = SSD1306_I2C_ADDRESS);
+void oled_clearDisplay();
+void oled_display();
+void oled_drawPixel(int16_t x, int16_t y, uint16_t color);
+void oled_setTextSize(uint8_t s);
+void oled_setTextColor(uint16_t c);
+void oled_setCursor(int16_t x, int16_t y);
+void oled_print(const char* str);
+void oled_print_diagnostic(const char* name, float value, int decimals);

@@ -1,6 +1,6 @@
 /*
 Tiny4FSK.ino, part of Tiny4FSK, for a high-altitude tracker.
-Copyright (C) 2024 Maxwell Kendall
+Copyright (C) 2025 Maxwell Kendall
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -42,6 +42,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "4fsk_mod.h"
 #include "morse.h"
 #include "utils.h"
+#include "shield.h"
 
 // **********************
 // || Native USB Setup ||
@@ -186,6 +187,20 @@ void setup()
   Serial.println("BME280 initialized! Sending morse code identification now.");
 #endif
 
+  // ************************
+  // || Inititalize Shield ||
+  // ************************
+  initialize_shield(); // If any external sensors are detected, initialize them
+
+  if(oled_found) {
+    oled_clearDisplay();
+    oled_print_diagnostic("Freq", FSK_FREQ, 3);
+    oled_display();
+  }
+  if(sd_found) {
+    sd_card_write_line("datalog.csv","PayloadID,Counter,Hours,Minutes,Seconds,Latitude,Longitude,Altitude,Speed,Sats,Temp,BattVoltage,AscentRate,ExtTemp,Humidity,ExtPress");
+  }
+
   // ******************************
   // || Send Morse Code Callsign ||
   // ******************************
@@ -201,6 +216,7 @@ void setup()
   delay(1000);
   digitalWrite(SUCCESS_LED, LOW);
 #endif
+
 
   // *************************
   // || Scheduler Execution ||
@@ -297,7 +313,7 @@ int build_horus_binary_packet_v2(char *buffer)
 {
 // Fill with GPS readings, with a GPS sanity check
 #ifdef FLAG_BAD_PACKET
-  if (gps.altitude.meters() > 0 && gps.location.isValid())
+  if (gps.altitude.meters() > 0 && gps.altitude.meters() < 50000)
   {
     BinaryPacketV2.Hours = gps.time.hour();
     BinaryPacketV2.Minutes = gps.time.minute();
@@ -374,6 +390,39 @@ int build_horus_binary_packet_v2(char *buffer)
   Serial.print(", Humidity: ");
   Serial.println(BinaryPacketV2.Humidity);
 #endif
+
+  // If OLED found, print the values
+  if(oled_found) {
+    oled_clearDisplay();
+    oled_setCursor(0,0);
+    oled_print_diagnostic("Sats", BinaryPacketV2.Sats, 0);
+    oled_print_diagnostic("Lat", BinaryPacketV2.Latitude, 6);
+    oled_print_diagnostic("Lon", BinaryPacketV2.Longitude, 6);
+    oled_print_diagnostic("Alt", BinaryPacketV2.Altitude, 1);
+    oled_display();
+  }
+  if(sd_found) {
+    snprintf(debugbuffer, sizeof(debugbuffer),
+         "%u,%u,%u,%u,%u,%.7f,%.7f,%u,%u,%u,%d,%u,%d,%.2f,%u,%u",
+         BinaryPacketV2.PayloadID,
+         BinaryPacketV2.Counter,
+         BinaryPacketV2.Hours,
+         BinaryPacketV2.Minutes,
+         BinaryPacketV2.Seconds,
+         BinaryPacketV2.Latitude,
+         BinaryPacketV2.Longitude,
+         BinaryPacketV2.Altitude,
+         BinaryPacketV2.Speed,
+         BinaryPacketV2.Sats,
+         BinaryPacketV2.Temp,
+         BinaryPacketV2.BattVoltage,
+         BinaryPacketV2.AscentRate,
+         BinaryPacketV2.ExtTemp / 10,
+         BinaryPacketV2.Humidity,
+         BinaryPacketV2.ExtPress / 10
+    );
+    sd_card_write_line("datalog.csv", debugbuffer);
+  }
 
   // Copy the binary packet to the buffer
   memcpy(buffer, &BinaryPacketV2, sizeof(BinaryPacketV2));

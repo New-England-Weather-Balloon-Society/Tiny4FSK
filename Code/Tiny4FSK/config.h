@@ -1,6 +1,6 @@
 /*
 config.h, part of Tiny4FSK, for a high-altitude tracker.
-Copyright (C) 2024 Maxwell Kendall
+Copyright (C) 2025 Maxwell Kendall
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 */
 
 // Replace with the assigned Horus v2 ID
-#define HORUS_ID 683
+#define HORUS_ID 861
 
 // Amateur radio license required! Give callsign here.
 #define CALLSIGN "W0MXX"
@@ -48,7 +48,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 #define CALLSIGN_INTERVAL 600000
 
 // FSK Center Frequency in MHz. Ensure SDR is tuned to this frequency.
-#define FSK_FREQ 432.630
+#define FSK_FREQ 432.634
 
 // Baud Rate of FSK Packet. No need to change.
 #define FSK_BAUD 100
@@ -64,18 +64,14 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 
 // If the GPS position seems to be a bad position (altitude less than zero, GPS reports bad fix),
 // then transmit all zeros.
-//#define FLAG_BAD_PACKET
+#define FLAG_BAD_PACKET
 
 // ****************************
 // || General Board Settings ||
 // ****************************
 
-// Enable SD Card Logging. Requires an SD Card Module.
-// Disable for flights to conserve power.
-//#define SD_CARD_LOGGING
+// SD card headers
 
-// Interval to write SD card data, in milliseconds
-#define SD_INTERVAL 1000
 
 // Enable status mode LEDs for information on GPS initialization and issues.
 #define STATUS_LED
@@ -93,7 +89,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 // || Pin Definitions ||
 // *********************
 
-// You most likely do not need to touch these, if you are using the PCB.
+// You most likely do not need to touch these if you are using the PCB.
 // Mostly for individual development or shields.
 
 // Si4063 Pins. These are in junction with normal SPI pins (MISO, MOSI, SCK).
@@ -111,7 +107,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 #define VOLTMETER_PIN A0
 
 // SD Card chip select pin
-#define SD_CS 13
+#define SD_CS 38 // Default on shield
 
 // *****************
 // || Custom Pins ||
@@ -125,5 +121,5 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 // || Tiny4FSK Shield Config ||
 //*****************************
 
-#define BME_ADDRESS 0x76
+#define BME_ADDRESS 0x77
 #define IMU_ADDRESS 0x68

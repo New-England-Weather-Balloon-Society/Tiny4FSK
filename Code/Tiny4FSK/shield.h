@@ -23,5 +23,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include <Wire.h>
 #include <TinyBME280.h>
 #include "config.h"
+#include "oled.h"
+#include "imu.h"
+#include "sd_card.h"
+#define Serial SerialUSB
 
-int* i2c_scan();
+extern bool bme280_found;
+extern bool imu_found;
+extern bool oled_found;
+extern bool sd_found;
+
+void i2c_scan(int* allAddresses);
+void initialize_shield();
+void initialize_imu();
