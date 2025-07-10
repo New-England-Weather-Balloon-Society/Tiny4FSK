@@ -23,7 +23,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 bool bme280_found = false;
 bool imu_found = false;
 bool oled_found = false;
-bool sd_found = true; // If begin fails then disable it
+bool sd_found = false;
 
 void initialize_imu()
 {
@@ -104,7 +104,7 @@ void initialize_shield()
     if (imu_found)
     {
         Serial.println("IMU Found! Initializing...");
-        initialize_imu();
+        //initialize_imu();
     }
 
     if (oled_found)
@@ -121,8 +121,8 @@ void initialize_shield()
 
     if (sd_card_begin()) {
         Serial.println("SD Card Initialized!");
+        sd_found = true;
     } else {
         Serial.println("No SD Card Detected...");
-        sd_found = false;
     }
 }

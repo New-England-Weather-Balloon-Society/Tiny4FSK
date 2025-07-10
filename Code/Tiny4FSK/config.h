@@ -36,7 +36,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 */
 
 // Replace with the assigned Horus v2 ID
-#define HORUS_ID 861
+#define HORUS_ID 380
 
 // Amateur radio license required! Give callsign here.
 #define CALLSIGN "W0MXX"

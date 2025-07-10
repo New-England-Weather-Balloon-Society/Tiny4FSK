@@ -184,7 +184,7 @@ void setup()
   BME280setup();
 
 #ifdef DEV_MODE
-  Serial.println("BME280 initialized! Sending morse code identification now.");
+  Serial.println("BME280 initialized!");
 #endif
 
   // ************************
@@ -311,10 +311,23 @@ void gpsFeed()
 // Build the Horus v2 Packet. This is where the GPS positions and telemetry are organized to the struct.
 int build_horus_binary_packet_v2(char *buffer)
 {
+  static float prev_altitude = 0.0f;
+  static unsigned long prev_time = 0;
+  float ascent_rate = 0.0f;
+
 // Fill with GPS readings, with a GPS sanity check
 #ifdef FLAG_BAD_PACKET
   if (gps.altitude.meters() > 0 && gps.altitude.meters() < 50000)
   {
+    if (prev_time != 0) {
+      unsigned long time_diff = millis() - prev_time;
+      if (time_diff > 0) {
+        ascent_rate = (gps.altitude.meters() - prev_altitude) / (time_diff / 1000.0f);
+      }
+    }
+    prev_altitude = gps.altitude.meters();
+    prev_time = millis();
+    
     BinaryPacketV2.Hours = gps.time.hour();
     BinaryPacketV2.Minutes = gps.time.minute();
     BinaryPacketV2.Seconds = gps.time.second();
@@ -326,6 +339,7 @@ int build_horus_binary_packet_v2(char *buffer)
   }
   else
   {
+    prev_time = 0;
     BinaryPacketV2.Hours = 0;
     BinaryPacketV2.Minutes = 0;
     BinaryPacketV2.Seconds = 0;
@@ -359,7 +373,7 @@ int build_horus_binary_packet_v2(char *buffer)
   BinaryPacketV2.Temp = BME280temperature() / 100.00;
 
   // User-Customizable Fields
-  BinaryPacketV2.AscentRate = 0;
+  BinaryPacketV2.AscentRate = (int16_t)(ascent_rate * 100);
   BinaryPacketV2.ExtTemp = (int16_t)(BME280temperature() / 10);
   BinaryPacketV2.Humidity = (int8_t)(BME280humidity() / 100);
   BinaryPacketV2.ExtPress = (int16_t)(BME280pressure() / 10);

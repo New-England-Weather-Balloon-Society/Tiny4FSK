@@ -38,8 +38,8 @@ bool oled_begin(int16_t width, int16_t height, uint8_t i2c_addr)
     _height = height;
     if ((buffer = (uint8_t *)malloc(_width * _height / 8)))
     {
+        //Wire.begin();
         memset(buffer, 0, _width * _height / 8);
-        Wire.begin();
         sendCommand(0xAE); // Display Off
         sendCommand(0xD5); // Set Display Clock Divide Ratio/Oscillator Frequency
         sendCommand(0x80);

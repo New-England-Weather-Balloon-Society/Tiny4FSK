@@ -19,9 +19,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "sd_card.h"
 
 bool sd_card_begin() {
-    SPI.begin();
+    //SPI.begin();
 
     if (!SD.begin(SD_CS)) {
+        SPI.end();
+        delay(5);
+        SPI.begin();
         return false;
     }
     return true;
