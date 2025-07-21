@@ -120,18 +120,6 @@ User configuration of this tracker is **required**. As this system uses amateur 
 - `OUTPUT_POWER` - 0-127. This is the output power of the radio module (suggested to keep at maximum).
 - `FLAG_BAD_PACKET` - If the latest GPS values are bad, send out all zeroes (for time, position, speed, and altitude)(suggested).
 
-**Everything below the above values in the configuration file can go unchanged.** These are various other settings that may be useful for development.
-- `FSK_BAUD` - FSK baud rate. No need to change, as most RX station use 100 baud. 
-- `FSK_SPACING` - FSK spacing in Hz. Most station are set to this value (270hz).
-- `NSS_PIN`- Si4063 SS pin
-- `RESET_PIN` - Si4063 RST pin
-- `DIO0_PIN` - Si4063 GPIO0 pin
-- `DIO1_PIN` - Si4063 GPIO1 pin
-- `EXTINT` - GPS EXTINT pin for longer packet delays.
-- `SUCCESS_LED` - Success LED pin.
-- `ERROR_LED` - Error LED pin.
-- `VOLTMETER_PIN` - Pin for the onboard voltage divider for voltage sensing.
-
 <details>
 <summary>How do I change these values?</summary>
 If there is a prexisting number or value next to the name of the setting name, you can replace that value with the desired value (e.g. replace the "N0CALL" with your callsign in double quotes, "W0MXX"). If there is no value next to the name, you need to comment out the setting to disable that functionality, or uncomment to enable that functionality (comments are defined by adding // at the start of the line).
@@ -157,6 +145,9 @@ You should start decoding packets transmitted from the board with your configura
 | Blinking (1s on, 1s off)     | GPS detected and configured |
 | Blinking (0.5s on, 0.5s off) | Transmission complete       |
 | Off                          | Deep sleep mode or error    |
+
+## External Sensors
+Tiny4FSK now offers compatiability with external sensors by automatically scanning I2C on startup. Some sensors come with the Tiny4FSK General Shield, which can be found on the [GitHub Repository](https://github.com/mpkendall/Tiny4FSK-Ecosystem). If you have any custom sensors which you would like me to add support for, please raise an [issue](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/issues).
 
 
 ## PCBWay PCBs
