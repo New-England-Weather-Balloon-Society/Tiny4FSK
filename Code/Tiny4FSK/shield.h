@@ -24,7 +24,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include <TinyBME280.h>
 #include "config.h"
 #include "oled.h"
-#include "imu.h"
 #include "sd_card.h"
 #define Serial SerialUSB
 
@@ -35,4 +34,3 @@ extern bool sd_found;
 
 void i2c_scan(int* allAddresses);
 void initialize_shield();
-void initialize_imu();

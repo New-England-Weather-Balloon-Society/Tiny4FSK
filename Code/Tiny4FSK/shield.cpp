@@ -25,18 +25,6 @@ bool imu_found = false;
 bool oled_found = false;
 bool sd_found = false;
 
-void initialize_imu()
-{
-    if (imu_begin())
-    {
-        Serial.println("IMU Initialized!");
-    }
-    else
-    {
-        Serial.println("IMU Init Failed!");
-    }
-}
-
 void i2c_scan(int *allAddresses)
 {
     byte address, error;
@@ -99,12 +87,6 @@ void initialize_shield()
         Serial.println("BME280 found! Initializing...");
         BME280setI2Caddress(BME_ADDRESS);
         BME280setup();
-    }
-
-    if (imu_found)
-    {
-        Serial.println("IMU Found! Initializing...");
-        initialize_imu();
     }
 
     if (oled_found)
