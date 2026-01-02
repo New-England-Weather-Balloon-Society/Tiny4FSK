@@ -110,7 +110,7 @@ void setup()
   // Begin the Serial Monitor
 #ifdef DEV_MODE
   Serial.begin(9600);
-  //while (!Serial);
+  // while (!Serial);
   Serial.println("Welcome to Tiny4FSK! Beginning initialization process.");
 #endif
 
@@ -192,13 +192,15 @@ void setup()
   // ************************
   initialize_shield(); // If any external sensors are detected, initialize them
 
-  if(oled_found) {
+  if (oled_found)
+  {
     oled_clearDisplay();
     oled_print_diagnostic("Freq", FSK_FREQ, 3);
     oled_display();
   }
-  if(sd_found) {
-    sd_card_write_line("datalog.csv","PayloadID,Counter,Hours,Minutes,Seconds,Latitude,Longitude,Altitude,Speed,Sats,Temp,BattVoltage,AscentRate,ExtTemp,Humidity,ExtPress");
+  if (sd_found)
+  {
+    sd_card_write_line("datalog.csv", "PayloadID,Counter,Hours,Minutes,Seconds,Latitude,Longitude,Altitude,Speed,Sats,Temp,BattVoltage,AscentRate,ExtTemp,Humidity,ExtPress");
   }
 
   // ******************************
@@ -216,7 +218,6 @@ void setup()
   delay(1000);
   digitalWrite(SUCCESS_LED, LOW);
 #endif
-
 
   // *************************
   // || Scheduler Execution ||
@@ -319,15 +320,17 @@ int build_horus_binary_packet_v2(char *buffer)
 #ifdef FLAG_BAD_PACKET
   if (gps.altitude.meters() > 0 && gps.altitude.meters() < 50000)
   {
-    if (prev_time != 0) {
+    if (prev_time != 0)
+    {
       unsigned long time_diff = millis() - prev_time;
-      if (time_diff > 0) {
+      if (time_diff > 0)
+      {
         ascent_rate = (gps.altitude.meters() - prev_altitude) / (time_diff / 1000.0f);
       }
     }
     prev_altitude = gps.altitude.meters();
     prev_time = millis();
-    
+
     BinaryPacketV2.Hours = gps.time.hour();
     BinaryPacketV2.Minutes = gps.time.minute();
     BinaryPacketV2.Seconds = gps.time.second();
@@ -406,35 +409,36 @@ int build_horus_binary_packet_v2(char *buffer)
 #endif
 
   // If OLED found, print the values
-  if(oled_found) {
+  if (oled_found)
+  {
     oled_clearDisplay();
-    oled_setCursor(0,0);
+    oled_setCursor(0, 0);
     oled_print_diagnostic("Sats", BinaryPacketV2.Sats, 0);
     oled_print_diagnostic("Lat", BinaryPacketV2.Latitude, 6);
     oled_print_diagnostic("Lon", BinaryPacketV2.Longitude, 6);
     oled_print_diagnostic("Alt", BinaryPacketV2.Altitude, 1);
     oled_display();
   }
-  if(sd_found) {
+  if (sd_found)
+  {
     snprintf(debugbuffer, sizeof(debugbuffer),
-         "%u,%u,%u,%u,%u,%.7f,%.7f,%u,%u,%u,%d,%u,%d,%.2f,%u,%u",
-         BinaryPacketV2.PayloadID,
-         BinaryPacketV2.Counter,
-         BinaryPacketV2.Hours,
-         BinaryPacketV2.Minutes,
-         BinaryPacketV2.Seconds,
-         BinaryPacketV2.Latitude,
-         BinaryPacketV2.Longitude,
-         BinaryPacketV2.Altitude,
-         BinaryPacketV2.Speed,
-         BinaryPacketV2.Sats,
-         BinaryPacketV2.Temp,
-         BinaryPacketV2.BattVoltage,
-         BinaryPacketV2.AscentRate,
-         BinaryPacketV2.ExtTemp / 10,
-         BinaryPacketV2.Humidity,
-         BinaryPacketV2.ExtPress / 10
-    );
+             "%u,%u,%u,%u,%u,%.7f,%.7f,%u,%u,%u,%d,%u,%d,%.2f,%u,%u",
+             BinaryPacketV2.PayloadID,
+             BinaryPacketV2.Counter,
+             BinaryPacketV2.Hours,
+             BinaryPacketV2.Minutes,
+             BinaryPacketV2.Seconds,
+             BinaryPacketV2.Latitude,
+             BinaryPacketV2.Longitude,
+             BinaryPacketV2.Altitude,
+             BinaryPacketV2.Speed,
+             BinaryPacketV2.Sats,
+             BinaryPacketV2.Temp,
+             BinaryPacketV2.BattVoltage,
+             BinaryPacketV2.AscentRate,
+             BinaryPacketV2.ExtTemp / 10,
+             BinaryPacketV2.Humidity,
+             BinaryPacketV2.ExtPress / 10);
     sd_card_write_line("datalog.csv", debugbuffer);
   }
 

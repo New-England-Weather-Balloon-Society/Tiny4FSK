@@ -96,9 +96,9 @@ void initialize_shield()
     if (bme280_found)
     {
         // initialize bme!
-/*         Serial.println("BME280 found! Initializing...");
+        Serial.println("BME280 found! Initializing...");
         BME280setI2Caddress(BME_ADDRESS);
-        BME280setup(); */
+        BME280setup();
     }
 
     if (imu_found)
@@ -119,10 +119,13 @@ void initialize_shield()
         oled_display();
     }
 
-    if (sd_card_begin()) {
+    if (sd_card_begin())
+    {
         Serial.println("SD Card Initialized!");
         sd_found = true;
-    } else {
+    }
+    else
+    {
         Serial.println("No SD Card Detected...");
     }
 }
