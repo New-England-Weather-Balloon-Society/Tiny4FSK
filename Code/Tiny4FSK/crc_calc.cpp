@@ -1,6 +1,6 @@
 /*
 4fsk_mod.cpp, part of Tiny4FSK, for a high-altitude tracker.
-Copyright (C) 2024 Maxwell Kendall
+Copyright (C) 2026 Maxwell Kendall
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

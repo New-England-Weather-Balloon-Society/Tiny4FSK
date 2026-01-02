@@ -1,0 +1,36 @@
+/*
+shield.h, part of Tiny4FSK, for a high-altitude tracker.
+Copyright (C) 2026 Maxwell Kendall
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+// Support interaction with the Tiny4FSK General Shield
+#pragma once
+
+#include <Arduino.h>
+#include <Wire.h>
+#include <TinyBME280.h>
+#include "config.h"
+#include "oled.h"
+#include "sd_card.h"
+#define Serial SerialUSB
+
+extern bool bme280_found;
+extern bool imu_found;
+extern bool oled_found;
+extern bool sd_found;
+
+void i2c_scan(int* allAddresses);
+void initialize_shield();

@@ -1,6 +1,6 @@
 /*
 utils.cpp, part of Tiny4FSK, for a high-altitude tracker.
-Copyright (C) 2024 Maxwell Kendall
+Copyright (C) 2026 Maxwell Kendall
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -65,14 +65,3 @@ void configureSi4063()
   // Disable TX if in reset mode
   si4063_inhibit_tx();
 }
-
-// Print named for CSV headers on SD card
-void printCSVHeaders()
-{
-  File dataFile = SD.open("datalog.csv", FILE_WRITE);
-  if (dataFile)
-  {
-    dataFile.println("Frame Count, Latitude, Longitude, Altitude, Satellites, Voltage, Temperature, Pressure, Humidity");
-  }
-  dataFile.close();
-} 

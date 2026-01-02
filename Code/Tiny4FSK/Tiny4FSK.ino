@@ -1,6 +1,6 @@
 /*
 Tiny4FSK.ino, part of Tiny4FSK, for a high-altitude tracker.
-Copyright (C) 2024 Maxwell Kendall
+Copyright (C) 2026 Maxwell Kendall
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -42,6 +42,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "4fsk_mod.h"
 #include "morse.h"
 #include "utils.h"
+#include "shield.h"
 
 // **********************
 // || Native USB Setup ||
@@ -109,7 +110,7 @@ void setup()
   // Begin the Serial Monitor
 #ifdef DEV_MODE
   Serial.begin(9600);
-  //while (!Serial);
+  // while (!Serial);
   Serial.println("Welcome to Tiny4FSK! Beginning initialization process.");
 #endif
 
@@ -183,8 +184,24 @@ void setup()
   BME280setup();
 
 #ifdef DEV_MODE
-  Serial.println("BME280 initialized! Sending morse code identification now.");
+  Serial.println("BME280 initialized!");
 #endif
+
+  // ************************
+  // || Inititalize Shield ||
+  // ************************
+  initialize_shield(); // If any external sensors are detected, initialize them
+
+  if (oled_found)
+  {
+    oled_clearDisplay();
+    oled_print_diagnostic("Freq", FSK_FREQ, 3);
+    oled_display();
+  }
+  if (sd_found)
+  {
+    sd_card_write_line("datalog.csv", "PayloadID,Counter,Hours,Minutes,Seconds,Latitude,Longitude,Altitude,Speed,Sats,Temp,BattVoltage,AscentRate,ExtTemp,Humidity,ExtPress");
+  }
 
   // ******************************
   // || Send Morse Code Callsign ||
@@ -295,10 +312,25 @@ void gpsFeed()
 // Build the Horus v2 Packet. This is where the GPS positions and telemetry are organized to the struct.
 int build_horus_binary_packet_v2(char *buffer)
 {
+  static float prev_altitude = 0.0f;
+  static unsigned long prev_time = 0;
+  float ascent_rate = 0.0f;
+
 // Fill with GPS readings, with a GPS sanity check
 #ifdef FLAG_BAD_PACKET
-  if (gps.altitude.meters() > 0 && gps.location.isValid())
+  if (gps.altitude.meters() > 0 && gps.altitude.meters() < 50000)
   {
+    if (prev_time != 0)
+    {
+      unsigned long time_diff = millis() - prev_time;
+      if (time_diff > 0)
+      {
+        ascent_rate = (gps.altitude.meters() - prev_altitude) / (time_diff / 1000.0f);
+      }
+    }
+    prev_altitude = gps.altitude.meters();
+    prev_time = millis();
+
     BinaryPacketV2.Hours = gps.time.hour();
     BinaryPacketV2.Minutes = gps.time.minute();
     BinaryPacketV2.Seconds = gps.time.second();
@@ -310,6 +342,7 @@ int build_horus_binary_packet_v2(char *buffer)
   }
   else
   {
+    prev_time = 0;
     BinaryPacketV2.Hours = 0;
     BinaryPacketV2.Minutes = 0;
     BinaryPacketV2.Seconds = 0;
@@ -343,7 +376,7 @@ int build_horus_binary_packet_v2(char *buffer)
   BinaryPacketV2.Temp = BME280temperature() / 100.00;
 
   // User-Customizable Fields
-  BinaryPacketV2.AscentRate = 0;
+  BinaryPacketV2.AscentRate = (int16_t)(ascent_rate * 100);
   BinaryPacketV2.ExtTemp = (int16_t)(BME280temperature() / 10);
   BinaryPacketV2.Humidity = (int8_t)(BME280humidity() / 100);
   BinaryPacketV2.ExtPress = (int16_t)(BME280pressure() / 10);
@@ -374,6 +407,40 @@ int build_horus_binary_packet_v2(char *buffer)
   Serial.print(", Humidity: ");
   Serial.println(BinaryPacketV2.Humidity);
 #endif
+
+  // If OLED found, print the values
+  if (oled_found)
+  {
+    oled_clearDisplay();
+    oled_setCursor(0, 0);
+    oled_print_diagnostic("Sats", BinaryPacketV2.Sats, 0);
+    oled_print_diagnostic("Lat", BinaryPacketV2.Latitude, 6);
+    oled_print_diagnostic("Lon", BinaryPacketV2.Longitude, 6);
+    oled_print_diagnostic("Alt", BinaryPacketV2.Altitude, 1);
+    oled_display();
+  }
+  if (sd_found)
+  {
+    snprintf(debugbuffer, sizeof(debugbuffer),
+             "%u,%u,%u,%u,%u,%.7f,%.7f,%u,%u,%u,%d,%u,%d,%.2f,%u,%u",
+             BinaryPacketV2.PayloadID,
+             BinaryPacketV2.Counter,
+             BinaryPacketV2.Hours,
+             BinaryPacketV2.Minutes,
+             BinaryPacketV2.Seconds,
+             BinaryPacketV2.Latitude,
+             BinaryPacketV2.Longitude,
+             BinaryPacketV2.Altitude,
+             BinaryPacketV2.Speed,
+             BinaryPacketV2.Sats,
+             BinaryPacketV2.Temp,
+             BinaryPacketV2.BattVoltage,
+             BinaryPacketV2.AscentRate,
+             BinaryPacketV2.ExtTemp / 10,
+             BinaryPacketV2.Humidity,
+             BinaryPacketV2.ExtPress / 10);
+    sd_card_write_line("datalog.csv", debugbuffer);
+  }
 
   // Copy the binary packet to the buffer
   memcpy(buffer, &BinaryPacketV2, sizeof(BinaryPacketV2));

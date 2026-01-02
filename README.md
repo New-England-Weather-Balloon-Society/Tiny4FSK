@@ -1,15 +1,15 @@
-![Tiny4FSK_Logo](https://cloud-nhw66iv7j-hack-club-bot.vercel.app/0logo.svg)
+![Tiny4FSK_Logo](/Media/Tiny4FSK_Logo.svg)
 # Tiny4FSK - The Lightweight Horus Binary Tracker Built for HABs
 **WORK IN PROGRESS** - Please do not rely on this as your only tracking system. Tiny4FSK is still in the R&D phase of development and testing.
 
-**NEW** - Incorporated new Rev. 4 PCB files and code (12/21/24).
+**NEW** - Minor updates to PCB files, code maintenance, automatic sensor initialization.
 
-**STATE** - Rev. 4 is fully working! Currently testing.
+**STATE** - Main branch is stable!
 
 ## What is the Tiny4FSK project?
 Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It runs on 1 AA battery that lasts for 10-17 hours (a few seconds between position updates, can run longer if there's a longer delay). It runs on 4FSK (4-frequency shift keying), which means that it separates tones into 4 separate frequencies. Upon this, it uses the [Horus Binary v2](https://github.com/projecthorus/horusdemodlib/wiki/2---Modem-Details#horus-binary-v1-mode-4-fsk) system, which is a relatively modern system popularly used with [RS41ng](https://github.com/mikaelnousiainen/RS41ng).
 
-![20240826_110047](https://cloud-ivkikeghh-hack-club-bot.vercel.app/0img_20241231_123601.jpg)
+![20240826_110047](/Media/Images/Tiny4FSK-Sky.jpg)
 
 ## What are High-Altitude Balloons?
 High altitude balloons (HABs) allow space science enthusiasts to launch their own payloads to near-space (30km) at a cost of hundreds of dollars instead of millions of dollars.  This can be done for atmospheric research, breathtaking imagery, and scientific experimentation. While demanding meticulous planning, safety adherence, and technical skill in electronics and mechanics, this hobby rewards makers with a chance to get hands on with projects like electronic data loggers, camera systems, wireless communications, and more.
@@ -43,10 +43,10 @@ This code is modular and separated into several different files for easy expansi
 1. **Carefully** snap off the USB breakout board from the board.
 2. Solder on the female 1x4 header row onto the underside of the USB breakout. Solder on the 1x4 male header row to the corresponding adjecent pins (labeled VSS, GND, D-, and D+).
 
-![Solder diagram](https://cloud-15azhb7wk-hack-club-bot.vercel.app/0usb-solder.jpg)
+![Solder diagram](/Media/Images/USB-Solder.jpg)
 3. To program the board, attach the USB breakout board as shown in the photo.  Once the board is programmed, the USB breakout board can be removed for flight.
 
-![USB Connection Diagram](https://cloud-fy2mwui0k-hack-club-bot.vercel.app/0usb-diagram.jpg)
+![USB Connection Diagram](/Media/Images/USB-Diagram.jpg)
 
 ## Antenna System
 This system relies on the 70cm amateur radio band (420-450 MHz in the US), and requires an amateur radio license, issued by the FCC, to operate. A pre-cut braided copper *monopole* is included, optimized to transmit on this frequency. The included antenna is a quarter-wave monopole, meaning that the antenna is just a quarter of the wavelength of the signal, and yet it maintains a good SWR (quantification of how much signal is reflected back into the transmitter). There is a pad that supports a quarter-wave monopole, but also provides grounding pads for a coax connector if alternate antennas wish to be used.
@@ -58,7 +58,7 @@ A 1/4 wave monopole antenna works by using a quarter of the wavelength of the si
 
 Solder the copper wire onto the center pin of the antenna connector (as depicted below).
 
-![Antenna Connection](https://cloud-nscrzqsdm-hack-club-bot.vercel.app/0antenna_diagram.png)
+![Antenna Connection](/Media/Antenna-Diagram.png)
 
 ## PCB Configuration
 The Tiny4FSK PCB has many configurable operating modes, pins and power sources. This section will outline these parts of the PCB.
@@ -120,18 +120,6 @@ User configuration of this tracker is **required**. As this system uses amateur 
 - `OUTPUT_POWER` - 0-127. This is the output power of the radio module (suggested to keep at maximum).
 - `FLAG_BAD_PACKET` - If the latest GPS values are bad, send out all zeroes (for time, position, speed, and altitude)(suggested).
 
-**Everything below the above values in the configuration file can go unchanged.** These are various other settings that may be useful for development.
-- `FSK_BAUD` - FSK baud rate. No need to change, as most RX station use 100 baud. 
-- `FSK_SPACING` - FSK spacing in Hz. Most station are set to this value (270hz).
-- `NSS_PIN`- Si4063 SS pin
-- `RESET_PIN` - Si4063 RST pin
-- `DIO0_PIN` - Si4063 GPIO0 pin
-- `DIO1_PIN` - Si4063 GPIO1 pin
-- `EXTINT` - GPS EXTINT pin for longer packet delays.
-- `SUCCESS_LED` - Success LED pin.
-- `ERROR_LED` - Error LED pin.
-- `VOLTMETER_PIN` - Pin for the onboard voltage divider for voltage sensing.
-
 <details>
 <summary>How do I change these values?</summary>
 If there is a prexisting number or value next to the name of the setting name, you can replace that value with the desired value (e.g. replace the "N0CALL" with your callsign in double quotes, "W0MXX"). If there is no value next to the name, you need to comment out the setting to disable that functionality, or uncomment to enable that functionality (comments are defined by adding // at the start of the line).
@@ -146,23 +134,27 @@ If you are going to fly your own payload using Horus Binary, you must get a payl
 Once code configuration is complete, you may plug in a standard data USB-C cable into the breakout board, select the port in Arduino IDE, and select the upload button (marked by an arrow at the top). You should select the Arduino Zero (Native USB Port) as the board name.
 
 ## Testing
-Once the code is uploaded, you'll see the green LED light start to glow. The behavior of that LED is outlined [here](#led-default-behavior). Now you'll need to set up a receive station on either a [laptop or computer with an SDR](https://github.com/projecthorus/horusdemodlib/wiki/1.1-Horus-GUI-Reception-Guide-(Windows-Linux-OSX)), or a [Raspberry Pi board connected to an SDR](https://github.com/projecthorus/horusdemodlib/wiki/1.2--Raspberry-Pi-'Headless'-RX-Guide).
+Once the code is uploaded, you'll see the green LED pulse briefly to indicate initialization. The behavior of that LED is outlined [here](#led-default-behavior). Now you'll need to set up a receive station on either a [laptop or computer with an SDR](https://github.com/projecthorus/horusdemodlib/wiki/1.1-Horus-GUI-Reception-Guide-(Windows-Linux-OSX)), or a [Raspberry Pi board connected to an SDR](https://github.com/projecthorus/horusdemodlib/wiki/1.2--Raspberry-Pi-'Headless'-RX-Guide).
 
 You should start decoding packets transmitted from the board with your configuration parameters. It may take up to 5 minutes to gain a GPS fix, depending on your location.
 
 ## LED Default Behavior
-| Green LED Behavior           | Meaning                     |
-|------------------------------|-----------------------------|
-| Solid                        | Initialization complete     |
-| Blinking (1s on, 1s off)     | GPS detected and configured |
-| Blinking (0.5s on, 0.5s off) | Transmission complete       |
-| Off                          | Deep sleep mode or error    |
+
+| Green LED Behavior | Meaning |
+|--------------------|---------|
+| Single 1s pulse    | GPS detected / Airborne mode set (single pulse during initialization) |
+| Single 0.5s pulse  | Packet transmission (packet build / transmit — single short pulse) |
+| Off                | Idle or deep sleep (no continuous blinking) |
+
+
+## External Sensors
+Tiny4FSK now offers compatiability with external sensors by automatically scanning I2C on startup. Some sensors come with the Tiny4FSK General Shield, which can be found on the [GitHub Repository](https://github.com/mpkendall/Tiny4FSK-Ecosystem). If you have any custom sensors which you would like me to add support for, please raise an [issue](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/issues).
 
 
 ## PCBWay PCBs
 The new Revision 4 PCBs have been fabricated and assembled through PCBWay. Their high-quality fabrication and assembly services are truly commendable. I appreciated the ability to choose from many different component suppliers to select the exact components I needed. Additionally, their customer service is incredibly responsive and helpful, and quickly notified me of design issues. I highly recommend PCBWay for any of your PCB prototyping & assembly needs. Thank you, PCBWay, for graciously sponsoring this project!
 
-![alt text](https://cloud-2unmbbsvy-hack-club-bot.vercel.app/0pcbway.jpg)
+![alt text](/Media/PCBWay.jpg)
 
 ## Contact Me!
 To ask questions, kindly donate, or even say hi, feel free to contact me at this email: tiny4fsk@gmail.com. Thanks!
@@ -204,10 +196,9 @@ Hardware License:
 - [OSHW (US002611)](https://certification.oshwa.org/us002611.html) and [CERN Open Hardware Licence Version 2 - Weakly Reciprocal](https://choosealicense.com/licenses/cern-ohl-w-2.0/)
 
 ## Pictures
-![20240826_110047](https://cloud-ivkikeghh-hack-club-bot.vercel.app/0img_20241231_123601.jpg)
-![](https://cloud-as6j73c1n-hack-club-bot.vercel.app/0img_6985.jpg)
-![](https://cloud-as6j73c1n-hack-club-bot.vercel.app/1img_20241231_123232.jpg)
-![](https://cloud-as6j73c1n-hack-club-bot.vercel.app/2img_6986.jpghttps://cloud-as6j73c1n-hack-club-bot.vercel.app/0img_6985.jpg)
-![](https://cloud-as6j73c1n-hack-club-bot.vercel.app/3img_6981.jpg)
-![](https://cloud-as6j73c1n-hack-club-bot.vercel.app/0img_6985.jpg)
-![](https://cloud-as6j73c1n-hack-club-bot.vercel.app/4img_6980.jpg)
+![](/Media/Images/Tiny4FSK-Sky.jpg)
+![](/Media/Images/Tiny4FSK_Cinematic.JPG)
+![](/Media/Images/Tiny4FSK_Back.JPG)
+![](/Media/Images/Tiny4FSK_Cinematic2.JPG)
+![](/Media/Images/Tiny4FSK_Sky1.jpg)
+![](/Media/Images/Tiny4FSK_White.JPG)
