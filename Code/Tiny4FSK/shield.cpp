@@ -104,7 +104,7 @@ void initialize_shield()
     if (imu_found)
     {
         Serial.println("IMU Found! Initializing...");
-        //initialize_imu();
+        initialize_imu();
     }
 
     if (oled_found)
