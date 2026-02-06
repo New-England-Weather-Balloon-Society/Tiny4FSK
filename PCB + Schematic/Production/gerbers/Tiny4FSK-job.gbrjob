@@ -3,9 +3,9 @@
     "GenerationSoftware": {
       "Vendor": "KiCad",
       "Application": "Pcbnew",
-      "Version": "8.0.8"
+      "Version": "9.0.0"
     },
-    "CreationDate": "2025-05-28T20:16:55-04:00"
+    "CreationDate": "2026-01-11T16:58:41-05:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
@@ -48,12 +48,12 @@
     },
     {
       "Path": "Tiny4FSK-In1_GND_Cu.gbr",
-      "FileFunction": "Copper,L2,Inr",
+      "FileFunction": "Copper,L5,Inr",
       "FilePolarity": "Positive"
     },
     {
       "Path": "Tiny4FSK-In2_VCC_Cu.gbr",
-      "FileFunction": "Copper,L3,Inr",
+      "FileFunction": "Copper,L7,Inr",
       "FilePolarity": "Positive"
     },
     {

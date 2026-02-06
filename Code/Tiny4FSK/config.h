@@ -70,9 +70,6 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 // || General Board Settings ||
 // ****************************
 
-// SD card headers
-
-
 // Enable status mode LEDs for information on GPS initialization and issues.
 #define STATUS_LED
 
@@ -80,10 +77,6 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 // MCU sleep mode disabled debug messages, so disable for MCU sleep.
 // Disable for flights to conserve power.
 #define DEV_MODE
-
-// EXPERIMENTAL - optimise for EXTREMELY low power draw
-// Does not do anything yet!
-//#define ULTRA_LOW_POWER
 
 // *********************
 // || Pin Definitions ||
