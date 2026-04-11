@@ -26,19 +26,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // || Tracker Settings ||
 // **********************
 
-// Horus Binary v2 ID. Obtain a valid ID from https://github.com/projecthorus/horusdemodlib/
-// Create an issue requesting a v2 ID with your callsign. Example Issue:
-/*
-Hello!
-Could I please get a Horus v2 ID for N0CALL? Thanks!
-
--Name Here
-*/
-
-// Replace with the assigned Horus v2 ID
-#define HORUS_ID 380
-
-// Amateur radio license required! Give callsign here.
+// Amateur radio license is required! Give callsign here.
 #define CALLSIGN "W0MXX"
 
 // Transmits callsign in CW to stay legal. Keep at 20 or below.
