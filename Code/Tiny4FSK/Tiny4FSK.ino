@@ -306,9 +306,9 @@ size_t build_horus_binary_packet_v3(char *buffer)
     TelemetryStruct.gps.seconds = gps.time.second();
     TelemetryStruct.gps.latitude = gps.location.lat() * 100000;
     TelemetryStruct.gps.longitude = gps.location.lng() * 100000;
-    TelemetryStruct.gps.altitudeMeters = constrain((int)gps.altitude.meters(), -1000, 50000);
-    TelemetryStruct.gps.velocityHorizontalKilometersPerHour = constrain((int)gps.speed.kmph(), 0, 512);
-    TelemetryStruct.gps.ascentRateCentimetersPerSecond = constrain((int)(ascent_rate * 100.0f), -32767, 32767);
+    TelemetryStruct.gps.altitudeMeters = (int)gps.altitude.meters();
+    TelemetryStruct.gps.velocityHorizontalKilometersPerHour = (int)gps.speed.kmph();
+    TelemetryStruct.gps.ascentRateCentimetersPerSecond = (int)(ascent_rate * 100.0f);
     TelemetryStruct.gps.satellitesVisible = gps.satellites.value();
   }
   else
@@ -331,9 +331,9 @@ size_t build_horus_binary_packet_v3(char *buffer)
   TelemetryStruct.gps.seconds = gps.time.second();
   TelemetryStruct.gps.latitude = gps.location.lat() * 100000;
   TelemetryStruct.gps.longitude = gps.location.lng() * 100000;
-  TelemetryStruct.gps.altitudeMeters = constrain((int)gps.altitude.meters(), -1000, 50000);
-  TelemetryStruct.gps.velocityHorizontalKilometersPerHour = constrain((int)gps.speed.kmph(), 0, 512);
-  TelemetryStruct.gps.ascentRateCentimetersPerSecond = constrain((int)(ascent_rate * 100.0f), -32767, 32767);
+  TelemetryStruct.gps.altitudeMeters = (int)gps.altitude.meters();
+  TelemetryStruct.gps.velocityHorizontalKilometersPerHour = (int)gps.speed.kmph();
+  TelemetryStruct.gps.ascentRateCentimetersPerSecond = (int)(ascent_rate * 100.0f);
   TelemetryStruct.gps.satellitesVisible = gps.satellites.value();
 #endif
 #ifdef STATUS_LED

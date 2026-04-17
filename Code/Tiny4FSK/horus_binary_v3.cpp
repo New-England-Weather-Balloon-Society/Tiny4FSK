@@ -9,21 +9,21 @@ int assemble_v3_packet(uint8_t* buffer, telemetry_message* payload) {
     memset(&asnMessage, 0, sizeof(asnMessage));
 
     memcpy(asnMessage.payloadCallsign, payload->callsign, sizeof(payload->callsign));
-    asnMessage.sequenceNumber = payload->sequenceNumber;
+    asnMessage.sequenceNumber = constrain(payload->sequenceNumber, 0, 65535);
 
-    asnMessage.timeOfDaySeconds = payload->gps.hours * 3600 + payload->gps.minutes * 60 + payload->gps.seconds;
-    asnMessage.latitude = payload->gps.latitude;
-    asnMessage.longitude = payload->gps.longitude;
-    asnMessage.altitudeMeters = payload->gps.altitudeMeters;
-    asnMessage.velocityHorizontalKilometersPerHour = payload->gps.velocityHorizontalKilometersPerHour;
-    asnMessage.ascentRateCentimetersPerSecond = payload->gps.ascentRateCentimetersPerSecond;
-    asnMessage.gnssSatellitesVisible = payload->gps.satellitesVisible;
+    asnMessage.timeOfDaySeconds = constrain(payload->gps.hours * 3600 + payload->gps.minutes * 60 + payload->gps.seconds, -1, 86400);
+    asnMessage.latitude = constrain(payload->gps.latitude, -9000000, 9000000);
+    asnMessage.longitude = constrain(payload->gps.longitude, -18000000, 18000000);
+    asnMessage.altitudeMeters = constrain(payload->gps.altitudeMeters, -1000, 50000);
+    asnMessage.velocityHorizontalKilometersPerHour = constrain(payload->gps.velocityHorizontalKilometersPerHour, 0, 512);
+    asnMessage.ascentRateCentimetersPerSecond = constrain(payload->gps.ascentRateCentimetersPerSecond, -32767, 32767);
+    asnMessage.gnssSatellitesVisible = constrain(payload->gps.satellitesVisible, 0, 31);
 
-    asnMessage.humidityPercentage = payload->bme280.humidity;
-    asnMessage.temperatureCelsius_x10.internal = payload->bme280.temperature;
-    asnMessage.pressurehPa_x10 = payload->bme280.pressure;
+    asnMessage.humidityPercentage = constrain(payload->bme280.humidity, 0, 100);
+    asnMessage.temperatureCelsius_x10.internal = constrain(payload->bme280.temperature, -1023, 1023);
+    asnMessage.pressurehPa_x10 = constrain(payload->bme280.pressure, 0, 12000);
 
-    asnMessage.milliVolts.battery = payload->batteryMilliVolts;
+    asnMessage.milliVolts.battery = constrain(payload->batteryMilliVolts, 0, 16383);
 
     asnMessage.exist.velocityHorizontalKilometersPerHour = true;
     asnMessage.exist.ascentRateCentimetersPerSecond = true;
