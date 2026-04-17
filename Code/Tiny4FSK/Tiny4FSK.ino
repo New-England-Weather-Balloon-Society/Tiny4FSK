@@ -348,7 +348,7 @@ size_t build_horus_binary_packet_v3(char *buffer)
   TelemetryStruct.bme280.temperature = BME280temperature() / 10;
   TelemetryStruct.bme280.pressure = BME280pressure() / 10;
   TelemetryStruct.bme280.humidity = BME280humidity() / 100;
-  TelemetryStruct.batteryMilliVolts = readVoltage();
+  TelemetryStruct.batteryMilliVolts = readVoltage() * 1000;
 
   // Dump the sensor values to Serial Monitor
 #ifdef DEV_MODE
