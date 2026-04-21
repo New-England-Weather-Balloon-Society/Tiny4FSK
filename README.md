@@ -35,7 +35,6 @@ This code is modular and separated into several different files for easy expansi
  - **voltage.cpp and voltage.h** - Voltage detection using ADC values.
  - **si4063.cpp and si4063.h** - Si4063 driver files for radio transmission.
  - **4fsk_mod.cpp and 4fsk_mod.h** - 4FSK modulation functions.
- - **delay_timer.cpp and delay_timer.h** - Low-level delay functions based on timers.
  - **utils.cpp and utils.h** - A collection of utility functions.
 
 
@@ -45,7 +44,7 @@ This code is modular and separated into several different files for easy expansi
 For pre-flight configuration, the USB board does not need to be broken off, and code can be uploaded normally by just plugging in the USB as it arrives. However, the breakout may be removed to save space during flights!
 
 1. **Carefully** snap off the USB breakout board from the board.
-2. Solder on the female 1x4 header row onto the underside of the USB breakout. Solder on the 1x4 male header row to the corresponding adjecent pins (labeled VSS, GND, D-, and D+).
+2. Solder on the female 1x4 header row onto the underside of the USB breakout. Solder on the 1x4 male header row to the corresponding adjacent pins (labeled VSS, GND, D-, and D+).
 
 ![Solder diagram](/Media/Images/USB-Solder.jpg)
 3. To program the board, attach the USB breakout board as shown in the photo.  Once the board is programmed, the USB breakout board can be removed for flight.
@@ -92,10 +91,10 @@ This project is based on the Arduino IDE workflow. Below steps outline steps nec
     * ArduinoLowPower
     * TinyGPSPlus
     * Scheduler
- 5. To following needs to be downloaded directly from GitHub:
+ 5. The following needs to be downloaded directly from GitHub:
     * [TinyBME280](https://github.com/mpkendall/tiny-bme280/)
 
-**Optional** - The SAMD goes to sleep to save power. To achieve proper sleep, some edits to the SAMD core are necessary. To locate the wiring.c file on your computer, [follow this guide](https:support.arduino.cc/hc/en-us/articles/4415103213714-Find-sketches-libraries-board-cores-and-other-files-on-your-computer).
+**Optional** - The SAMD goes to sleep to save power. To achieve proper sleep, some edits to the SAMD core are necessary. To locate the wiring.c file on your computer, [follow this guide](https://support.arduino.cc/hc/en-us/articles/4415103213714-Find-sketches-libraries-board-cores-and-other-files-on-your-computer).
 Once there, comment out or completely delete the lines shown below:
 ```cpp
     // Defining VERY_LOW_POWER breaks Arduino APIs since all pins are considered INPUT at startup
@@ -125,7 +124,7 @@ User configuration of this tracker is **required**. As this system uses amateur 
 
 <details>
 <summary>How do I change these values?</summary>
-If there is a prexisting number or value next to the name of the setting name, you can replace that value with the desired value (e.g. replace the "N0CALL" with your callsign in double quotes, "W0MXX"). If there is no value next to the name, you need to comment out the setting to disable that functionality, or uncomment to enable that functionality (comments are defined by adding // at the start of the line).
+If there is a pre-existing number or value next to the name of the setting name, you can replace that value with the desired value (e.g. replace the "N0CALL" with your callsign in double quotes, "W0MXX"). If there is no value next to the name, you need to comment out the setting to disable that functionality, or uncomment to enable that functionality (comments are defined by adding // at the start of the line).
 </details>
 
 ## Upload the Code!
@@ -146,7 +145,7 @@ You should start decoding packets transmitted from the board with your configura
 
 
 ## External Sensors
-Tiny4FSK now offers compatiability with external sensors by automatically scanning I2C on startup. Some sensors come with the Tiny4FSK General Shield, which can be found on the [GitHub Repository](https://github.com/mpkendall/Tiny4FSK-Ecosystem). If you have any custom sensors which you would like me to add support for, please raise an [issue](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/issues).
+Tiny4FSK now offers compatibility with external sensors by automatically scanning I2C on startup. Some sensors come with the Tiny4FSK General Shield, which can be found on the [GitHub Repository](https://github.com/mpkendall/Tiny4FSK-Ecosystem). If you have any custom sensors which you would like me to add support for, please raise an [issue](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/issues).
 
 
 ## PCBWay PCBs
