@@ -9,7 +9,7 @@
 ## What is the Tiny4FSK project?
 Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It runs on 1 AA battery that lasts for 10-17 hours (a few seconds between position updates, can run longer if there's a longer delay). It runs on 4FSK (4-frequency shift keying), which means that it separates tones into 4 separate frequencies. Upon this, it uses the [Horus Binary v3](https://github.com/projecthorus/horusdemodlib) system, which is a relatively modern system popularly used with [RS41ng](https://github.com/mikaelnousiainen/RS41ng).
 
-![20240826_110047](/Media/Images/Tiny4FSK-Sky.jpg)
+![20240826_110047](/Media/Images/Tiny4FSK_Sky2.png)
 
 ## What are High-Altitude Balloons?
 High altitude balloons (HABs) allow space science enthusiasts to launch their own payloads to near-space (30km) at a cost of hundreds of dollars instead of millions of dollars.  This can be done for atmospheric research, breathtaking imagery, and scientific experimentation. While demanding meticulous planning, safety adherence, and technical skill in electronics and mechanics, this hobby rewards makers with a chance to get hands on with projects like electronic data loggers, camera systems, wireless communications, and more.
