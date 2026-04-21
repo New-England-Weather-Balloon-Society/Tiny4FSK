@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Tiny4FSK                                                                                             //
-// The lightweight, small Horus Binary v2 4FSK tracker                                                  //
+// The lightweight, small Horus Binary v3 4FSK tracker                                                  //
 //                                                                                                      //
 // Horus Binary modulation has been developed by Mark Jessop and the Project Horus team                 //
 // Made by Max Kendall W0MXX and the New England Weather Balloon Society (N.E.W.B.S.)                   //
@@ -220,7 +220,7 @@ void loop()
   // || Generate Horus Packet ||
   // ***************************
 #ifdef DEV_MODE
-  Serial.println(F("Generating Horus Binary v2 Packet"));
+  Serial.println(F("Generating Horus Binary v3 Packet"));
 #endif
   coded_len = build_horus_binary_packet_v3((char *)&codedbuffer);
 
@@ -228,7 +228,7 @@ void loop()
   // || Transmit Time ||
   // *******************
 #ifdef DEV_MODE
-  Serial.println(F("Transmitting Horus Binary v2 Packet"));
+  Serial.println(F("Transmitting Horus Binary v3 Packet"));
 #endif
 
   // Start sending out a continuous signal
