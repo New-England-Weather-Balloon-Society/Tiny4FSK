@@ -41,6 +41,9 @@ This code is modular and separated into several different files for easy expansi
 
 # Step by Step Setup Guide
 ## Setting up the PCB
+
+For pre-flight configuration, the USB board does not need to be broken off, and code can be uploaded normally by just plugging in the USB as it arrives. However, the breakout may be removed to save space during flights!
+
 1. **Carefully** snap off the USB breakout board from the board.
 2. Solder on the female 1x4 header row onto the underside of the USB breakout. Solder on the 1x4 male header row to the corresponding adjecent pins (labeled VSS, GND, D-, and D+).
 
@@ -90,7 +93,7 @@ This project is based on the Arduino IDE workflow. Below steps outline steps nec
     * TinyGPSPlus
     * Scheduler
  5. To following needs to be downloaded directly from GitHub:
-    * [TinyBME280](https://github.com/maxsrobotics/tiny-bme280/)
+    * [TinyBME280](https://github.com/mpkendall/tiny-bme280/)
 
 **Optional** - The SAMD goes to sleep to save power. To achieve proper sleep, some edits to the SAMD core are necessary. To locate the wiring.c file on your computer, [follow this guide](https:support.arduino.cc/hc/en-us/articles/4415103213714-Find-sketches-libraries-board-cores-and-other-files-on-your-computer).
 Once there, comment out or completely delete the lines shown below:
@@ -126,7 +129,7 @@ If there is a prexisting number or value next to the name of the setting name, y
 </details>
 
 ## Upload the Code!
-Once code configuration is complete, you may plug in a standard data USB-C cable into the breakout board, select the port in Arduino IDE, and select the upload button (marked by an arrow at the top). You should select the Arduino Zero (Native USB Port) as the board name.
+Once code configuration is complete, you may plug in a standard data USB-C cable into the breakout board, select the port in Arduino IDE, and select the upload button (marked by an arrow at the top). You should select the `Arduino Zero (Native USB Port)` as the board name.
 
 ## Testing
 Once the code is uploaded, you'll see the green LED pulse briefly to indicate initialization. The behavior of that LED is outlined [here](#led-default-behavior). Now you'll need to set up a receive station on either a [laptop or computer with an SDR](https://github.com/projecthorus/horusdemodlib/wiki/1.1-Horus-GUI-Reception-Guide-(Windows-Linux-OSX)), or a [Raspberry Pi board connected to an SDR](https://github.com/projecthorus/horusdemodlib/wiki/1.2--Raspberry-Pi-'Headless'-RX-Guide).
