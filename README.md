@@ -7,7 +7,7 @@
 **STATE** - Main branch is stable!
 
 ## What is the Tiny4FSK project?
-Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It runs on 1 AA battery that lasts for 10-17 hours (a few seconds between position updates, can run longer if there's a longer delay). It runs on 4FSK (4-frequency shift keying), which means that it separates tones into 4 separate frequencies. Upon this, it uses the [Horus Binary v2](https://github.com/projecthorus/horusdemodlib/wiki/2---Modem-Details#horus-binary-v1-mode-4-fsk) system, which is a relatively modern system popularly used with [RS41ng](https://github.com/mikaelnousiainen/RS41ng).
+Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It runs on 1 AA battery that lasts for 10-17 hours (a few seconds between position updates, can run longer if there's a longer delay). It runs on 4FSK (4-frequency shift keying), which means that it separates tones into 4 separate frequencies. Upon this, it uses the [Horus Binary v3](https://github.com/projecthorus/horusdemodlib) system, which is a relatively modern system popularly used with [RS41ng](https://github.com/mikaelnousiainen/RS41ng).
 
 ![20240826_110047](/Media/Images/Tiny4FSK-Sky.jpg)
 
@@ -31,6 +31,7 @@ This code is modular and separated into several different files for easy expansi
  - **config.h** - Configuration file for user parameters.
  - **crc_calc.cpp and crc_calc.h** - CRC16 generator files for parity bits.
  - **horus_l2.cpp and horus_l2.h** - Horus layer 2 file, Golay error correction algorithm.
+ - **horus_binary_v3.cpp and horus_binary_v3.h** - Horus Binary v3 packet assembly and encoding functions.
  - **voltage.cpp and voltage.h** - Voltage detection using ADC values.
  - **si4063.cpp and si4063.h** - Si4063 driver files for radio transmission.
  - **4fsk_mod.cpp and 4fsk_mod.h** - 4FSK modulation functions.
@@ -109,7 +110,6 @@ Arduino gives you an official warning: "This breaks Arduino APIs since all pins 
 ## Code Configuration
 User configuration of this tracker is **required**. As this system uses amateur radio, you will need at least a Technician's level license (US). Configuration file is located in **config.h**. Open this file in Arduino IDE. Here are the parameters may need to be changed.
 
-- `HORUS_ID` - This setting is your Horus ID number. Information on how to get one in next section.
 - `CALLSIGN` - Amateur radio callsign. This is required to stay legal!
 - `CALLSIGN_WPM` - Speed to send the callsign, in morse code.
 - `CALLSIGN_INTERVAL` - Interval to send the morse code callsign. Maximum interval in the US is 10 minutes.
@@ -124,11 +124,6 @@ User configuration of this tracker is **required**. As this system uses amateur 
 <summary>How do I change these values?</summary>
 If there is a prexisting number or value next to the name of the setting name, you can replace that value with the desired value (e.g. replace the "N0CALL" with your callsign in double quotes, "W0MXX"). If there is no value next to the name, you need to comment out the setting to disable that functionality, or uncomment to enable that functionality (comments are defined by adding // at the start of the line).
 </details>
-
-### How do I get a Horus v2 ID?
-If you are going to fly your own payload using Horus Binary, you must get a payload ID allocated for your use. This can be done by  [submitting an issue](https://github.com/projecthorus/horusdemodlib/issues/new/choose) or a pull request to that repository, or e-mailing VK5QI: vk5qi@rfhead.net
-
-**Do not use the testing (4FSKTEST-V2) payload ID on an actual launch! (ID 256)**
 
 ## Upload the Code!
 Once code configuration is complete, you may plug in a standard data USB-C cable into the breakout board, select the port in Arduino IDE, and select the upload button (marked by an arrow at the top). You should select the Arduino Zero (Native USB Port) as the board name.
