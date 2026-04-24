@@ -1,5 +1,6 @@
 #include "horus_binary_v3.h"
 #include <cstring>
+#define Serial SerialUSB
 
 volatile uint16_t horus_v3_packet_counter = 0;
 static Telemetry asnMessage;
@@ -68,8 +69,23 @@ int assemble_v3_packet(uint8_t* buffer, telemetry_message* payload) {
         frameSize = 128;
     }
 
+    Serial.print("Horus payload callsign: ");
+    Serial.println(asnMessage.payloadCallsign);
+    Serial.print("Horus ASN bytes: ");
+    Serial.print(encodedSize);
+    Serial.print(", selected frame bytes: ");
+    Serial.println(frameSize);
+
     uint16_t crc = (uint16_t)gen_crc16((unsigned char *)(buffer+2), frameSize-2);
     memcpy(buffer, &crc, sizeof(crc));
+
+#ifdef DEV_MODE
+    Serial.print("Frame CRC: 0x");
+    Serial.print((buffer[0] >> 4) & 0xF, HEX);
+    Serial.print((buffer[0]) & 0xF, HEX);
+    Serial.print((buffer[1] >> 4) & 0xF, HEX);
+    Serial.println((buffer[1]) & 0xF, HEX);
+#endif
 
     return frameSize;
 }

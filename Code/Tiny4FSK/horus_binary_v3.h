@@ -10,7 +10,7 @@
 #define HORUS_CODED_BUFFER_SIZE 256
 
 typedef struct telemetry_message {
-    char callsign[7];
+    char callsign[16];
     uint16_t sequenceNumber;
     struct {
         int latitude; // 5 decimals, x10^5
