@@ -54,6 +54,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // then transmit all zeros.
 #define FLAG_BAD_PACKET
 
+// Lowers the transmit output power to defined value while awaiting GPS lock.
+// Also lowers transmit interval.
+// This can help with obtaining a faster lock, as it doesn't desense the receiver as much.
+#define QUICK_LOCK
+
+// Power level to use during quick lock mode.
+#define QUICK_LOCK_POWER 30
+
+#define QUICK_LOCK_INTERVAL 5000
+
 // ****************************
 // || General Board Settings ||
 // ****************************

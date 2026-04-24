@@ -67,6 +67,9 @@ char codedbuffer[HORUS_CODED_BUFFER_SIZE]; // Buffer to store an encoded binary 
 char debugbuffer[256];     // Buffer to store debug strings
 uint16_t packet_count = 1; // Packet counter
 int call_count = 0;        // Counter to sense when to send callsign
+bool valid_fix = false;      // Whether we have a valid GPS fix or not
+bool prev_fix = false;       // Previous loop's GPS fix status, to detect changes in GPS fix
+int tx_interval = PACKET_INTERVAL; // Interval between transmissions, can be modified by quick lock feature
 
 // Make sure interval is at the legal limit!
 #if CALLSIGN_INTERVAL > 600000
@@ -231,6 +234,18 @@ void loop()
   Serial.println(F("Transmitting Horus Binary v3 Packet"));
 #endif
 
+#ifdef QUICK_LOCK
+  valid_fix = gps.location.isValid();
+
+  if (packet_count == 1 || valid_fix != prev_fix)
+  {
+    valid_fix ? si4063_set_tx_power(OUTPUT_POWER) : si4063_set_tx_power(QUICK_LOCK_POWER);
+    tx_interval = valid_fix ? PACKET_INTERVAL : QUICK_LOCK_INTERVAL;
+
+    prev_fix = valid_fix;
+  }
+#endif
+
   // Start sending out a continuous signal
   si4063_enable_tx();
 
@@ -258,10 +273,10 @@ void loop()
   // || Sleep Mode Time! ||
   // **********************
 #ifndef DEV_MODE
-  LowPower.deepSleep(PACKET_INTERVAL);
+  LowPower.deepSleep(tx_interval);
 #endif
 #ifdef DEV_MODE
-  delay(PACKET_INTERVAL);
+  delay(tx_interval);
 #endif
 }
 
