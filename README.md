@@ -121,6 +121,13 @@ User configuration of this tracker is **required**. As this system uses amateur 
 - `PACKET_INTERVAL` - Interval between 4FSK packets. The smaller the interval, the lower the battery life is.
 - `OUTPUT_POWER` - 0-127. This is the output power of the radio module (suggested to keep at maximum).
 - `FLAG_BAD_PACKET` - If the latest GPS values are bad, send out all zeroes (for time, position, speed, and altitude)(suggested).
+- `QUICK_LOCK` - Quick lock mode lowers the output power and increases packet interval while the GPS doesn't have a lock. This helps with desensing the GPS receiver. Values return to previously-defined `PACKET_INTERVAL` and `OUTPUT_POWER` upon lock.
+- `QUICK_LOCK_POWER` - Power level used while the GPS doesn't have a lock. Only applied if `QUICK_LOCK` mode is enabled.
+- `QUICK_LOCK_INTERVAL` - Packet interval used while the GPS doesn't have a lock. Only applied if `QUICK_LOCK` mode is enabled.
+- `RECOVERY_MODE` - If enabled, the tracker will send updates less frequently when on the ground to save power. Only occurs if the tracker detects it's in a flight.
+- `RECOVER_MODE_INTERVAL` - Interval to transmit in recovery mode, when on the ground.
+- `RECOVERY_MODE_FLIGHT_THRESHOLD` - Altitude threshold to consider ourselves in flight, in meters.
+- `RECOVERY_MODE_LAND_THRESHOLD` - Altitude threshold to consider ourselves on the ground, in meters. Recovery mode will trigger below this altitude.
 
 <details>
 <summary>How do I change these values?</summary>
@@ -149,7 +156,7 @@ Tiny4FSK now offers compatibility with external sensors by automatically scannin
 
 
 ## PCBWay PCBs
-The new Revision 4 PCBs have been fabricated and assembled through PCBWay. Their high-quality fabrication and assembly services are truly commendable. I appreciated the ability to choose from many different component suppliers to select the exact components I needed. Additionally, their customer service is incredibly responsive and helpful, and quickly notified me of design issues. I highly recommend PCBWay for any of your PCB prototyping & assembly needs. Thank you, PCBWay, for graciously sponsoring this project!
+The Revision 4 PCBs have been fabricated and assembled through PCBWay. Their high-quality fabrication and assembly services are truly commendable. I appreciated the ability to choose from many different component suppliers to select the exact components I needed. Additionally, their customer service is incredibly responsive and helpful, and quickly notified me of design issues. I highly recommend PCBWay for any of your PCB prototyping & assembly needs. Thank you, PCBWay, for graciously sponsoring this project!
 
 ![alt text](/Media/PCBWay.jpg)
 
