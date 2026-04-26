@@ -70,6 +70,7 @@ int call_count = 0;        // Counter to sense when to send callsign
 bool valid_fix = false;      // Whether we have a valid GPS fix or not
 bool prev_fix = false;       // Previous loop's GPS fix status, to detect changes in GPS fix
 int tx_interval = PACKET_INTERVAL; // Interval between transmissions, can be modified by quick lock feature
+bool in_flight = false;       // Whether we are in flight or not, to adjust transmit interval
 
 // Make sure interval is at the legal limit!
 #if CALLSIGN_INTERVAL > 600000
@@ -255,6 +256,15 @@ void loop()
 
   // End the transmission
   si4063_inhibit_tx();
+
+#ifdef RECOVERY_MODE
+  if(gps.altitude.meters() > RECOVERY_MODE_FLIGHT_THRESHOLD && !in_flight) {
+    in_flight = true;
+  }
+  if(gps.altitude.meters() < RECOVERY_MODE_LAND_THRESHOLD && in_flight) {
+    tx_interval = RECOVERY_MODE_INTERVAL; // If we're still on the ground, transmit less frequently to save power and reduce desense
+  }
+#endif
 
 #ifdef DEV_MODE
   Serial.println(F("Transmission complete!"));

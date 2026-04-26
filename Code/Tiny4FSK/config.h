@@ -64,6 +64,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #define QUICK_LOCK_INTERVAL 5000
 
+// If defined, the tracker will transmit less frequently when on the ground to save power.
+#define RECOVERY_MODE
+
+// Interval to transmit in recovery mode, when on the ground.
+#define RECOVERY_MODE_INTERVAL 120000
+
+#define RECOVERY_MODE_FLIGHT_THRESHOLD 5000 // Altitude threshold to consider ourselves in flight, in meters.
+#define RECOVERY_MODE_LAND_THRESHOLD 300 // Altitude threshold to consider ourselves on the ground, in meters.
+
 // ****************************
 // || General Board Settings ||
 // ****************************
@@ -74,7 +83,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // Enable Serial Prints for debugging and sleep modes for MCU.
 // MCU sleep mode disabled debug messages, so disable for MCU sleep.
 // Disable for flights to conserve power.
-#define DEV_MODE
+//#define DEV_MODE
 
 // *********************
 // || Pin Definitions ||
