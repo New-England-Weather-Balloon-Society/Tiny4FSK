@@ -20,7 +20,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include <Arduino.h>
 #include "si4063.h"
-#include "delay_timer.h"
 #include <SPI.h>
 
 void fsk4_writebyte(uint8_t b);

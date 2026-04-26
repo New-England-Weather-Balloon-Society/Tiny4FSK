@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Tiny4FSK                                                                                             //
-// The lightweight, small Horus Binary v2 4FSK tracker                                                  //
+// The lightweight, small Horus Binary v3 4FSK tracker                                                  //
 //                                                                                                      //
 // Horus Binary modulation has been developed by Mark Jessop and the Project Horus team                 //
 // Made by Max Kendall W0MXX and the New England Weather Balloon Society (N.E.W.B.S.)                   //
@@ -43,6 +43,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "morse.h"
 #include "utils.h"
 #include "shield.h"
+#include "horus_binary_v3.h"
 
 // **********************
 // || Native USB Setup ||
@@ -58,47 +59,22 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // New GPS object
 TinyGPSPlus gps;
 
-// Horus Binary Structures & Variables
-
-// Horus v2 Structure of Packet
-// https://github.com/projecthorus/horusdemodlib/wiki/4-Packet-Format-Details#packet-formats
-struct HorusBinaryPacketV2
-{
-  uint16_t PayloadID;
-  uint16_t Counter;
-  uint8_t Hours;
-  uint8_t Minutes;
-  uint8_t Seconds;
-  float Latitude;
-  float Longitude;
-  uint16_t Altitude;
-  uint8_t Speed;
-  uint8_t Sats;
-  int8_t Temp;
-  uint8_t BattVoltage;
-  // The following bytes (up until the CRC) are user-customizable. These can be changed by using a custom field list (see horusdemodlib)
-  int16_t AscentRate; // Divide by 100
-  int16_t ExtTemp;    // Divide by 10
-  uint8_t Humidity;   // No post-processing
-  uint16_t ExtPress;  // Divide by 10
-  uint8_t dummy1;
-  uint8_t dummy2;
-  uint16_t Checksum;
-} __attribute__((packed));
-
-// Horus Binary V2 Packet
-struct HorusBinaryPacketV2 BinaryPacketV2;
+// Horus Binary V3 Packet
+telemetry_message TelemetryStruct;
 
 // Buffers and counters.
-char rawbuffer[128];       // Buffer to temporarily store a raw binary packet.
-char codedbuffer[128];     // Buffer to store an encoded binary packet
+char codedbuffer[HORUS_CODED_BUFFER_SIZE]; // Buffer to store an encoded binary packet
 char debugbuffer[256];     // Buffer to store debug strings
 uint16_t packet_count = 1; // Packet counter
 int call_count = 0;        // Counter to sense when to send callsign
+bool valid_fix = false;      // Whether we have a valid GPS fix or not
+bool prev_fix = false;       // Previous loop's GPS fix status, to detect changes in GPS fix
+int tx_interval = PACKET_INTERVAL; // Interval between transmissions, can be modified by quick lock feature
+bool in_flight = false;       // Whether we are in flight or not, to adjust transmit interval
 
 // Make sure interval is at the legal limit!
 #if CALLSIGN_INTERVAL > 600000
-#error "Please set the CALLSIGN_INTERVAL to less than or equal to 10 minutes to keep this legal!
+#error "Please set the CALLSIGN_INTERVAL to less than or equal to 10 minutes to keep this legal!"
 #endif
 
 void setup()
@@ -231,7 +207,6 @@ void loop()
   // || Local Variables ||
   // *********************
   int coded_len;
-  int pkt_len;
 
   // ***************************
   // || Callsign Transmission ||
@@ -249,16 +224,27 @@ void loop()
   // || Generate Horus Packet ||
   // ***************************
 #ifdef DEV_MODE
-  Serial.println(F("Generating Horus Binary v2 Packet"));
+  Serial.println(F("Generating Horus Binary v3 Packet"));
 #endif
-  pkt_len = build_horus_binary_packet_v2(rawbuffer);
-  coded_len = horus_l2_encode_tx_packet((unsigned char *)codedbuffer, (unsigned char *)rawbuffer, pkt_len);
+  coded_len = build_horus_binary_packet_v3((char *)&codedbuffer);
 
   // *******************
   // || Transmit Time ||
   // *******************
 #ifdef DEV_MODE
-  Serial.println(F("Transmitting Horus Binary v2 Packet"));
+  Serial.println(F("Transmitting Horus Binary v3 Packet"));
+#endif
+
+#ifdef QUICK_LOCK
+  valid_fix = gps.location.isValid();
+
+  if (packet_count == 1 || valid_fix != prev_fix)
+  {
+    valid_fix ? si4063_set_tx_power(OUTPUT_POWER) : si4063_set_tx_power(QUICK_LOCK_POWER);
+    tx_interval = valid_fix ? PACKET_INTERVAL : QUICK_LOCK_INTERVAL;
+
+    prev_fix = valid_fix;
+  }
 #endif
 
   // Start sending out a continuous signal
@@ -270,6 +256,15 @@ void loop()
 
   // End the transmission
   si4063_inhibit_tx();
+
+#ifdef RECOVERY_MODE
+  if(gps.altitude.meters() > RECOVERY_MODE_FLIGHT_THRESHOLD && !in_flight) {
+    in_flight = true;
+  }
+  if(gps.altitude.meters() < RECOVERY_MODE_LAND_THRESHOLD && in_flight) {
+    tx_interval = RECOVERY_MODE_INTERVAL; // If we're still on the ground, transmit less frequently to save power and reduce desense
+  }
+#endif
 
 #ifdef DEV_MODE
   Serial.println(F("Transmission complete!"));
@@ -288,10 +283,10 @@ void loop()
   // || Sleep Mode Time! ||
   // **********************
 #ifndef DEV_MODE
-  LowPower.deepSleep(PACKET_INTERVAL);
+  LowPower.deepSleep(tx_interval);
 #endif
 #ifdef DEV_MODE
-  delay(PACKET_INTERVAL);
+  delay(tx_interval);
 #endif
 }
 
@@ -309,59 +304,62 @@ void gpsFeed()
   yield();
 }
 
-// Build the Horus v2 Packet. This is where the GPS positions and telemetry are organized to the struct.
-int build_horus_binary_packet_v2(char *buffer)
+// Build the Horus v3 Packet. This is where the GPS positions and telemetry are organized to the struct.
+size_t build_horus_binary_packet_v3(char *buffer)
 {
   static float prev_altitude = 0.0f;
   static unsigned long prev_time = 0;
   float ascent_rate = 0.0f;
 
+  if (prev_time != 0)
+  {
+    unsigned long time_diff = millis() - prev_time;
+    if (time_diff > 0)
+    {
+      ascent_rate = (gps.altitude.meters() - prev_altitude) / (time_diff / 1000.0f);
+    }
+  }
+  prev_altitude = gps.altitude.meters();
+  prev_time = millis();
+
 // Fill with GPS readings, with a GPS sanity check
 #ifdef FLAG_BAD_PACKET
   if (gps.altitude.meters() > 0 && gps.altitude.meters() < 50000)
   {
-    if (prev_time != 0)
-    {
-      unsigned long time_diff = millis() - prev_time;
-      if (time_diff > 0)
-      {
-        ascent_rate = (gps.altitude.meters() - prev_altitude) / (time_diff / 1000.0f);
-      }
-    }
-    prev_altitude = gps.altitude.meters();
-    prev_time = millis();
-
-    BinaryPacketV2.Hours = gps.time.hour();
-    BinaryPacketV2.Minutes = gps.time.minute();
-    BinaryPacketV2.Seconds = gps.time.second();
-    BinaryPacketV2.Latitude = gps.location.lat();
-    BinaryPacketV2.Longitude = gps.location.lng();
-    BinaryPacketV2.Altitude = gps.altitude.meters();
-    BinaryPacketV2.Speed = gps.speed.kmph();
-    BinaryPacketV2.Sats = gps.satellites.value();
+    TelemetryStruct.gps.hours = gps.time.hour();
+    TelemetryStruct.gps.minutes = gps.time.minute();
+    TelemetryStruct.gps.seconds = gps.time.second();
+    TelemetryStruct.gps.latitude = gps.location.lat() * 100000;
+    TelemetryStruct.gps.longitude = gps.location.lng() * 100000;
+    TelemetryStruct.gps.altitudeMeters = (int)gps.altitude.meters();
+    TelemetryStruct.gps.velocityHorizontalKilometersPerHour = (int)gps.speed.kmph();
+    TelemetryStruct.gps.ascentRateCentimetersPerSecond = (int)(ascent_rate * 100.0f);
+    TelemetryStruct.gps.satellitesVisible = gps.satellites.value();
   }
   else
   {
     prev_time = 0;
-    BinaryPacketV2.Hours = 0;
-    BinaryPacketV2.Minutes = 0;
-    BinaryPacketV2.Seconds = 0;
-    BinaryPacketV2.Latitude = 0;
-    BinaryPacketV2.Longitude = 0;
-    BinaryPacketV2.Altitude = 0;
-    BinaryPacketV2.Speed = 0;
-    BinaryPacketV2.Sats = gps.satellites.value();
+    TelemetryStruct.gps.hours = 0;
+    TelemetryStruct.gps.minutes = 0;
+    TelemetryStruct.gps.seconds = 0;
+    TelemetryStruct.gps.latitude = 0;
+    TelemetryStruct.gps.longitude = 0;
+    TelemetryStruct.gps.altitudeMeters = 0;
+    TelemetryStruct.gps.velocityHorizontalKilometersPerHour = 0;
+    TelemetryStruct.gps.satellitesVisible = gps.satellites.value();
+    TelemetryStruct.gps.ascentRateCentimetersPerSecond = 0;
   }
 #else
   // Or, if you prefer no sanity check, force GPS positions into struct
-  BinaryPacketV2.Hours = gps.time.hour();
-  BinaryPacketV2.Minutes = gps.time.minute();
-  BinaryPacketV2.Seconds = gps.time.second();
-  BinaryPacketV2.Latitude = gps.location.lat();
-  BinaryPacketV2.Longitude = gps.location.lng();
-  BinaryPacketV2.Altitude = gps.altitude.meters();
-  BinaryPacketV2.Speed = gps.speed.kmph();
-  BinaryPacketV2.Sats = gps.satellites.value();
+  TelemetryStruct.gps.hours = gps.time.hour();
+  TelemetryStruct.gps.minutes = gps.time.minute();
+  TelemetryStruct.gps.seconds = gps.time.second();
+  TelemetryStruct.gps.latitude = gps.location.lat() * 100000;
+  TelemetryStruct.gps.longitude = gps.location.lng() * 100000;
+  TelemetryStruct.gps.altitudeMeters = (int)gps.altitude.meters();
+  TelemetryStruct.gps.velocityHorizontalKilometersPerHour = (int)gps.speed.kmph();
+  TelemetryStruct.gps.ascentRateCentimetersPerSecond = (int)(ascent_rate * 100.0f);
+  TelemetryStruct.gps.satellitesVisible = gps.satellites.value();
 #endif
 #ifdef STATUS_LED
   digitalWrite(SUCCESS_LED, HIGH);
@@ -370,42 +368,39 @@ int build_horus_binary_packet_v2(char *buffer)
 #endif
 
   // Non-GPS values
-  BinaryPacketV2.PayloadID = HORUS_ID;
-  BinaryPacketV2.Counter = packet_count;
-  BinaryPacketV2.BattVoltage = (int)mapf((double)readVoltage(), 0.00, 5.00, 0, 255);
-  BinaryPacketV2.Temp = BME280temperature() / 100.00;
-
-  // User-Customizable Fields
-  BinaryPacketV2.AscentRate = (int16_t)(ascent_rate * 100);
-  BinaryPacketV2.ExtTemp = (int16_t)(BME280temperature() / 10);
-  BinaryPacketV2.Humidity = (int8_t)(BME280humidity() / 100);
-  BinaryPacketV2.ExtPress = (int16_t)(BME280pressure() / 10);
-
-  // End the packet off with a CRC checksum.
-  BinaryPacketV2.Checksum = (uint16_t)crc16((unsigned char *)&BinaryPacketV2, sizeof(BinaryPacketV2) - 2);
+  memcpy(TelemetryStruct.callsign, CALLSIGN, sizeof(CALLSIGN));
+  TelemetryStruct.sequenceNumber = packet_count;
+  TelemetryStruct.bme280.temperature = BME280temperature() / 10;
+  TelemetryStruct.bme280.pressure = BME280pressure() / 10;
+  TelemetryStruct.bme280.humidity = BME280humidity() / 100;
+  TelemetryStruct.batteryMilliVolts = readVoltage() * 1000;
 
   // Dump the sensor values to Serial Monitor
 #ifdef DEV_MODE
-  Serial.print("Frame Count: ");
+  Serial.print("Packet #");
   Serial.print(packet_count);
-  Serial.print(", Latitude: ");
-  Serial.print(BinaryPacketV2.Latitude, 7);
-  Serial.print(", Longitude: ");
-  Serial.print(BinaryPacketV2.Longitude, 7);
-  Serial.print(", Altitude MSL: ");
-  Serial.print(BinaryPacketV2.Altitude);
-  Serial.print(", Sats: ");
-  Serial.print(BinaryPacketV2.Sats);
-  Serial.print(", Voltage: ");
-  Serial.print(readVoltage());
-  Serial.print(", Voltage (Scaled): ");
-  Serial.print(BinaryPacketV2.BattVoltage);
-  Serial.print(", Temperature: ");
-  Serial.print(BinaryPacketV2.Temp);
-  Serial.print(", Pressure: ");
-  Serial.print(BinaryPacketV2.ExtPress / 10.00);
-  Serial.print(", Humidity: ");
-  Serial.println(BinaryPacketV2.Humidity);
+  Serial.print(": ");
+  Serial.print("Lat: ");
+  Serial.print(TelemetryStruct.gps.latitude);
+  Serial.print(", Lon: ");
+  Serial.print(TelemetryStruct.gps.longitude);
+  Serial.print(", Alt: ");
+  Serial.print(TelemetryStruct.gps.altitudeMeters);
+  Serial.print("m, Speed: ");
+  Serial.print(TelemetryStruct.gps.velocityHorizontalKilometersPerHour);
+  Serial.print("km/h, Ascent Rate: ");
+  Serial.print(TelemetryStruct.gps.ascentRateCentimetersPerSecond);
+  Serial.print("cm/s, Sats: ");
+  Serial.print(TelemetryStruct.gps.satellitesVisible);
+  Serial.print(", Temp: ");
+  Serial.print(TelemetryStruct.bme280.temperature);
+  Serial.print("°C, Pressure: ");
+  Serial.print(TelemetryStruct.bme280.pressure);
+  Serial.print("hPa, Humidity: ");
+  Serial.print(TelemetryStruct.bme280.humidity);
+  Serial.print("%, Battery: ");
+  Serial.print(TelemetryStruct.batteryMilliVolts);
+  Serial.println("mV");
 #endif
 
   // If OLED found, print the values
@@ -413,15 +408,15 @@ int build_horus_binary_packet_v2(char *buffer)
   {
     oled_clearDisplay();
     oled_setCursor(0, 0);
-    oled_print_diagnostic("Sats", BinaryPacketV2.Sats, 0);
-    oled_print_diagnostic("Lat", BinaryPacketV2.Latitude, 6);
-    oled_print_diagnostic("Lon", BinaryPacketV2.Longitude, 6);
-    oled_print_diagnostic("Alt", BinaryPacketV2.Altitude, 1);
+    oled_print_diagnostic("Sats", TelemetryStruct.gps.satellitesVisible, 0);
+    oled_print_diagnostic("Lat", TelemetryStruct.gps.latitude, 6);
+    oled_print_diagnostic("Lon", TelemetryStruct.gps.longitude, 6);
+    oled_print_diagnostic("Alt", TelemetryStruct.gps.altitudeMeters, 1);
     oled_display();
   }
   if (sd_found)
   {
-    snprintf(debugbuffer, sizeof(debugbuffer),
+    /* snprintf(debugbuffer, sizeof(debugbuffer),
              "%u,%u,%u,%u,%u,%.7f,%.7f,%u,%u,%u,%d,%u,%d,%.2f,%u,%u",
              BinaryPacketV2.PayloadID,
              BinaryPacketV2.Counter,
@@ -439,11 +434,12 @@ int build_horus_binary_packet_v2(char *buffer)
              BinaryPacketV2.ExtTemp / 10,
              BinaryPacketV2.Humidity,
              BinaryPacketV2.ExtPress / 10);
-    sd_card_write_line("datalog.csv", debugbuffer);
+    sd_card_write_line("datalog.csv", debugbuffer); */
   }
 
-  // Copy the binary packet to the buffer
-  memcpy(buffer, &BinaryPacketV2, sizeof(BinaryPacketV2));
+  size_t length = radio_horus_v3_encode((uint8_t *)buffer, &TelemetryStruct);
 
-  return sizeof(struct HorusBinaryPacketV2);
+  Serial.println("Encoded packet length: " + String(length) + " bytes");
+
+  return length;
 }

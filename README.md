@@ -7,9 +7,9 @@
 **STATE** - Main branch is stable!
 
 ## What is the Tiny4FSK project?
-Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It runs on 1 AA battery that lasts for 10-17 hours (a few seconds between position updates, can run longer if there's a longer delay). It runs on 4FSK (4-frequency shift keying), which means that it separates tones into 4 separate frequencies. Upon this, it uses the [Horus Binary v2](https://github.com/projecthorus/horusdemodlib/wiki/2---Modem-Details#horus-binary-v1-mode-4-fsk) system, which is a relatively modern system popularly used with [RS41ng](https://github.com/mikaelnousiainen/RS41ng).
+Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It runs on 1 AA battery that lasts for 10-17 hours (a few seconds between position updates, can run longer if there's a longer delay). It runs on 4FSK (4-frequency shift keying), which means that it separates tones into 4 separate frequencies. Upon this, it uses the [Horus Binary v3](https://github.com/projecthorus/horusdemodlib) system, which is a relatively modern system popularly used with [RS41ng](https://github.com/mikaelnousiainen/RS41ng).
 
-![20240826_110047](/Media/Images/Tiny4FSK-Sky.jpg)
+![20240826_110047](/Media/Images/Tiny4FSK_Sky2.png)
 
 ## What are High-Altitude Balloons?
 High altitude balloons (HABs) allow space science enthusiasts to launch their own payloads to near-space (30km) at a cost of hundreds of dollars instead of millions of dollars.  This can be done for atmospheric research, breathtaking imagery, and scientific experimentation. While demanding meticulous planning, safety adherence, and technical skill in electronics and mechanics, this hobby rewards makers with a chance to get hands on with projects like electronic data loggers, camera systems, wireless communications, and more.
@@ -31,17 +31,20 @@ This code is modular and separated into several different files for easy expansi
  - **config.h** - Configuration file for user parameters.
  - **crc_calc.cpp and crc_calc.h** - CRC16 generator files for parity bits.
  - **horus_l2.cpp and horus_l2.h** - Horus layer 2 file, Golay error correction algorithm.
+ - **horus_binary_v3.cpp and horus_binary_v3.h** - Horus Binary v3 packet assembly and encoding functions.
  - **voltage.cpp and voltage.h** - Voltage detection using ADC values.
  - **si4063.cpp and si4063.h** - Si4063 driver files for radio transmission.
  - **4fsk_mod.cpp and 4fsk_mod.h** - 4FSK modulation functions.
- - **delay_timer.cpp and delay_timer.h** - Low-level delay functions based on timers.
  - **utils.cpp and utils.h** - A collection of utility functions.
 
 
 # Step by Step Setup Guide
 ## Setting up the PCB
+
+For pre-flight configuration, the USB board does not need to be broken off, and code can be uploaded normally by just plugging in the USB as it arrives. However, the breakout may be removed to save space during flights!
+
 1. **Carefully** snap off the USB breakout board from the board.
-2. Solder on the female 1x4 header row onto the underside of the USB breakout. Solder on the 1x4 male header row to the corresponding adjecent pins (labeled VSS, GND, D-, and D+).
+2. Solder on the female 1x4 header row onto the underside of the USB breakout. Solder on the 1x4 male header row to the corresponding adjacent pins (labeled VSS, GND, D-, and D+).
 
 ![Solder diagram](/Media/Images/USB-Solder.jpg)
 3. To program the board, attach the USB breakout board as shown in the photo.  Once the board is programmed, the USB breakout board can be removed for flight.
@@ -88,10 +91,10 @@ This project is based on the Arduino IDE workflow. Below steps outline steps nec
     * ArduinoLowPower
     * TinyGPSPlus
     * Scheduler
- 5. To following needs to be downloaded directly from GitHub:
-    * [TinyBME280](https://github.com/maxsrobotics/tiny-bme280/)
+ 5. The following needs to be downloaded directly from GitHub:
+    * [TinyBME280](https://github.com/mpkendall/tiny-bme280/)
 
-**Optional** - The SAMD goes to sleep to save power. To achieve proper sleep, some edits to the SAMD core are necessary. To locate the wiring.c file on your computer, [follow this guide](https:support.arduino.cc/hc/en-us/articles/4415103213714-Find-sketches-libraries-board-cores-and-other-files-on-your-computer).
+**Optional** - The SAMD goes to sleep to save power. To achieve proper sleep, some edits to the SAMD core are necessary. To locate the wiring.c file on your computer, [follow this guide](https://support.arduino.cc/hc/en-us/articles/4415103213714-Find-sketches-libraries-board-cores-and-other-files-on-your-computer).
 Once there, comment out or completely delete the lines shown below:
 ```cpp
     // Defining VERY_LOW_POWER breaks Arduino APIs since all pins are considered INPUT at startup
@@ -109,7 +112,6 @@ Arduino gives you an official warning: "This breaks Arduino APIs since all pins 
 ## Code Configuration
 User configuration of this tracker is **required**. As this system uses amateur radio, you will need at least a Technician's level license (US). Configuration file is located in **config.h**. Open this file in Arduino IDE. Here are the parameters may need to be changed.
 
-- `HORUS_ID` - This setting is your Horus ID number. Information on how to get one in next section.
 - `CALLSIGN` - Amateur radio callsign. This is required to stay legal!
 - `CALLSIGN_WPM` - Speed to send the callsign, in morse code.
 - `CALLSIGN_INTERVAL` - Interval to send the morse code callsign. Maximum interval in the US is 10 minutes.
@@ -119,19 +121,21 @@ User configuration of this tracker is **required**. As this system uses amateur 
 - `PACKET_INTERVAL` - Interval between 4FSK packets. The smaller the interval, the lower the battery life is.
 - `OUTPUT_POWER` - 0-127. This is the output power of the radio module (suggested to keep at maximum).
 - `FLAG_BAD_PACKET` - If the latest GPS values are bad, send out all zeroes (for time, position, speed, and altitude)(suggested).
+- `QUICK_LOCK` - Quick lock mode lowers the output power and increases packet interval while the GPS doesn't have a lock. This helps with desensing the GPS receiver. Values return to previously-defined `PACKET_INTERVAL` and `OUTPUT_POWER` upon lock.
+- `QUICK_LOCK_POWER` - Power level used while the GPS doesn't have a lock. Only applied if `QUICK_LOCK` mode is enabled.
+- `QUICK_LOCK_INTERVAL` - Packet interval used while the GPS doesn't have a lock. Only applied if `QUICK_LOCK` mode is enabled.
+- `RECOVERY_MODE` - If enabled, the tracker will send updates less frequently when on the ground to save power. Only occurs if the tracker detects it's in a flight.
+- `RECOVER_MODE_INTERVAL` - Interval to transmit in recovery mode, when on the ground.
+- `RECOVERY_MODE_FLIGHT_THRESHOLD` - Altitude threshold to consider ourselves in flight, in meters.
+- `RECOVERY_MODE_LAND_THRESHOLD` - Altitude threshold to consider ourselves on the ground, in meters. Recovery mode will trigger below this altitude.
 
 <details>
 <summary>How do I change these values?</summary>
-If there is a prexisting number or value next to the name of the setting name, you can replace that value with the desired value (e.g. replace the "N0CALL" with your callsign in double quotes, "W0MXX"). If there is no value next to the name, you need to comment out the setting to disable that functionality, or uncomment to enable that functionality (comments are defined by adding // at the start of the line).
+If there is a pre-existing number or value next to the name of the setting name, you can replace that value with the desired value (e.g. replace the "N0CALL" with your callsign in double quotes, "W0MXX"). If there is no value next to the name, you need to comment out the setting to disable that functionality, or uncomment to enable that functionality (comments are defined by adding // at the start of the line).
 </details>
 
-### How do I get a Horus v2 ID?
-If you are going to fly your own payload using Horus Binary, you must get a payload ID allocated for your use. This can be done by  [submitting an issue](https://github.com/projecthorus/horusdemodlib/issues/new/choose) or a pull request to that repository, or e-mailing VK5QI: vk5qi@rfhead.net
-
-**Do not use the testing (4FSKTEST-V2) payload ID on an actual launch! (ID 256)**
-
 ## Upload the Code!
-Once code configuration is complete, you may plug in a standard data USB-C cable into the breakout board, select the port in Arduino IDE, and select the upload button (marked by an arrow at the top). You should select the Arduino Zero (Native USB Port) as the board name.
+Once code configuration is complete, you may plug in a standard data USB-C cable into the breakout board, select the port in Arduino IDE, and select the upload button (marked by an arrow at the top). You should select the `Arduino Zero (Native USB Port)` as the board name.
 
 ## Testing
 Once the code is uploaded, you'll see the green LED pulse briefly to indicate initialization. The behavior of that LED is outlined [here](#led-default-behavior). Now you'll need to set up a receive station on either a [laptop or computer with an SDR](https://github.com/projecthorus/horusdemodlib/wiki/1.1-Horus-GUI-Reception-Guide-(Windows-Linux-OSX)), or a [Raspberry Pi board connected to an SDR](https://github.com/projecthorus/horusdemodlib/wiki/1.2--Raspberry-Pi-'Headless'-RX-Guide).
@@ -148,11 +152,11 @@ You should start decoding packets transmitted from the board with your configura
 
 
 ## External Sensors
-Tiny4FSK now offers compatiability with external sensors by automatically scanning I2C on startup. Some sensors come with the Tiny4FSK General Shield, which can be found on the [GitHub Repository](https://github.com/mpkendall/Tiny4FSK-Ecosystem). If you have any custom sensors which you would like me to add support for, please raise an [issue](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/issues).
+Tiny4FSK now offers compatibility with external sensors by automatically scanning I2C on startup. Some sensors come with the Tiny4FSK General Shield, which can be found on the [GitHub Repository](https://github.com/mpkendall/Tiny4FSK-Ecosystem). If you have any custom sensors which you would like me to add support for, please raise an [issue](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK/issues).
 
 
 ## PCBWay PCBs
-The new Revision 4 PCBs have been fabricated and assembled through PCBWay. Their high-quality fabrication and assembly services are truly commendable. I appreciated the ability to choose from many different component suppliers to select the exact components I needed. Additionally, their customer service is incredibly responsive and helpful, and quickly notified me of design issues. I highly recommend PCBWay for any of your PCB prototyping & assembly needs. Thank you, PCBWay, for graciously sponsoring this project!
+The Revision 4 PCBs have been fabricated and assembled through PCBWay. Their high-quality fabrication and assembly services are truly commendable. I appreciated the ability to choose from many different component suppliers to select the exact components I needed. Additionally, their customer service is incredibly responsive and helpful, and quickly notified me of design issues. I highly recommend PCBWay for any of your PCB prototyping & assembly needs. Thank you, PCBWay, for graciously sponsoring this project!
 
 ![alt text](/Media/PCBWay.jpg)
 

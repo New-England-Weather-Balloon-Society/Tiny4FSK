@@ -26,19 +26,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // || Tracker Settings ||
 // **********************
 
-// Horus Binary v2 ID. Obtain a valid ID from https://github.com/projecthorus/horusdemodlib/
-// Create an issue requesting a v2 ID with your callsign. Example Issue:
-/*
-Hello!
-Could I please get a Horus v2 ID for N0CALL? Thanks!
-
--Name Here
-*/
-
-// Replace with the assigned Horus v2 ID
-#define HORUS_ID 380
-
-// Amateur radio license required! Give callsign here.
+// Amateur radio license is required! Give callsign here.
 #define CALLSIGN "W0MXX"
 
 // Transmits callsign in CW to stay legal. Keep at 20 or below.
@@ -66,12 +54,28 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 // then transmit all zeros.
 #define FLAG_BAD_PACKET
 
+// Lowers the transmit output power to defined value while awaiting GPS lock.
+// Also lowers transmit interval.
+// This can help with obtaining a faster lock, as it doesn't desense the receiver as much.
+#define QUICK_LOCK
+
+// Power level to use during quick lock mode.
+#define QUICK_LOCK_POWER 30
+
+#define QUICK_LOCK_INTERVAL 5000
+
+// If defined, the tracker will transmit less frequently when on the ground to save power.
+#define RECOVERY_MODE
+
+// Interval to transmit in recovery mode, when on the ground.
+#define RECOVERY_MODE_INTERVAL 120000
+
+#define RECOVERY_MODE_FLIGHT_THRESHOLD 5000 // Altitude threshold to consider ourselves in flight, in meters.
+#define RECOVERY_MODE_LAND_THRESHOLD 300 // Altitude threshold to consider ourselves on the ground, in meters.
+
 // ****************************
 // || General Board Settings ||
 // ****************************
-
-// SD card headers
-
 
 // Enable status mode LEDs for information on GPS initialization and issues.
 #define STATUS_LED
@@ -79,11 +83,7 @@ Could I please get a Horus v2 ID for N0CALL? Thanks!
 // Enable Serial Prints for debugging and sleep modes for MCU.
 // MCU sleep mode disabled debug messages, so disable for MCU sleep.
 // Disable for flights to conserve power.
-#define DEV_MODE
-
-// EXPERIMENTAL - optimise for EXTREMELY low power draw
-// Does not do anything yet!
-//#define ULTRA_LOW_POWER
+//#define DEV_MODE
 
 // *********************
 // || Pin Definitions ||
