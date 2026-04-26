@@ -2,7 +2,7 @@
 # Tiny4FSK - The Lightweight Horus Binary Tracker Built for HABs
 **WORK IN PROGRESS** - Please do not rely on this as your only tracking system. Tiny4FSK is still in the R&D phase of development and testing.
 
-**NEW** - Minor updates to PCB files, code maintenance, automatic sensor initialization.
+**NEW** - Horus Binary v3! + quick lock mode and recovery mode
 
 **STATE** - Main branch is stable!
 
