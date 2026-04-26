@@ -7,7 +7,7 @@
 **STATE** - Main branch is stable!
 
 ## What is the Tiny4FSK project?
-Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It runs on 1 AA battery that lasts for 10-17 hours (a few seconds between position updates, can run longer if there's a longer delay). It runs on 4FSK (4-frequency shift keying), which means that it separates tones into 4 separate frequencies. Upon this, it uses the [Horus Binary v3](https://github.com/projecthorus/horusdemodlib) system, which is a relatively modern system popularly used with [RS41ng](https://github.com/mikaelnousiainen/RS41ng).
+Tiny4FSK aims to be an ultra-tiny high-altitude tracking system. It runs on 1 AA battery that lasts for 10-17 hours (packet interval and power output can be adjusted to lengthen battery life). It runs on 4FSK (4-frequency shift keying), which means that it separates tones into 4 separate frequencies. Upon this, it uses the [Horus Binary v3](https://github.com/projecthorus/horusdemodlib) system, which is a relatively modern system popularly used with [RS41ng](https://github.com/mikaelnousiainen/RS41ng).
 
 ![20240826_110047](/Media/Images/Tiny4FSK_Sky2.png)
 
