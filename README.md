@@ -138,7 +138,7 @@ If there is a pre-existing number or value next to the name of the setting name,
 Once code configuration is complete, you may plug in a standard data USB-C cable into the breakout board, select the port in Arduino IDE, and select the upload button (marked by an arrow at the top). You should select the `Arduino Zero (Native USB Port)` as the board name.
 
 ## Testing
-Once the code is uploaded, you'll see the green LED pulse briefly to indicate initialization. The behavior of that LED is outlined [here](#led-default-behavior). Now you'll need to set up a receive station on either a [laptop or computer with an SDR](https://github.com/projecthorus/horusdemodlib/wiki/1.1-Horus-GUI-Reception-Guide-(Windows-Linux-OSX)), or a [Raspberry Pi board connected to an SDR](https://github.com/projecthorus/horusdemodlib/wiki/1.2--Raspberry-Pi-'Headless'-RX-Guide).
+Once the code is uploaded, you'll see the green LED pulse briefly to indicate initialization. The behavior of that LED is outlined [here](#led-default-behavior). Now you'll need to set up a receive station on either a [laptop and an RTL-SDR](https://github.com/projecthorus/horusdemodlib/wiki/1.1-Horus-GUI-Reception-Guide-(Windows-Linux-OSX)), [Raspberry Pi and RTL-SDR](https://github.com/projecthorus/horusdemodlib/wiki/1.2--Raspberry-Pi-'Headless'-RX-Guide), or [any browser-enabled device with an RTL-SDR](https://horus.sondehub.org).
 
 You should start decoding packets transmitted from the board with your configuration parameters. It may take up to 5 minutes to gain a GPS fix, depending on your location.
 
