@@ -21139,7 +21139,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "1.5pF"
+		(property "Value" "2.7pF"
 			(at 74.93 80.5115 0)
 			(show_name no)
 			(do_not_autoplace no)
