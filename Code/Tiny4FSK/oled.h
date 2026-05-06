@@ -26,6 +26,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 bool oled_begin(int16_t width, int16_t height, uint8_t i2c_addr = SSD1306_I2C_ADDRESS);
 void oled_clearDisplay();
 void oled_display();
+void oled_sleep();
+void oled_wake();
 void oled_drawPixel(int16_t x, int16_t y, uint16_t color);
 void oled_setTextSize(uint8_t s);
 void oled_setTextColor(uint16_t c);

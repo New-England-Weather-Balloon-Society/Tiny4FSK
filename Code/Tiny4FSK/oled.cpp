@@ -110,6 +110,16 @@ void oled_display()
     }
 }
 
+void oled_sleep()
+{
+    sendCommand(0xAE); // Display Off
+}
+
+void oled_wake()
+{
+    sendCommand(0xAF); // Display On
+}
+
 void oled_drawPixel(int16_t x, int16_t y, uint16_t color)
 {
     if (x < 0 || x >= _width || y < 0 || y >= _height)

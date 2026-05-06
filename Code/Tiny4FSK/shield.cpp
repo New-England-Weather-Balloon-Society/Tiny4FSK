@@ -99,6 +99,7 @@ void initialize_shield()
         oled_setCursor(0, 0);
         oled_print("Tiny4FSK Tracker");
         oled_display();
+        oled_sleep();
     }
 
     if (sd_card_begin())

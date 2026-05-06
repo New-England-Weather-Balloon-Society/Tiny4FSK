@@ -170,9 +170,11 @@ void setup()
 
   if (oled_found)
   {
+    oled_wake();
     oled_clearDisplay();
     oled_print_diagnostic("Freq", FSK_FREQ, 3);
     oled_display();
+    oled_sleep();
   }
   if (sd_found)
   {
@@ -255,7 +257,7 @@ void loop()
   fsk4_write(codedbuffer, coded_len);
 
   // End the transmission
-  si4063_inhibit_tx();
+  si4063_disable_tx();
 
 #ifdef RECOVERY_MODE
   if(gps.altitude.meters() > RECOVERY_MODE_FLIGHT_THRESHOLD && !in_flight) {
@@ -406,6 +408,7 @@ size_t build_horus_binary_packet_v3(char *buffer)
   // If OLED found, print the values
   if (oled_found)
   {
+    oled_wake();
     oled_clearDisplay();
     oled_setCursor(0, 0);
     oled_print_diagnostic("Sats", TelemetryStruct.gps.satellitesVisible, 0);
@@ -413,6 +416,7 @@ size_t build_horus_binary_packet_v3(char *buffer)
     oled_print_diagnostic("Lon", TelemetryStruct.gps.longitude, 6);
     oled_print_diagnostic("Alt", TelemetryStruct.gps.altitudeMeters, 1);
     oled_display();
+    oled_sleep();
   }
   if (sd_found)
   {
