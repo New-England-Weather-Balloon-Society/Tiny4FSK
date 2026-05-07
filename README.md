@@ -88,13 +88,14 @@ This project is based on the Arduino IDE workflow. Below steps outline steps nec
  1. Install [Arduino IDE](https://www.arduino.cc/en/software) from [here](https://www.arduino.cc/en/software).
  2. [Download the Arduino SAMD core](https://docs.arduino.cc/learn/starting-guide/cores/).
  3. Download necessary libraries from library manager:
-    * ArduinoLowPower
+    * Arduino Low Power (with dependencies)
     * TinyGPSPlus
     * Scheduler
- 5. The following needs to be downloaded directly from GitHub:
-    * [TinyBME280](https://github.com/mpkendall/tiny-bme280/)
 
 **Optional** - The SAMD goes to sleep to save power. To achieve proper sleep, some edits to the SAMD core are necessary. To locate the wiring.c file on your computer, [follow this guide](https://support.arduino.cc/hc/en-us/articles/4415103213714-Find-sketches-libraries-board-cores-and-other-files-on-your-computer).
+
+Windows: `C:/Users/[YOUR USER]/AppData/Local/Arduino15/packages/arduino/hardware/samd/1.8.14/cores/arduino`
+
 Once there, comment out or completely delete the lines shown below:
 ```cpp
     // Defining VERY_LOW_POWER breaks Arduino APIs since all pins are considered INPUT at startup
@@ -117,7 +118,7 @@ User configuration of this tracker is **required**. As this system uses amateur 
 - `CALLSIGN_INTERVAL` - Interval to send the morse code callsign. Maximum interval in the US is 10 minutes.
 - `FSK_FREQ` - This is setting for your preferred TX frequency. The filter is optimized for 70cm radio band.
 - `STATUS_LED` - Comment out to disable verbose status LEDs on PCB.
-- `DEV_MODE` - Comment out for flight mode. Disables Serial and enables deep sleep modes for lower power consumption.
+- `DEV_MODE` - Comment out for flight mode, uncomment during programming. Disables Serial and enables deep sleep modes for lower power consumption.
 - `PACKET_INTERVAL` - Interval between 4FSK packets. The smaller the interval, the lower the battery life is.
 - `OUTPUT_POWER` - 0-127. This is the output power of the radio module (suggested to keep at maximum).
 - `FLAG_BAD_PACKET` - If the latest GPS values are bad, send out all zeroes (for time, position, speed, and altitude)(suggested).
@@ -132,6 +133,11 @@ User configuration of this tracker is **required**. As this system uses amateur 
 <details>
 <summary>How do I change these values?</summary>
 If there is a pre-existing number or value next to the name of the setting name, you can replace that value with the desired value (e.g. replace the "N0CALL" with your callsign in double quotes, "W0MXX"). If there is no value next to the name, you need to comment out the setting to disable that functionality, or uncomment to enable that functionality (comments are defined by adding // at the start of the line).
+</details>
+
+<details>
+<summary>A note on reprogramming without DEV_MODE, or: Why does the board continuously disconnect from the computer?</summary>
+On the condition that DEV_MODE is uncommented, the microcontroller goes into deep sleep to conserve power. Part of this sleep cycle includes disabling the USB peripheral, causing the board to appear to continuously disconnect and reconnect. <em>This can easily be fixed by double-clicking the reset button. Doing so will enter the board into bootloader mode, which will attach the board onto a new USB port and disable any code. Once new code is uploaded, the board will appear on a different port on the computer.</em>
 </details>
 
 ## Upload the Code!

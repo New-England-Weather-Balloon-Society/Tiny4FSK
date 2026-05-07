@@ -83,7 +83,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // Enable Serial Prints for debugging and sleep modes for MCU.
 // MCU sleep mode disabled debug messages, so disable for MCU sleep.
 // Disable for flights to conserve power.
-//#define DEV_MODE
+#define DEV_MODE
 
 // *********************
 // || Pin Definitions ||

@@ -31,7 +31,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include <SPI.h>
 #include <ArduinoLowPower.h>
 #include <TinyGPSPlus.h>
-#include <TinyBME280.h>
+#include "bme280.h"
 #include <Scheduler.h>
 #include <SD.h>
 #include "horus_l2.h"

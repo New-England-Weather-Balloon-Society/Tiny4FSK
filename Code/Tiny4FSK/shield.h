@@ -21,7 +21,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include <Arduino.h>
 #include <Wire.h>
-#include <TinyBME280.h>
+#include "bme280.h"
 #include "config.h"
 #include "oled.h"
 #include "sd_card.h"
