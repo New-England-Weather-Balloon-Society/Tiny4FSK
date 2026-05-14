@@ -140,6 +140,17 @@ If there is a pre-existing number or value next to the name of the setting name,
 On the condition that DEV_MODE is uncommented, the microcontroller goes into deep sleep to conserve power. Part of this sleep cycle includes disabling the USB peripheral, causing the board to appear to continuously disconnect and reconnect. <em>This can easily be fixed by double-clicking the reset button. Doing so will enter the board into bootloader mode, which will attach the board onto a new USB port and disable any code. Once new code is uploaded, the board will appear on a different port on the computer.</em>
 </details>
 
+## Battery Life Expectations
+Through a series of battery life tests on ground-level, we've created a graph approximating the battery life with reference to packe interval and transmit power.
+
+At maximum power (127):
+
+![Graph showing level at max power](/Media/BatteryGraphs/MaxPower.png)
+
+All power levels from 0 (no amplifier) to 127 (max power):
+
+![Graph showing levels at several powers](/Media/BatteryGraphs/AllLevels.png)
+
 ## Upload the Code!
 Once code configuration is complete, you may plug in a standard data USB-C cable into the breakout board, select the port in Arduino IDE, and select the upload button (marked by an arrow at the top). You should select the `Arduino Zero (Native USB Port)` as the board name.
 
