@@ -151,6 +151,8 @@ All power levels from 0 (no amplifier) to 127 (max power):
 
 ![Graph showing levels at several powers](/Media/BatteryGraphs/AllLevels.png)
 
+All tests ran with quick lock off and 1x Energizer Ultimate Lithium AA.
+
 ## Upload the Code!
 Once code configuration is complete, you may plug in a standard data USB-C cable into the breakout board, select the port in Arduino IDE, and select the upload button (marked by an arrow at the top). You should select the `Arduino Zero (Native USB Port)` as the board name.
 
