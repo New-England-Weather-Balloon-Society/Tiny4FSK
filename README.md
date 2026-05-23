@@ -141,7 +141,9 @@ On the condition that DEV_MODE is uncommented, the microcontroller goes into dee
 </details>
 
 ## Battery Life Expectations
-Through a series of battery life tests on ground-level, we've created a graph approximating the battery life with reference to packe interval and transmit power.
+Through a series of battery life tests on ground-level, we've created a graph approximating the battery life with reference to packet interval and transmit power.
+
+These graphs only provide an approximation. Variation will still occur from battery to battery, and we always recommend testing yourself prior to flight and aiming for double the battery life necessary.
 
 At maximum power (127):
 
