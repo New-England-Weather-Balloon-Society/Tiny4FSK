@@ -130,6 +130,20 @@ User configuration of this tracker is **required**. As this system uses amateur 
 - `RECOVERY_MODE_FLIGHT_THRESHOLD` - Altitude threshold to consider ourselves in flight, in meters.
 - `RECOVERY_MODE_LAND_THRESHOLD` - Altitude threshold to consider ourselves on the ground, in meters. Recovery mode will trigger below this altitude.
 
+### Output power mapping
+
+Approximate mapping from the `OUTPUT_POWER` numeric value to typical output in dBm:
+
+| Value | Approx. dBm |
+|------:|:-----------:|
+| 127   | 19 dBm      |
+| 100   | 18 dBm      |
+| 80    | 16.5 dBm    |
+| 60    | 14.5 dBm    |
+| 40    | 11.4 dBm    |
+| 20    | 5.6 dBm     |
+| 0     | -45 dBm     |
+
 <details>
 <summary>How do I change these values?</summary>
 If there is a pre-existing number or value next to the name of the setting name, you can replace that value with the desired value (e.g. replace the "N0CALL" with your callsign in double quotes, "W0MXX"). If there is no value next to the name, you need to comment out the setting to disable that functionality, or uncomment to enable that functionality (comments are defined by adding // at the start of the line).
