@@ -58,11 +58,11 @@ int assemble_v3_packet(uint8_t* buffer, telemetry_message* payload) {
 
     int frameSize = 128;
     if (encodedSize <= 30){
-        frameSize = 32;
+        frameSize = 32; // 4 secs
     } else if (encodedSize <= 46){
-        frameSize = 48;
+        frameSize = 48; // 5 secs
     } else if (encodedSize <= 62){
-        frameSize = 64;
+        frameSize = 64; // 6 secs
     } else if (encodedSize <= 94){
         frameSize = 96;
     } else if (encodedSize <= 126){

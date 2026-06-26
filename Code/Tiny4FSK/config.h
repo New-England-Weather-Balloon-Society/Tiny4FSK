@@ -44,8 +44,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // Spacing of FSK peaks. Adjust in the decoding program (e.g., Horus GUI, HorusDemodLib).
 #define FSK_SPACING 270
 
-// Delay between each packet, in milliseconds.
-#define PACKET_INTERVAL 1000 // For 90% of use cases, try to keep this over 10 
+// Delay between each packet, in milliseconds. Refer the the Battery Life Expectations section of the README for more information.
+#define PACKET_INTERVAL 10000 // For 90% of use cases, try to keep this over 10 seconds in favor of increasing battery life. The longer the interval, the longer the battery will last.
 
 // Si4063 Transmit Power Level
 #define OUTPUT_POWER 127
