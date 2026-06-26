@@ -45,7 +45,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #define FSK_SPACING 270
 
 // Delay between each packet, in milliseconds.
-#define PACKET_INTERVAL 1000
+#define PACKET_INTERVAL 1000 // For 90% of use cases, try to keep this over 10 
 
 // Si4063 Transmit Power Level
 #define OUTPUT_POWER 127
