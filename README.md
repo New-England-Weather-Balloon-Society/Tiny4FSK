@@ -116,7 +116,7 @@ User configuration of this tracker is **required**. As this system uses amateur 
 - `CALLSIGN` - Amateur radio callsign. This is required to stay legal!
 - `CALLSIGN_WPM` - Speed to send the callsign, in morse code.
 - `CALLSIGN_INTERVAL` - Interval to send the morse code callsign. Maximum interval in the US is 10 minutes.
-- `FSK_FREQ` - This is setting for your preferred TX frequency. The filter is optimized for 70cm radio band.
+- `FREQUENCY` - This is setting for your preferred TX frequency. The filter is optimized for 70cm radio band.
 - `STATUS_LED` - Comment out to disable verbose status LEDs on PCB.
 - `DEV_MODE` - Comment out for flight mode, uncomment during programming. Disables Serial and enables deep sleep modes for lower power consumption.
 - `PACKET_INTERVAL` - Interval between 4FSK packets. The smaller the interval, the lower the battery life is.

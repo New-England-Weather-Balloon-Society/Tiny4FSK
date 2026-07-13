@@ -16,53 +16,55 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-// TINY4FSK CONFIG FILE
-// Please read comments for each section, even though some settings are self-explanatory.
+// PLEASE READ ALL COMMENTS, even though some settings may be self-explanatory.
 // Feel free to add an issue or PR on GitHub for any questions or bugs.
 
 #pragma once
 
-// **********************
-// || Tracker Settings ||
-// **********************
+// *****************************
+// || Essential Configuration ||
+// *****************************
 
+// ---------------- CRITICAL ----------------
 // Amateur radio license is required! Give callsign here.
-#define CALLSIGN "W0MXX"
-
-// Transmits callsign in CW to stay legal. Keep at 20 or below.
-#define CALLSIGN_WPM 20
-
-// Interval to send the CW in milliseconds.
-#define CALLSIGN_INTERVAL 600000
+#define CALLSIGN "N0CALL"
 
 // FSK Center Frequency in MHz. Ensure SDR is tuned to this frequency.
-#define FSK_FREQ 432.634
+#define FREQUENCY 432.634
+// ------------------------------------------
 
-// Baud Rate of FSK Packet. No need to change.
-#define FSK_BAUD 100
-
-// Spacing of FSK peaks. Adjust in the decoding program (e.g., Horus GUI, HorusDemodLib).
-#define FSK_SPACING 270
-
+// -------------- BATTERY LIFE --------------
 // Delay between each packet, in milliseconds. Refer the the Battery Life Expectations section of the README for more information.
-#define PACKET_INTERVAL 10000 // For 90% of use cases, try to keep this over 10 seconds in favor of increasing battery life. The longer the interval, the longer the battery will last.
+// For 90% of use cases, try to keep this over 10 seconds in favor of increasing battery life. The longer the interval, the longer the battery will last.
+#define PACKET_INTERVAL 10000
 
-// Si4063 Transmit Power Level
+// Enable status mode LEDs for information on GPS initialization and issues.
+// Disabling will save some power.
+#define STATUS_LED
+
+// Keeping this setting enabled allows Serial prints to be sent to the Serial Monitor.
+// This is useful for debugging, but will increase power consumption and reduce battery life.
+// Disabling will allow the tracker to enter deep-sleep mode between transmissions, which will greatly increase battery life.
+// If you're plugged into USB without DEV_MODE, you'll see it disconnect between transmissions. Check the README!!
+#define DEV_MODE
+
+// Sets the output power level from 0dBm - ~19dBm (0-127).
+// Honestly, this really doesn't do much for battery life. Check the graph in the README.
 #define OUTPUT_POWER 127
+// ------------------------------------------
 
-// If the GPS position seems to be a bad position (altitude less than zero, GPS reports bad fix),
-// then transmit all zeros.
-#define FLAG_BAD_PACKET
-
-// Lowers the transmit output power to defined value while awaiting GPS lock.
-// Also lowers transmit interval.
+// ------------- LAUNCH/LANDING -------------
+// Lowers the transmit output power to defined value while awaiting GPS lock. Also lowers transmit interval.
 // This can help with obtaining a faster lock, as it doesn't desense the receiver as much.
 #define QUICK_LOCK
 
-// Power level to use during quick lock mode.
+// Power level to use during quick lock mode (0-127).
 #define QUICK_LOCK_POWER 30
 
+// Interval to transmit in quick lock mode, when waiting for a GPS fix, in milliseconds.
+// It'd make the most sense to make this longer than PACKET_INTERVAL.
 #define QUICK_LOCK_INTERVAL 5000
+
 
 // If defined, the tracker will transmit less frequently when on the ground to save power.
 #define RECOVERY_MODE
@@ -72,18 +74,38 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #define RECOVERY_MODE_FLIGHT_THRESHOLD 5000 // Altitude threshold to consider ourselves in flight, in meters.
 #define RECOVERY_MODE_LAND_THRESHOLD 300 // Altitude threshold to consider ourselves on the ground, in meters.
+// ------------------------------------------
+
+
+
+
+
+
 
 // ****************************
-// || General Board Settings ||
+// || Advanced Configuration ||
 // ****************************
 
-// Enable status mode LEDs for information on GPS initialization and issues.
-#define STATUS_LED
+// These settings modify the internal behavior of the board. You should not need to modify these unless you are doing custom development or have a specific use case.
+// As always, please refer to the README.
 
-// Enable Serial Prints for debugging and sleep modes for MCU.
-// MCU sleep mode disabled debug messages, so disable for MCU sleep.
-// Disable for flights to conserve power.
-#define DEV_MODE
+// ********************
+// | Tracker Settings |
+// ********************
+
+// Transmits callsign in CW to stay legal. Keep at 20 or below.
+#define CALLSIGN_WPM 20
+// Interval to send the CW in milliseconds.
+#define CALLSIGN_INTERVAL 600000
+
+// Baud Rate of FSK Packet.
+#define FSK_BAUD 100
+// Spacing of FSK peaks. Adjust in the decoding program (e.g., Horus GUI, HorusDemodLib).
+#define FSK_SPACING 270
+
+// If the GPS position seems to be a bad position (altitude less than zero, GPS reports bad fix),
+// then transmit all zeros.
+#define FLAG_BAD_PACKET
 
 // *********************
 // || Pin Definitions ||

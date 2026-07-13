@@ -172,7 +172,7 @@ void setup()
   {
     oled_wake();
     oled_clearDisplay();
-    oled_print_diagnostic("Freq", FSK_FREQ, 3);
+    oled_print_diagnostic("Freq", FREQUENCY, 3);
     oled_display();
     oled_sleep();
   }

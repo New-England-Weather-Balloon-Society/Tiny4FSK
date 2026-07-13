@@ -46,7 +46,7 @@ void configureSi4063()
   si_params.clock = 26000000UL;
 
   radio_parameters rf_params;
-  rf_params.frequency_hz = FSK_FREQ * 1000000;
+  rf_params.frequency_hz = FREQUENCY * 1000000;
   rf_params.power = OUTPUT_POWER;
   rf_params.type = SI4063_MODULATION_TYPE_CW;
   rf_params.offset = 0;
