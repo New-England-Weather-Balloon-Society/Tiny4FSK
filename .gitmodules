@@ -1,0 +1,3 @@
+[submodule "mpkendall-kicad-repo"]
+	path = mpkendall-kicad-repo
+	url = https://github.com/mpkendall/mpkendall-kicad-repo
