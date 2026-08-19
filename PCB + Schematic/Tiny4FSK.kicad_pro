@@ -691,12 +691,43 @@
       "sort_field": "Reference"
     },
     "bus_aliases": {
-      "I2C": [],
+      "GLOBAL_STATUS": [
+        "ERROR",
+        "SUCCESS"
+      ],
+      "GPIO": [
+        "GPIO38",
+        "GPIO12",
+        "GPIO13",
+        "GPIO_A_1",
+        "GPIO_A_2"
+      ],
+      "I2C": [
+        "SDA",
+        "SCL"
+      ],
+      "SI_CTL": [
+        "SDN",
+        "RST",
+        "GP0",
+        "GP1"
+      ],
       "SPI": [
         "MISO",
         "MOSI",
         "~{CS}",
         "CLK"
+      ],
+      "SWD": [
+        "SWDIO",
+        "SWCLK",
+        "~{RESET}"
+      ],
+      "UART": [
+        "TXD",
+        "RXD",
+        "CTS",
+        "DTR"
       ],
       "USB": [
         "D+",
@@ -738,7 +769,7 @@
       "meta": {
         "version": 0
       },
-      "model_mode": 0,
+      "model_mode": 4,
       "workbook_filename": ""
     },
     "page_layout_descr_file": "",
@@ -761,7 +792,7 @@
         "uuid": "afd8b0bc-328a-481f-8ddf-c1252dc3b440"
       }
     ],
-    "used_designators": "R1-15,JP1,TP1,J1-9,H1-2,H4,BT1,#PWR2-3,#PWR5-69,#PWR71-72,FB1,L1-10,C1-31,AE1-2,SW1-2,D1-3,U1-8",
+    "used_designators": "R1-23,JP1,TP1,J1-9,H1-2,H4,BT1,#PWR2-3,#PWR5-83,FB1,L1-10,C1-36,SW1-2,AE1-2,D1-3,U1-9",
     "variants": []
   },
   "sheets": [
