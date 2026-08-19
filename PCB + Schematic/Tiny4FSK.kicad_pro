@@ -51,7 +51,23 @@
         "silk_text_upright": false,
         "zones": {
           "45_degree_only": false,
-          "min_clearance": 0.0
+          "border_display_style": 2,
+          "border_hatch_pitch": 0.5,
+          "corner_radius": 0.0,
+          "corner_smoothing": 0,
+          "fill_mode": 0,
+          "hatch_gap": 1.5,
+          "hatch_orientation": 0.0,
+          "hatch_smoothing_level": 0,
+          "hatch_smoothing_value": 0.1,
+          "hatch_thickness": 1.0,
+          "min_clearance": 0.0,
+          "min_island_area": 10.0,
+          "min_thickness": 0.25,
+          "pad_connection": 1,
+          "remove_islands": 0,
+          "thermal_relief_gap": 0.5,
+          "thermal_relief_spoke_width": 0.5
         }
       },
       "diff_pair_dimensions": [
@@ -668,13 +684,25 @@
         }
       ],
       "filter_string": "",
-      "group_symbols": true,
+      "group_symbols": false,
       "include_excluded_from_bom": false,
       "name": "",
       "sort_asc": true,
       "sort_field": "Reference"
     },
-    "bus_aliases": {},
+    "bus_aliases": {
+      "I2C": [],
+      "SPI": [
+        "MISO",
+        "MOSI",
+        "~{CS}",
+        "CLK"
+      ],
+      "USB": [
+        "D+",
+        "D-"
+      ]
+    },
     "connection_grid_size": 50.0,
     "drawing": {
       "dashed_lines_dash_length_ratio": 12.0,
@@ -733,13 +761,33 @@
         "uuid": "afd8b0bc-328a-481f-8ddf-c1252dc3b440"
       }
     ],
-    "used_designators": "",
+    "used_designators": "R1-15,JP1,TP1,J1-9,H1-2,H4,BT1,#PWR2-3,#PWR5-69,#PWR71-72,FB1,L1-10,C1-31,AE1-2,SW1-2,D1-3,U1-8",
     "variants": []
   },
   "sheets": [
     [
       "afd8b0bc-328a-481f-8ddf-c1252dc3b440",
       "Tiny4FSK"
+    ],
+    [
+      "cf7a32e2-bce8-4b86-ac78-9d8acf42adb5",
+      "radio"
+    ],
+    [
+      "c2ac3fdd-9d20-4040-8b14-5c077d8b27c3",
+      "power"
+    ],
+    [
+      "912416ae-bb0e-402f-bbe6-c221c5661b66",
+      "sensors"
+    ],
+    [
+      "57d9f7bf-2f80-4306-b6cb-3241eb3fa1f3",
+      "interface"
+    ],
+    [
+      "ebe76c7c-ab07-4af9-aba3-b47fc9038a84",
+      "mcu"
     ]
   ],
   "text_variables": {},
