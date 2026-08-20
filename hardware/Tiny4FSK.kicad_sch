@@ -355,8 +355,8 @@
 		)
 	)
 	(sheet
-		(at 67.31 86.36)
-		(size 21.59 15.24)
+		(at 67.31 83.82)
+		(size 21.59 17.78)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -371,7 +371,7 @@
 		)
 		(uuid "912416ae-bb0e-402f-bbe6-c221c5661b66")
 		(property "Sheetname" "sensors"
-			(at 67.31 85.6484 0)
+			(at 67.31 83.1084 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects

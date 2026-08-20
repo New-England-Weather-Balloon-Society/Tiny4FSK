@@ -4426,7 +4426,7 @@
 		(uuid "8cb0b425-d40d-455b-b53d-62457675e06d")
 	)
 	(bus_entry
-		(at 82.55 63.5)
+		(at 91.44 63.5)
 		(size -2.54 2.54)
 		(stroke
 			(width 0)
@@ -4435,7 +4435,7 @@
 		(uuid "5034e0b2-d223-4aa0-9740-6ea9c40eb96a")
 	)
 	(bus_entry
-		(at 82.55 66.04)
+		(at 91.44 66.04)
 		(size -2.54 2.54)
 		(stroke
 			(width 0)
@@ -4805,7 +4805,7 @@
 	)
 	(bus
 		(pts
-			(xy 82.55 63.5) (xy 82.55 66.04)
+			(xy 91.44 63.5) (xy 91.44 66.04)
 		)
 		(stroke
 			(width 0)
@@ -5205,7 +5205,7 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 66.04) (xy 80.01 66.04)
+			(xy 73.66 66.04) (xy 88.9 66.04)
 		)
 		(stroke
 			(width 0)
@@ -5305,7 +5305,7 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 68.58) (xy 80.01 68.58)
+			(xy 73.66 68.58) (xy 88.9 68.58)
 		)
 		(stroke
 			(width 0)
@@ -5545,7 +5545,7 @@
 	)
 	(hierarchical_label "{USB}"
 		(shape input)
-		(at 82.55 63.5 0)
+		(at 91.44 63.5 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5553,6 +5553,60 @@
 			(justify left)
 		)
 		(uuid "5441286f-4c80-44c6-b526-5dfefed80218")
+	)
+	(rule_area
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(polyline
+			(pts
+				(xy 87.63 63.5) (xy 87.63 71.12) (xy 85.09 71.12) (xy 85.09 63.5)
+			)
+			(stroke
+				(width 0)
+				(type dash)
+			)
+			(fill
+				(type none)
+			)
+			(uuid "a93f4ad9-6f4e-4a5d-b32a-887e7a9d0cd1")
+		)
+	)
+	(netclass_flag ""
+		(length 2.54)
+		(shape round)
+		(at 86.36 63.5 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8ee61ed0-690c-445b-8aac-b841ae5afce3")
+		(property "Netclass" "90R"
+			(at 87.0585 60.96 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Component Class" ""
+			(at -25.4 26.67 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_name "Earth_3")
