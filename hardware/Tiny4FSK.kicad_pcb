@@ -164,7 +164,7 @@
 	(footprint "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "00d2048d-d5fa-4424-8f8b-a1216f188f73")
-		(at 62.62 105.095)
+		(at 210.87 77.07)
 		(descr "Through hole straight pin header, 1x09, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x09 2.54mm single row")
 		(property "Reference" "J2"
@@ -2575,7 +2575,7 @@
 	(footprint "Button_Switch_SMD:SW_Tactile_SPST_NO_Straight_CK_PTS636Sx25SMTRLFS"
 		(layer "F.Cu")
 		(uuid "136bb645-7df9-4410-91c1-76099d1ec719")
-		(at 192.925 78.495 -90)
+		(at 192.85 72.47 -90)
 		(descr "Tactile switch, SPST, 6.0x3.5 mm, H2.5 mm, straight, NO, gull wing leads: https://www.ckswitches.com/media/2779/pts636.pdf")
 		(tags "switch tactile SPST 1P1T straight NO SMTR C&K")
 		(property "Reference" "SW2"
@@ -4820,7 +4820,7 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "35dacc01-33f6-4681-8d36-0db115bc783e")
-		(at 154.7 51)
+		(at 184.55 72.95)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "R21"
@@ -5082,7 +5082,7 @@
 	(footprint "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "3b998315-3e6d-4baf-9352-18fa40ade87d")
-		(at 62.66 140.595)
+		(at 210.885 112.52)
 		(descr "Through hole straight pin header, 1x05, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x05 2.54mm single row")
 		(property "Reference" "J6"
@@ -5984,7 +5984,7 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "3e2d0f95-bbdb-4633-ad2d-37bf5ed54d35")
-		(at 192.73 68.75)
+		(at 196.405 68.85)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C2"
@@ -13031,7 +13031,7 @@
 	(footprint "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "8274d9ff-492f-440d-88a8-4e5526ea0e68")
-		(at 210.315 60.14)
+		(at 208.665 60.215)
 		(descr "Through hole straight pin header, 1x01, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x01 2.54mm single row")
 		(property "Reference" "J9"
@@ -17405,7 +17405,7 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "adbd696a-825d-418e-b813-37c536309098")
-		(at 153.7 50.08)
+		(at 183.55 72.03)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "R20"
@@ -21100,7 +21100,7 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "c415cdef-8496-460b-8ad6-9efe79f30267")
-		(at 153.7 48.87)
+		(at 183.55 70.82)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C3"
@@ -21362,7 +21362,7 @@
 	(footprint "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "c4fb22eb-bdfe-458e-9a02-c106ef292f1e")
-		(at 62.66 129.345)
+		(at 210.935 101.12)
 		(descr "Through hole straight pin header, 1x04, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x04 2.54mm single row")
 		(property "Reference" "J3"
@@ -22240,7 +22240,7 @@
 	(footprint "Package_LGA:Bosch_LGA-8_2.5x2.5mm_P0.65mm_ClockwisePinNumbering"
 		(layer "F.Cu")
 		(uuid "d04c02be-2d27-464a-9f93-025524ad4e23")
-		(at 193.365 70.635 -90)
+		(at 197.04 70.735 -90)
 		(descr "LGA-8")
 		(tags "lga land grid array")
 		(property "Reference" "U1"
@@ -28334,7 +28334,7 @@
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "fc4e3e72-b725-42f0-9db2-93bc48fcb46d")
-		(at 192.73 72.535)
+		(at 196.405 72.635)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C36"
@@ -29070,7 +29070,7 @@
 	(footprint "Connector_Pogo_1.27mm:Pogo_2x05_P1.27mm"
 		(layer "B.Cu")
 		(uuid "baaeff8d-374f-4966-8937-c1a34b6bfd98")
-		(at 192.83 84.05)
+		(at 192.83 72.4)
 		(property "Reference" "J8"
 			(at -0.075 4.15 180)
 			(unlocked yes)
@@ -29361,17 +29361,6 @@
 			(uuid "00034839-74fb-4c25-bd14-e3e27675a4da")
 		)
 		(embedded_fonts no)
-	)
-	(gr_rect
-		(start 182.35 26.975)
-		(end 191.35 35.975)
-		(stroke
-			(width 0.2)
-			(type solid)
-		)
-		(fill no)
-		(layer "F.Cu")
-		(uuid "68d6a285-dab0-4d9f-b579-66c63e8784cd")
 	)
 	(gr_rect
 		(start 190.35 58.15)
