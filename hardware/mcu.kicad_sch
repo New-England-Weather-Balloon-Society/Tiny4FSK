@@ -7076,7 +7076,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Button_Switch_SMD:SW_Tactile_SPST_NO_Straight_CK_PTS636Sx25SMTRLFS"
+		(property "Footprint" "Button_Switch_SMD:SW_SPST_TS-1088-xR020"
 			(at 114.3 132.08 0)
 			(hide yes)
 			(show_name no)
