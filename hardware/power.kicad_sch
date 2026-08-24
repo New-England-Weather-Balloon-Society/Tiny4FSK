@@ -5420,7 +5420,7 @@
 		(uuid "9988fbe3-f8ca-4dcc-ba1b-486ccc090f3d")
 	)
 	(label "BST_IN"
-		(at 95.25 123.19 180)
+		(at 73.66 125.73 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8629,7 +8629,7 @@
 	(symbol
 		(lib_name "+BATT_1")
 		(lib_id "power:+BATT")
-		(at 73.66 125.73 0)
+		(at 95.25 123.19 0)
 		(mirror y)
 		(unit 1)
 		(body_style 1)
@@ -8640,7 +8640,7 @@
 		(dnp no)
 		(uuid "5fb1b1d9-fbd2-4192-8cc1-aaf2ad43aa1f")
 		(property "Reference" "#PWR029"
-			(at 73.66 129.54 0)
+			(at 95.25 127 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8651,7 +8651,7 @@
 			)
 		)
 		(property "Value" "+BATT"
-			(at 71.12 124.4599 0)
+			(at 92.71 121.9199 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8662,7 +8662,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 73.66 125.73 0)
+			(at 95.25 123.19 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8673,7 +8673,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 73.66 125.73 0)
+			(at 95.25 123.19 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8684,7 +8684,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 73.66 125.73 0)
+			(at 95.25 123.19 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
