@@ -2606,6 +2606,16 @@
 			(embedded_fonts no)
 		)
 	)
+	(text "COMBINE INTO SHIELD LAYOUT\n\nMORE VCC PINS"
+		(exclude_from_sim no)
+		(at 175.514 37.846 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "699d0fb9-7285-430c-87ef-028d6604b1a5")
+	)
 	(junction
 		(at 186.69 62.23)
 		(diameter 0)
