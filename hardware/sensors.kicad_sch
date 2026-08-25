@@ -1608,7 +1608,7 @@
 	)
 	(text "GET ACTUAL FOOTPRINT"
 		(exclude_from_sim no)
-		(at 236.22 97.028 0)
+		(at 229.997 94.996 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1633,6 +1633,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "659a1b1d-d243-4923-bc16-b637d5731e53")
+	)
+	(junction
+		(at 219.71 106.68)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "65b587e5-8fbe-4e32-8e62-2aabbb9e54ad")
 	)
 	(junction
 		(at 173.99 91.44)
@@ -1675,12 +1681,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d9f7d3df-12ee-49ce-a53d-908b65945c49")
-	)
-	(junction
-		(at 219.71 106.68)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "edf1a9e7-6d5c-49c9-b838-7c6cba372dca")
 	)
 	(junction
 		(at 88.9 91.44)
@@ -1742,7 +1742,7 @@
 	)
 	(wire
 		(pts
-			(xy 194.31 106.68) (xy 182.88 106.68)
+			(xy 182.88 106.68) (xy 212.09 106.68)
 		)
 		(stroke
 			(width 0)
@@ -1872,16 +1872,6 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 106.68) (xy 224.79 106.68)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5fd3f8fa-11f7-4c65-bb59-043e2f03a4bf")
-	)
-	(wire
-		(pts
 			(xy 168.91 91.44) (xy 171.45 91.44)
 		)
 		(stroke
@@ -1942,6 +1932,16 @@
 	)
 	(wire
 		(pts
+			(xy 219.71 106.68) (xy 236.22 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a58560aa-f17a-4b82-afb9-30c23a57001b")
+	)
+	(wire
+		(pts
 			(xy 171.45 127) (xy 173.99 127)
 		)
 		(stroke
@@ -1959,16 +1959,6 @@
 			(type default)
 		)
 		(uuid "a99c53a8-1214-425b-bbfe-798b8765dfd6")
-	)
-	(wire
-		(pts
-			(xy 201.93 106.68) (xy 212.09 106.68)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b0ae3520-59c3-4e3f-89f4-19c7ddcbc751")
 	)
 	(wire
 		(pts
@@ -2090,16 +2080,6 @@
 		)
 		(uuid "067d7b6b-f49a-4811-b881-d95a089091c3")
 	)
-	(label "ANT_GPS"
-		(at 201.93 106.68 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5f744bcb-a757-40a6-b72b-8da5a56bbbbb")
-	)
 	(label "BME.SDA"
 		(at 115.57 109.22 180)
 		(effects
@@ -2109,16 +2089,6 @@
 			(justify right bottom)
 		)
 		(uuid "6dbd2446-7c86-4dea-8263-3b47443f21e0")
-	)
-	(label "ANT_GPS"
-		(at 194.31 106.68 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "7c4dfc45-12fc-4edb-b4e1-1f8c119c0035")
 	)
 	(label "GPS.TXD"
 		(at 160.02 102.87 180)
@@ -2180,7 +2150,7 @@
 		(dnp no)
 		(polyline
 			(pts
-				(xy 243.84 118.11) (xy 243.84 96.52) (xy 198.12 96.52) (xy 198.12 118.11)
+				(xy 210.82 100.33) (xy 210.82 96.52) (xy 198.12 96.52) (xy 198.12 100.33)
 			)
 			(stroke
 				(width 0)
@@ -2195,7 +2165,7 @@
 	(netclass_flag ""
 		(length 2.54)
 		(shape round)
-		(at 220.98 96.52 0)
+		(at 203.2 106.68 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2205,7 +2175,7 @@
 		)
 		(uuid "0705f7c3-61c6-4203-93fc-df30035ee464")
 		(property "Netclass" "50R"
-			(at 221.6785 93.98 0)
+			(at 203.8985 104.14 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2216,7 +2186,42 @@
 			)
 		)
 		(property "Component Class" ""
-			(at -40.64 8.89 0)
+			(at -58.42 19.05 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+			)
+		)
+	)
+	(netclass_flag ""
+		(length 2.54)
+		(shape round)
+		(at 226.06 106.68 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "71ef67e8-0113-49be-9cc7-62f829819a66")
+		(property "Netclass" "50R"
+			(at 226.7585 104.14 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Component Class" ""
+			(at -35.56 19.05 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2451,6 +2456,17 @@
 			)
 		)
 		(property "Mouser Price/Stock" ""
+			(at 219.71 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
 			(at 219.71 110.49 0)
 			(hide yes)
 			(show_name no)
@@ -2789,6 +2805,17 @@
 				)
 			)
 		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 99.06 91.44 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "7a81e7ed-6517-4a3e-9175-c7b6d9a6bbf5")
 		)
@@ -3036,6 +3063,17 @@
 				)
 			)
 		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 171.45 81.28 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "13ad6ab9-8ba8-46ea-8910-38dd0bb7291d")
 		)
@@ -3273,6 +3311,17 @@
 		)
 		(property "Mouser Price/Stock" ""
 			(at 215.9 106.68 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 215.9 106.68 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3610,6 +3659,17 @@
 				)
 			)
 		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 83.82 91.44 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "5fd12259-f8bd-4b6c-9936-5ddffb8f93d2")
 		)
@@ -3627,7 +3687,7 @@
 	)
 	(symbol
 		(lib_id "Device:Antenna")
-		(at 224.79 101.6 0)
+		(at 236.22 101.6 0)
 		(mirror y)
 		(unit 1)
 		(body_style 1)
@@ -3638,7 +3698,7 @@
 		(dnp no)
 		(uuid "916bf7a1-930f-4640-af03-cadc93159d2f")
 		(property "Reference" "AE1"
-			(at 226.822 100.2029 0)
+			(at 238.252 100.2029 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3649,7 +3709,7 @@
 			)
 		)
 		(property "Value" "1575AT43A0040"
-			(at 226.822 102.7429 0)
+			(at 238.252 102.7429 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3660,7 +3720,7 @@
 			)
 		)
 		(property "Footprint" "RF_Antenna:Johanson_2450AT43F0100_2400-2500Mhz"
-			(at 224.79 101.6 0)
+			(at 236.22 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3671,7 +3731,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 224.79 101.6 0)
+			(at 236.22 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3682,7 +3742,7 @@
 			)
 		)
 		(property "Description" "Antenna"
-			(at 224.79 101.6 0)
+			(at 236.22 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3693,7 +3753,7 @@
 			)
 		)
 		(property "LCSC" "C239243"
-			(at 224.79 101.6 0)
+			(at 236.22 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3704,7 +3764,7 @@
 			)
 		)
 		(property "Arrow Part Number" ""
-			(at 224.79 101.6 0)
+			(at 236.22 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3715,7 +3775,7 @@
 			)
 		)
 		(property "Arrow Price/Stock" ""
-			(at 224.79 101.6 0)
+			(at 236.22 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3726,7 +3786,7 @@
 			)
 		)
 		(property "Height" ""
-			(at 224.79 101.6 0)
+			(at 236.22 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3737,7 +3797,7 @@
 			)
 		)
 		(property "Manufacturer_Name" ""
-			(at 224.79 101.6 0)
+			(at 236.22 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3748,7 +3808,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" ""
-			(at 224.79 101.6 0)
+			(at 236.22 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3759,7 +3819,7 @@
 			)
 		)
 		(property "Mouser Part Number" ""
-			(at 224.79 101.6 0)
+			(at 236.22 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3770,7 +3830,18 @@
 			)
 		)
 		(property "Mouser Price/Stock" ""
-			(at 224.79 101.6 0)
+			(at 236.22 101.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 236.22 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4024,6 +4095,17 @@
 				)
 			)
 		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 171.45 85.09 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "4165e4d6-8e64-4924-aaa1-7c74006b4efc")
 		)
@@ -4184,6 +4266,17 @@
 			)
 		)
 		(property "Mouser Price/Stock" ""
+			(at 212.09 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
 			(at 212.09 110.49 0)
 			(hide yes)
 			(show_name no)

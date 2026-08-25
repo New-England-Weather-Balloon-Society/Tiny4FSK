@@ -736,16 +736,18 @@
       },
       {
         "name": "50R",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 0,
+        "pcb_color": "rgb(255, 4, 26)",
+        "priority": 1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.35,
         "tuning_profile": ""
       },
       {
         "name": "90R",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 1,
+        "pcb_color": "rgb(0, 5, 255)",
+        "priority": 0,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.32,
         "tuning_profile": ""
       }
     ],
@@ -795,16 +797,19 @@
       ],
       "Net-(C24-Pad2)": [
         "50R"
+      ],
+      "Net-(U11-RF_IN)": [
+        "50R"
       ]
     },
     "netclass_patterns": [
       {
         "netclass": "90R",
-        "pattern": "D+"
+        "pattern": "*D+*"
       },
       {
         "netclass": "90R",
-        "pattern": "D-"
+        "pattern": "*D-*"
       }
     ]
   },

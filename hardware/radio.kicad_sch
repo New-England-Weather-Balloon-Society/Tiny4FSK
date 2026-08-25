@@ -2580,16 +2580,6 @@
 		)
 		(uuid "336ae63a-e8a2-4f9f-bf4c-e42409d61f33")
 	)
-	(wire
-		(pts
-			(xy 207.01 73.66) (xy 195.58 73.66)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "37496de6-0dd2-44c1-bf80-dd9960840355")
-	)
 	(bus
 		(pts
 			(xy 82.55 87.63) (xy 82.55 95.25)
@@ -2939,6 +2929,16 @@
 			(type default)
 		)
 		(uuid "cd1e3894-9899-4252-99d9-bcc9a1fde4c8")
+	)
+	(wire
+		(pts
+			(xy 195.58 73.66) (xy 207.01 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d0b09675-a52b-4477-b57b-92df087cd04f")
 	)
 	(wire
 		(pts
@@ -3309,7 +3309,7 @@
 		(dnp no)
 		(polyline
 			(pts
-				(xy 248.92 104.14) (xy 248.92 57.15) (xy 157.48 57.15) (xy 157.48 104.14)
+				(xy 160.02 93.98) (xy 160.02 71.12) (xy 231.14 71.12) (xy 231.14 76.2) (xy 189.23 76.2) (xy 189.23 93.98)
 			)
 			(stroke
 				(width 0)
@@ -3318,13 +3318,13 @@
 			(fill
 				(type none)
 			)
-			(uuid "b9c1027e-7ec5-455d-8429-b463f76d03f2")
+			(uuid "19d35fef-3b49-4bbb-820c-e379cfe4d955")
 		)
 	)
 	(netclass_flag ""
 		(length 2.54)
 		(shape round)
-		(at 203.2 57.15 0)
+		(at 196.85 71.12 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3332,9 +3332,9 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "53a2df45-dae7-487b-8213-986e5b707258")
+		(uuid "535b284b-eba4-4b56-823a-319f8bae59d1")
 		(property "Netclass" "50R"
-			(at 203.8985 54.61 0)
+			(at 197.5485 68.58 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3345,7 +3345,7 @@
 			)
 		)
 		(property "Component Class" ""
-			(at -68.58 15.24 0)
+			(at -78.74 20.32 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3655,6 +3655,17 @@
 				)
 			)
 		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 224.79 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "f31c03ff-961a-407f-b0d5-f3bc56a09dcf")
 		)
@@ -3804,6 +3815,17 @@
 		)
 		(property "Mouser Price/Stock" ""
 			(at 133.35 123.19 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 133.35 123.19 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4131,6 +4153,17 @@
 				)
 			)
 		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 195.58 76.2 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "2cbffac8-28af-4861-b5a0-b57fe98758d2")
 		)
@@ -4280,6 +4313,17 @@
 			)
 		)
 		(property "Mouser Price/Stock" ""
+			(at 213.36 76.2 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
 			(at 213.36 76.2 0)
 			(hide yes)
 			(show_name no)
@@ -4460,6 +4504,17 @@
 				)
 			)
 		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 135.89 132.08 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "a1bb59de-3036-4c2a-a954-e95cb11effcb")
 		)
@@ -4619,6 +4674,17 @@
 			)
 		)
 		(property "Mouser Price/Stock" ""
+			(at 137.16 64.77 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
 			(at 137.16 64.77 0)
 			(hide yes)
 			(show_name no)
@@ -5028,6 +5094,17 @@
 				)
 			)
 		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 171.45 69.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "f01b006f-a868-4d92-99c5-59f3d34eb96f")
 		)
@@ -5177,6 +5254,17 @@
 			)
 		)
 		(property "Mouser Price/Stock" ""
+			(at 130.81 87.63 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "package/no_lead"
 			(at 130.81 87.63 0)
 			(hide yes)
 			(show_name no)
@@ -5560,6 +5648,17 @@
 				)
 			)
 		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 177.8 92.71 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "4952a5cd-060b-4f2b-ad39-2e967c9f9d5b")
 		)
@@ -5797,6 +5896,17 @@
 				)
 			)
 		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 191.77 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "0ae7caf0-609e-4303-93ad-d6a2bea0d699")
 		)
@@ -5946,6 +6056,17 @@
 			)
 		)
 		(property "Mouser Price/Stock" ""
+			(at 167.64 87.63 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
 			(at 167.64 87.63 0)
 			(hide yes)
 			(show_name no)
@@ -6115,6 +6236,17 @@
 				)
 			)
 		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 167.64 96.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "82b8931c-2822-40a2-a1bc-c4e85329a253")
 		)
@@ -6263,6 +6395,17 @@
 		)
 		(property "Mouser Price/Stock" ""
 			(at 177.8 82.55 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 177.8 82.55 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6430,6 +6573,17 @@
 				)
 			)
 		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 220.98 76.2 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "7821e0ba-c23d-4176-aace-e6abbd27d86f")
 		)
@@ -6579,6 +6733,17 @@
 			)
 		)
 		(property "Mouser Price/Stock" ""
+			(at 195.58 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "connector/pin_header_socket"
 			(at 195.58 115.57 0)
 			(hide yes)
 			(show_name no)
@@ -6978,6 +7143,17 @@
 				)
 			)
 		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 217.17 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "412e55f6-9ad0-4009-892c-f820507fcf07")
 		)
@@ -7293,6 +7469,17 @@
 				)
 			)
 		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 185.42 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "78ec94c9-eb1d-4a52-8877-e5a88e04edc2")
 		)
@@ -7441,6 +7628,17 @@
 		)
 		(property "Mouser Price/Stock" ""
 			(at 209.55 73.66 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 209.55 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7699,6 +7897,17 @@
 				)
 			)
 		)
+		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
+			(at 147.32 64.77 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "2563a073-a876-4b63-9318-01d3a97e3358")
 		)
@@ -7938,6 +8147,17 @@
 			)
 		)
 		(property "Mouser Price/Stock" ""
+			(at 120.65 120.65 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "KiLib_Generator" "crystal_resonator_oscillator"
 			(at 120.65 120.65 0)
 			(hide yes)
 			(show_name no)
