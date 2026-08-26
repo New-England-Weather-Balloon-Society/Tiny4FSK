@@ -735,17 +735,19 @@
         "wire_width": 6
       },
       {
+        "diff_pair_width": 0.35,
         "name": "50R",
         "pcb_color": "rgb(255, 4, 26)",
-        "priority": 1,
+        "priority": 0,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.35,
         "tuning_profile": ""
       },
       {
+        "diff_pair_width": 0.32,
         "name": "90R",
         "pcb_color": "rgb(0, 5, 255)",
-        "priority": 0,
+        "priority": 1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.32,
         "tuning_profile": ""

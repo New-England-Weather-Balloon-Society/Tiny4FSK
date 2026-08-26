@@ -5041,6 +5041,26 @@
 		)
 		(uuid "fc41d9b0-74f6-43ee-883d-268fcb68b292")
 	)
+	(label "RAW.D+"
+		(at 58.42 67.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "020e8aae-8323-4286-a70d-677b1427c0db")
+	)
+	(label "RAW.D-"
+		(at 58.42 64.77 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "23fa36e7-35a7-4435-9626-487adceb0b9d")
+	)
 	(label "BST_IN"
 		(at 105.41 105.41 0)
 		(effects
