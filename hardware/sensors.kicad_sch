@@ -2143,25 +2143,6 @@
 		)
 		(uuid "d5368edc-7b53-4597-a542-983d065bee99")
 	)
-	(rule_area
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(polyline
-			(pts
-				(xy 210.82 100.33) (xy 210.82 96.52) (xy 198.12 96.52) (xy 198.12 100.33)
-			)
-			(stroke
-				(width 0)
-				(type dash)
-			)
-			(fill
-				(type none)
-			)
-			(uuid "5d4c25f4-12ca-41a9-afac-b0a014c186c2")
-		)
-	)
 	(netclass_flag ""
 		(length 2.54)
 		(shape round)
