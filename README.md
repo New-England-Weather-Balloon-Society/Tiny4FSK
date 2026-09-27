@@ -79,6 +79,11 @@ There are two antenna pads, AE1 and AE2.
 - **AE1** - L1 GPS band antenna
 - **AE2** - 70cm antenna pad. For a guide to cut a proper antenna, refer to the above section.
 
+Finally, the top left 3-row header allows for custom power options.
+- **VBat** - A direct connection to the switching regulator input pin. This accepts between 1.3V and 6V.
+- **GND** - Board ground.
+- **3v3** - Regulated 3.3V node.
+
 ## Setting up the Code
 Now that you've got all the hardware set up, time for programming!
 
