@@ -407,135 +407,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Connector_Generic:Conn_01x01"
-			(pin_names
-				(offset 1.016)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "J"
-				(at 0 2.54 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Conn_01x01"
-				(at 0 -2.54 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "connector"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "Connector*:*_1x??_*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "Conn_01x01_1_1"
-				(rectangle
-					(start -1.27 1.27)
-					(end 1.27 -1.27)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(rectangle
-					(start -1.27 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at -5.08 0 0)
-					(length 3.81)
-					(name "Pin_1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Device:Antenna_Shield"
 			(pin_numbers
 				(hide yes)
@@ -2235,12 +2106,6 @@
 		(uuid "14242835-24fc-4e63-96c6-b2af223f838d")
 	)
 	(junction
-		(at 181.61 73.66)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "5960ee32-5ed2-49b7-a6ec-4876ecd80f63")
-	)
-	(junction
 		(at 167.64 92.71)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2257,12 +2122,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "95ecc4e3-ccca-4053-a971-7986d0cc49a2")
-	)
-	(junction
-		(at 181.61 82.55)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a7a5fb97-cab5-493b-822d-46e738518bb2")
 	)
 	(junction
 		(at 111.76 125.73)
@@ -2283,6 +2142,12 @@
 		(uuid "d2507917-8c01-4bc3-a9a6-449070f9dacf")
 	)
 	(junction
+		(at 181.61 82.55)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "de5a1909-ed76-4090-8290-f7a647ff86f8")
+	)
+	(junction
 		(at 130.81 69.85)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2293,6 +2158,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e0ebd14d-d3d5-48ee-9e90-0886b6513e23")
+	)
+	(junction
+		(at 191.77 73.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ede2bba8-dfc1-4e81-815f-308e28e70e7a")
 	)
 	(junction
 		(at 220.98 73.66)
@@ -2412,16 +2283,6 @@
 	)
 	(wire
 		(pts
-			(xy 181.61 73.66) (xy 181.61 82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0587d1a8-1b22-475c-aae8-e199b751c9a3")
-	)
-	(wire
-		(pts
 			(xy 181.61 82.55) (xy 181.61 92.71)
 		)
 		(stroke
@@ -2429,16 +2290,6 @@
 			(type default)
 		)
 		(uuid "079f245d-f017-42e6-b9d4-6ec738b232ea")
-	)
-	(wire
-		(pts
-			(xy 171.45 73.66) (xy 181.61 73.66)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "08a0a4b1-b65d-46b7-b5b1-da5f26c4aa22")
 	)
 	(wire
 		(pts
@@ -2512,6 +2363,16 @@
 	)
 	(wire
 		(pts
+			(xy 191.77 73.66) (xy 191.77 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "22e23df0-ffef-4980-a17b-3ae637cc4b5d")
+	)
+	(wire
+		(pts
 			(xy 220.98 80.01) (xy 220.98 78.74)
 		)
 		(stroke
@@ -2562,7 +2423,7 @@
 	)
 	(wire
 		(pts
-			(xy 181.61 73.66) (xy 182.88 73.66)
+			(xy 171.45 73.66) (xy 180.34 73.66)
 		)
 		(stroke
 			(width 0)
@@ -2652,16 +2513,6 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 115.57) (xy 190.5 115.57)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5ff335d7-95a5-4846-896b-909aed38c31b")
-	)
-	(wire
-		(pts
 			(xy 137.16 67.31) (xy 147.32 67.31)
 		)
 		(stroke
@@ -2689,6 +2540,16 @@
 			(type default)
 		)
 		(uuid "7801fe83-9ac2-4894-8239-debe4e9eb1ec")
+	)
+	(wire
+		(pts
+			(xy 191.77 73.66) (xy 195.58 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7996a5f0-2201-4933-be76-17d04d787c91")
 	)
 	(wire
 		(pts
@@ -2832,7 +2693,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 73.66) (xy 187.96 73.66)
+			(xy 186.69 73.66) (xy 185.42 73.66)
 		)
 		(stroke
 			(width 0)
@@ -2869,6 +2730,16 @@
 			(type default)
 		)
 		(uuid "c1aedf70-212c-4874-9c63-08d9f3ea1b9b")
+	)
+	(wire
+		(pts
+			(xy 191.77 82.55) (xy 181.61 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c43faa06-ec36-47d6-b751-870ad8746814")
 	)
 	(wire
 		(pts
@@ -2992,16 +2863,6 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 73.66) (xy 194.31 73.66)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ea2b62b9-381e-42de-95cf-a893691d46a1")
-	)
-	(wire
-		(pts
 			(xy 167.64 90.17) (xy 167.64 92.71)
 		)
 		(stroke
@@ -3120,16 +2981,6 @@
 		)
 		(uuid "55081a94-8add-4490-b9ea-e5a358cfa671")
 	)
-	(label "SI.MISO"
-		(at 111.76 92.71 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5c18f6f7-3704-46b5-94f5-f66cbea0a3dd")
-	)
 	(label "SI.~{CS}"
 		(at 111.76 97.79 0)
 		(effects
@@ -3240,6 +3091,16 @@
 		)
 		(uuid "b46f873e-d117-4717-857c-38e186220aa2")
 	)
+	(label "SI.MOSI"
+		(at 111.76 92.71 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "befbaf85-da70-4755-a6f2-8d6cb41797dc")
+	)
 	(label "SI.MISO"
 		(at 111.76 95.25 0)
 		(effects
@@ -3309,7 +3170,7 @@
 		(dnp no)
 		(polyline
 			(pts
-				(xy 160.02 93.98) (xy 160.02 71.12) (xy 231.14 71.12) (xy 231.14 76.2) (xy 189.23 76.2) (xy 189.23 93.98)
+				(xy 160.02 93.98) (xy 160.02 71.12) (xy 231.14 71.12) (xy 231.14 76.2) (xy 193.04 76.2) (xy 193.04 93.98)
 			)
 			(stroke
 				(width 0)
@@ -5756,7 +5617,7 @@
 	)
 	(symbol
 		(lib_id "Device:L_Small")
-		(at 191.77 73.66 90)
+		(at 189.23 73.66 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -5767,7 +5628,7 @@
 		(fields_autoplaced yes)
 		(uuid "a8b2d0bc-a9de-49c6-ab84-ae51e7488120")
 		(property "Reference" "L4"
-			(at 191.77 68.58 90)
+			(at 189.23 68.58 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5777,7 +5638,7 @@
 			)
 		)
 		(property "Value" "22nH"
-			(at 191.77 71.12 90)
+			(at 189.23 71.12 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5787,7 +5648,7 @@
 			)
 		)
 		(property "Footprint" "Inductor_SMD:L_0402_1005Metric"
-			(at 191.77 73.66 0)
+			(at 189.23 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5798,7 +5659,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 191.77 73.66 0)
+			(at 189.23 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5809,7 +5670,7 @@
 			)
 		)
 		(property "Description" "Inductor, small symbol"
-			(at 191.77 73.66 0)
+			(at 189.23 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5820,7 +5681,7 @@
 			)
 		)
 		(property "Arrow Part Number" ""
-			(at 191.77 73.66 90)
+			(at 189.23 73.66 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5831,7 +5692,7 @@
 			)
 		)
 		(property "Arrow Price/Stock" ""
-			(at 191.77 73.66 90)
+			(at 189.23 73.66 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5842,7 +5703,7 @@
 			)
 		)
 		(property "Height" ""
-			(at 191.77 73.66 90)
+			(at 189.23 73.66 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5853,7 +5714,7 @@
 			)
 		)
 		(property "Manufacturer_Name" ""
-			(at 191.77 73.66 90)
+			(at 189.23 73.66 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5864,7 +5725,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" ""
-			(at 191.77 73.66 90)
+			(at 189.23 73.66 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5875,7 +5736,7 @@
 			)
 		)
 		(property "Mouser Part Number" ""
-			(at 191.77 73.66 90)
+			(at 189.23 73.66 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5886,7 +5747,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" ""
-			(at 191.77 73.66 90)
+			(at 189.23 73.66 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5897,7 +5758,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 191.77 73.66 0)
+			(at 189.23 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6600,173 +6461,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector_Generic:Conn_01x01")
-		(at 195.58 115.57 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c33f009b-345d-4551-9d48-600478c44ef8")
-		(property "Reference" "J9"
-			(at 198.12 114.2999 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "Counterpoise"
-			(at 198.12 116.8399 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical"
-			(at 195.58 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 195.58 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x01, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 195.58 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Arrow Part Number" ""
-			(at 195.58 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Arrow Price/Stock" ""
-			(at 195.58 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Height" ""
-			(at 195.58 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Manufacturer_Name" ""
-			(at 195.58 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Manufacturer_Part_Number" ""
-			(at 195.58 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Mouser Part Number" ""
-			(at 195.58 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Mouser Price/Stock" ""
-			(at 195.58 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "KiLib_Generator" "connector/pin_header_socket"
-			(at 195.58 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "aafae533-9b1e-448f-afd8-dcff35b24f95")
-		)
-		(instances
-			(project "Tiny4FSK"
-				(path "/afd8b0bc-328a-481f-8ddf-c1252dc3b440/cf7a32e2-bce8-4b86-ac78-9d8acf42adb5"
-					(reference "J9")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Connector:TestPoint")
 		(at 142.24 80.01 0)
 		(unit 1)
@@ -6916,86 +6610,6 @@
 			(project "Tiny4FSK"
 				(path "/afd8b0bc-328a-481f-8ddf-c1252dc3b440/cf7a32e2-bce8-4b86-ac78-9d8acf42adb5"
 					(reference "TP1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_name "Earth_2")
-		(lib_id "power:Earth")
-		(at 189.23 115.57 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "da348f92-d984-461e-b5f5-87d7ee4ffa6f")
-		(property "Reference" "#PWR061"
-			(at 189.23 121.92 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Earth"
-			(at 189.23 119.38 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 189.23 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 189.23 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 189.23 115.57 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "959c62c3-0e80-4f81-8789-ac5b42086928")
-		)
-		(instances
-			(project "Tiny4FSK"
-				(path "/afd8b0bc-328a-481f-8ddf-c1252dc3b440/cf7a32e2-bce8-4b86-ac78-9d8acf42adb5"
-					(reference "#PWR061")
 					(unit 1)
 				)
 			)
@@ -7329,7 +6943,7 @@
 	)
 	(symbol
 		(lib_id "Device:C_Small")
-		(at 185.42 73.66 90)
+		(at 182.88 73.66 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7340,7 +6954,7 @@
 		(fields_autoplaced yes)
 		(uuid "e15c1dd2-821b-4885-9b6e-75c445f70d2e")
 		(property "Reference" "C15"
-			(at 185.4263 67.31 90)
+			(at 182.8863 67.31 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7350,7 +6964,7 @@
 			)
 		)
 		(property "Value" "9.1pF"
-			(at 185.4263 69.85 90)
+			(at 182.8863 69.85 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7360,7 +6974,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 185.42 73.66 0)
+			(at 182.88 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7371,7 +6985,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 185.42 73.66 0)
+			(at 182.88 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7382,7 +6996,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 185.42 73.66 0)
+			(at 182.88 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7393,7 +7007,7 @@
 			)
 		)
 		(property "Arrow Part Number" ""
-			(at 185.42 73.66 90)
+			(at 182.88 73.66 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7404,7 +7018,7 @@
 			)
 		)
 		(property "Arrow Price/Stock" ""
-			(at 185.42 73.66 90)
+			(at 182.88 73.66 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7415,7 +7029,7 @@
 			)
 		)
 		(property "Height" ""
-			(at 185.42 73.66 90)
+			(at 182.88 73.66 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7426,7 +7040,7 @@
 			)
 		)
 		(property "Manufacturer_Name" ""
-			(at 185.42 73.66 90)
+			(at 182.88 73.66 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7437,7 +7051,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" ""
-			(at 185.42 73.66 90)
+			(at 182.88 73.66 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7448,7 +7062,7 @@
 			)
 		)
 		(property "Mouser Part Number" ""
-			(at 185.42 73.66 90)
+			(at 182.88 73.66 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7459,7 +7073,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" ""
-			(at 185.42 73.66 90)
+			(at 182.88 73.66 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7470,7 +7084,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 185.42 73.66 0)
+			(at 182.88 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)

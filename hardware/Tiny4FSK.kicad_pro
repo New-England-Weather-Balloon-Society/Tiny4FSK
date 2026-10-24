@@ -61,7 +61,7 @@
           "hatch_smoothing_level": 0,
           "hatch_smoothing_value": 0.1,
           "hatch_thickness": 1.0,
-          "min_clearance": 0.0,
+          "min_clearance": 0.2,
           "min_island_area": 10.0,
           "min_thickness": 0.25,
           "pad_connection": 1,
@@ -184,6 +184,7 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
+          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -195,6 +196,7 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
+          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -206,6 +208,7 @@
         {
           "td_allow_use_two_tracks": true,
           "td_curve_segcount": 0,
+          "td_enabled": false,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -217,9 +220,7 @@
       ],
       "track_widths": [
         0.0,
-        0.2,
         0.25,
-        0.35,
         0.5,
         0.75
       ],
@@ -253,6 +254,10 @@
         {
           "diameter": 0.0,
           "drill": 0.0
+        },
+        {
+          "diameter": 0.3,
+          "drill": 0.15
         }
       ],
       "zones_allow_external_fillets": false,
@@ -687,6 +692,7 @@
       "pin_to_pin": "ignore",
       "power_pin_not_driven": "ignore",
       "same_local_global_label": "warning",
+      "same_local_global_power": "warning",
       "similar_label_and_power": "warning",
       "similar_labels": "warning",
       "similar_power": "warning",
@@ -726,8 +732,8 @@
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.25,
         "tuning_profile": "",
-        "via_diameter": 0.8,
-        "via_drill": 0.4,
+        "via_diameter": 0.5,
+        "via_drill": 0.2,
         "wire_width": 6
       },
       {
@@ -752,17 +758,8 @@
     "meta": {
       "version": 5
     },
-    "net_colors": null,
+    "net_colors": {},
     "netclass_assignments": {
-      "+3.3V": [
-        "50R"
-      ],
-      "/interface/GP.D+": [
-        "90R"
-      ],
-      "/interface/GP.D-": [
-        "90R"
-      ],
       "/radio/RX+": [
         "50R"
       ],
@@ -770,12 +767,6 @@
         "50R"
       ],
       "/radio/SI_TX": [
-        "50R"
-      ],
-      "/sensors/ANT_GPS": [
-        "50R"
-      ],
-      "Earth": [
         "50R"
       ],
       "Net-(AE1-A)": [
@@ -956,7 +947,7 @@
         "SUCCESS"
       ],
       "GPIO": [
-        "GPIO38",
+        "GPIO10",
         "GPIO12",
         "GPIO13",
         "GPIO_A_1",
@@ -1052,7 +1043,7 @@
         "uuid": "afd8b0bc-328a-481f-8ddf-c1252dc3b440"
       }
     ],
-    "used_designators": "R1-23,JP1,TP1,J1-10,H1-2,H4,BT1,#PWR2-3,#PWR5-83,FB1,L1-10,C1-37,SW1-2,AE1-2,D1-3,U1-9,U11",
+    "used_designators": "#PWR2-3,#PWR5-83,AE1-2,BT1,C1-37,D1-3,FB1,H1-2,H4,J1-10,JP1,L1-10,R1-23,SW1-2,TP1,U1-9,U11",
     "variants": []
   },
   "sheets": [
