@@ -1606,16 +1606,6 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "GET ACTUAL FOOTPRINT"
-		(exclude_from_sim no)
-		(at 229.997 94.996 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "cdc7a725-ab68-4afd-a653-4bc2d111b37f")
-	)
 	(junction
 		(at 173.99 85.09)
 		(diameter 0)
@@ -3700,7 +3690,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "RF_Antenna:Johanson_2450AT43F0100_2400-2500Mhz"
+		(property "Footprint" "RF_Antenna_Custom:ANT_1575AT_JOT"
 			(at 236.22 101.6 0)
 			(hide yes)
 			(show_name no)
